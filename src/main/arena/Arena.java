@@ -59,8 +59,24 @@ public class Arena {
     }
 
     private void simEnemyTurn() {
+        if (ENEMY_SLOTS[selected].empty() || noTeam()) {
+            advanceTurn();
+            return;
+        }
+        Slot target = TEAM_SLOTS[(int) P.random(TEAM_SLOTS.length)];
+        while (target.empty()) {
+            target = TEAM_SLOTS[(int) P.random(TEAM_SLOTS.length)];
+        }
+        ENEMY_SLOTS[selected].primaryAttack(target);
         actionTimer = 0;
-        enemiesTurn = false;
+        advanceTurn();
+    }
+
+    private boolean noTeam() {
+        for (Slot slot : TEAM_SLOTS) {
+            if (!slot.empty()) return false;
+        }
+        return true;
     }
 
     private void simTeamTurn() {
