@@ -184,15 +184,17 @@ public class Arena {
             }
             if (combatant instanceof SplashAbility) {
                 if (!onOpposingTeams(combatant, other.combatant)) return false;
-                Combatant[] others = new Combatant[0];
+                Combatant[] others;
                 if (combatant.isEnemy) {
                     others = new Combatant[arena.TEAM_SLOTS.length];
                     for (int i = 0; i < others.length; i++) {
+                        if (arena.TEAM_SLOTS[i].empty()) continue;
                         others[i] = arena.TEAM_SLOTS[i].combatant;
                     }
                 } else {
                     others = new Combatant[arena.ENEMY_SLOTS.length];
                     for (int i = 0; i < others.length; i++) {
+                        if (arena.ENEMY_SLOTS[i].empty()) continue;
                         others[i] = arena.ENEMY_SLOTS[i].combatant;
                     }
                 }
