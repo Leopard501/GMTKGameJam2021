@@ -1,16 +1,19 @@
 package main.arena.combatants.team;
 
 import main.arena.combatants.Combatant;
+import main.arena.combatants.types.DamageAbility;
 import processing.core.PApplet;
 
-public class Fighter extends Combatant {
+public class Fighter extends Combatant implements DamageAbility {
 
     public Fighter(PApplet p) {
         super(p, 100, 10, 5, 20, 40);
     }
 
     @Override
-    protected void abilityEffect(Combatant other) {
+    public void damageAbility(Combatant other) {
+        mp -= mpCost;
+        if (mp < 0) mp = 0;
         other.hurt(abilityDamage);
     }
 }

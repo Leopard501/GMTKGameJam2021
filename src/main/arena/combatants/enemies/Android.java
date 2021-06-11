@@ -8,9 +8,4 @@ public class Android extends Combatant {
     public Android(PApplet p) {
         super(p, 75, 10, 2, 25, 20);
     }
-
-    @Override
-    protected void abilityEffect(Combatant other) {
-        other.hurt(abilityDamage);
-    }
 }

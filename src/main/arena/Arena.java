@@ -4,6 +4,8 @@ import main.arena.combatants.Combatant;
 import main.arena.combatants.enemies.Android;
 import main.arena.combatants.team.Fighter;
 import main.arena.combatants.team.Healer;
+import main.arena.combatants.types.BuffAbility;
+import main.arena.combatants.types.DamageAbility;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -165,7 +167,12 @@ public class Arena {
         private boolean ability(Slot other, boolean usingOnEnemy) {
             if (combatant == null) return false;
             if (combatant.mp < combatant.mpCost) return false;
-            combatant.ability(other.combatant);
+            try {
+                ((DamageAbility) combatant).damageAbility(other.combatant);
+            } catch (ClassCastException ignored) {}
+            try {
+                ((BuffAbility) combatant).buffAbility(other.combatant);
+            } catch (ClassCastException ignored) {}
             //temp, return false if it can't use ability on
             return true;
         }

@@ -109,13 +109,6 @@ public abstract class Combatant {
         other.hurt(attackDamage);
     }
 
-    public void ability(Combatant other) {
-        mp -= mpCost;
-        abilityEffect(other);
-    }
-
-    protected abstract void abilityEffect(Combatant other);
-
     public void hurt(int amount) {
         hp -= amount;
         if (hp <= 0) alive = false;
