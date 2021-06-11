@@ -1,6 +1,7 @@
 package main.arena.combatants;
 
 import main.Main;
+import main.arena.buffs.Bleeding;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -30,6 +31,9 @@ public abstract class Combatant {
     protected int maxMp;
     protected int attackDamage;
     protected int abilityDamage;
+
+    //This might suck, but it's a game jam so who cares.
+    public Bleeding bleeding;
 
     /**
      * These are the little dudes that will fight.
