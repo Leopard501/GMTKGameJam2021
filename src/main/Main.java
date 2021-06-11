@@ -1,5 +1,6 @@
 package main;
 
+import main.arena.Arena;
 import main.misc.InputHandler;
 import main.sound.FadeSoundLoop;
 import main.sound.SoundWithAlts;
@@ -45,6 +46,8 @@ public class Main extends PApplet {
     public static InputHandler.KeyDS keysPressed;
     public static PVector matrixMousePosition;
 
+    public static Arena arena;
+
     public static void main(String[] args) {
         PApplet.main("main.Main", args);
     }
@@ -68,6 +71,11 @@ public class Main extends PApplet {
         setupSprites();
         setupMisc();
         setupFullscreen();
+        setupArena();
+    }
+
+    private void setupArena() {
+        arena = new Arena(this);
     }
 
     private void setupMisc() {
@@ -108,6 +116,7 @@ public class Main extends PApplet {
 
         pushFullscreen();
 
+        arena.display();
 
         popFullscreen();
     }

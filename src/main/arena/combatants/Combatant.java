@@ -28,6 +28,9 @@ public abstract class Combatant {
         P = p;
         this.maxHp = maxHp;
         this.maxMp = maxMp;
+        this.mpCost = mpCost;
+        this.primaryDamage = primaryDamage;
+        this.secondaryDamage = secondaryDamage;
     }
 
     public void setPosition(PVector position) {
