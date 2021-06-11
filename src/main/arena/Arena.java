@@ -12,11 +12,14 @@ public class Arena {
 
     public boolean enemiesTurn;
 
+    private static final int TIME_BETWEEN_ACTIONS = 30;
+
     private final PApplet P;
     private final Slot[] TEAM_SLOTS;
     private final Slot[] ENEMY_SLOTS;
 
     private int selected;
+    private int actionTimer;
 
     /**
      * This will hold the players and gui and stuff
@@ -44,17 +47,22 @@ public class Arena {
 
     public void main() {
         display();
-        if (enemiesTurn) simEnemyTurn();
-        else simTeamTurn();
+        if (actionTimer >= TIME_BETWEEN_ACTIONS) {
+            if (enemiesTurn) simEnemyTurn();
+            else simTeamTurn();
+        }
+        actionTimer++;
     }
 
     private void simEnemyTurn() {
+        actionTimer = 0;
         enemiesTurn = false;
     }
 
     private void simTeamTurn() {
         for (Slot slot : ENEMY_SLOTS) {
             if (slot.isClicked()) {
+                actionTimer = 0;
                 TEAM_SLOTS[selected].primaryAttack(slot);
                 advanceTurn();
             }
@@ -67,20 +75,22 @@ public class Arena {
             if (selected >= ENEMY_SLOTS.length) {
                 enemiesTurn = false;
                 selected = 0;
-            }
-            if (ENEMY_SLOTS[selected] == null) advanceTurn();
+            } else if (ENEMY_SLOTS[selected].empty()) advanceTurn();
         } else {
             if (selected >= TEAM_SLOTS.length) {
                 enemiesTurn = true;
                 selected = 0;
-            }
-            if (TEAM_SLOTS[selected] == null) advanceTurn();
+            } else if (TEAM_SLOTS[selected].empty()) advanceTurn();
         }
     }
 
     private void display() {
         for (Slot slot : TEAM_SLOTS) slot.display();
         for (Slot slot : ENEMY_SLOTS) slot.display();
+        if (actionTimer >= TIME_BETWEEN_ACTIONS) {
+            if (enemiesTurn) ENEMY_SLOTS[selected].selectionOverlay();
+            else TEAM_SLOTS[selected].selectionOverlay();
+        }
     }
 
     private static class Slot {
@@ -112,6 +122,15 @@ public class Arena {
         private void primaryAttack(Slot other) {
             if (combatant == null) return;
             combatant.primaryAttack(other.combatant);
+        }
+
+        private void selectionOverlay() {
+            if (combatant == null) return;
+            combatant.selectionOverlay();
+        }
+
+        private boolean empty() {
+            return combatant == null;
         }
     }
 }

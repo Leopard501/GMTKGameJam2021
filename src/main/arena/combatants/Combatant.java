@@ -39,6 +39,8 @@ public abstract class Combatant {
         this.secondaryDamage = secondaryDamage;
 
         alive = true;
+        hp = maxHp;
+        mp = maxMp;
     }
 
     public void setPosition(float x, float y) {
@@ -47,6 +49,12 @@ public abstract class Combatant {
 
     public void display() {
         P.fill(255);
+        P.circle(position.x, position.y, SIZE.x);
+    }
+
+    public void selectionOverlay() {
+        P.noFill();
+        P.stroke(255);
         P.rect(position.x, position.y, SIZE.x, SIZE.y);
     }
 
