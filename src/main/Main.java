@@ -70,8 +70,8 @@ public class Main extends PApplet {
         setupSound();
         setupSprites();
         setupMisc();
-        setupFullscreen();
         setupArena();
+        setupFullscreen();
     }
 
     private void setupArena() {
@@ -113,7 +113,6 @@ public class Main extends PApplet {
     public void draw() {
         background(BACKGROUND_COLOR.getRGB());
         drawSound();
-
         pushFullscreen();
 
         arena.display();
@@ -153,6 +152,7 @@ public class Main extends PApplet {
     private void drawBlackBars() {
         fill(0);
         noStroke();
+        rectMode(CORNER);
         if (hasVerticalBars()) {
             rect(0, 0, matrixOffset, height);
             rect(width - matrixOffset, 0, matrixOffset, height);
@@ -160,6 +160,7 @@ public class Main extends PApplet {
             rect(0, 0, width, matrixOffset);
             rect(0, height - matrixOffset, width, matrixOffset);
         }
+        rectMode(CENTER);
     }
 
     /**
