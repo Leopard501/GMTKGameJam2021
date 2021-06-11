@@ -11,7 +11,7 @@ public class Healer extends Combatant implements BuffAbility {
     }
 
     @Override
-    public void buffAbility(Combatant other) {
+    public void ability(Combatant other) {
         mp -= mpCost;
         if (mp < 0) mp = 0;
         other.heal(abilityDamage);

@@ -5,22 +5,26 @@ import main.arena.combatants.Combatant;
 import main.arena.combatants.enemies.Android;
 import main.arena.combatants.team.Fighter;
 import main.arena.combatants.team.Healer;
+import main.arena.combatants.team.Slime;
 import main.arena.combatants.types.BuffAbility;
 import main.arena.combatants.types.DamageAbility;
+import main.arena.combatants.types.SplashAbility;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.BOARD_SIZE;
+import static main.Main.arena;
 
 public class Arena {
 
     public boolean enemiesTurn;
 
+    public final Slot[] TEAM_SLOTS;
+    public final Slot[] ENEMY_SLOTS;
+
     private static final int TIME_BETWEEN_ACTIONS = 30;
 
     private final PApplet P;
-    private final Slot[] TEAM_SLOTS;
-    private final Slot[] ENEMY_SLOTS;
 
     private int selected;
     private int actionTimer;
@@ -43,7 +47,7 @@ public class Arena {
 
         TEAM_SLOTS[0].setCombatant(new Fighter(P));
         TEAM_SLOTS[1].setCombatant(new Healer(P));
-        TEAM_SLOTS[2].setCombatant(new Fighter(P));
+        TEAM_SLOTS[2].setCombatant(new Slime(P));
 
         ENEMY_SLOTS[0].setCombatant(new Android(P));
         ENEMY_SLOTS[1].setCombatant(new Android(P));
@@ -176,11 +180,27 @@ public class Arena {
             if (combatant.mp < combatant.mpCost) return false;
             if (combatant instanceof DamageAbility) {
                 if (!onOpposingTeams(combatant, other.combatant)) return false;
-                ((DamageAbility) combatant).damageAbility(other.combatant);
+                ((DamageAbility) combatant).ability(other.combatant);
+            }
+            if (combatant instanceof SplashAbility) {
+                if (!onOpposingTeams(combatant, other.combatant)) return false;
+                Combatant[] others = new Combatant[0];
+                if (combatant.isEnemy) {
+                    others = new Combatant[arena.TEAM_SLOTS.length];
+                    for (int i = 0; i < others.length; i++) {
+                        others[i] = arena.TEAM_SLOTS[i].combatant;
+                    }
+                } else {
+                    others = new Combatant[arena.ENEMY_SLOTS.length];
+                    for (int i = 0; i < others.length; i++) {
+                        others[i] = arena.ENEMY_SLOTS[i].combatant;
+                    }
+                }
+                ((SplashAbility) combatant).ability(others);
             }
             if (combatant instanceof BuffAbility) {
                 if (onOpposingTeams(combatant, other.combatant)) return false;
-                ((BuffAbility) combatant).buffAbility(other.combatant);
+                ((BuffAbility) combatant).ability(other.combatant);
             }
             return true;
         }

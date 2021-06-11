@@ -11,7 +11,7 @@ public class Fighter extends Combatant implements DamageAbility {
     }
 
     @Override
-    public void damageAbility(Combatant other) {
+    public void ability(Combatant other) {
         mp -= mpCost;
         if (mp < 0) mp = 0;
         other.hurt(abilityDamage);
