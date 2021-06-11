@@ -3,6 +3,7 @@ package main.arena;
 import main.arena.combatants.Combatant;
 import main.arena.combatants.enemies.Android;
 import main.arena.combatants.team.Fighter;
+import main.arena.combatants.team.Healer;
 import processing.core.PApplet;
 import processing.core.PVector;
 

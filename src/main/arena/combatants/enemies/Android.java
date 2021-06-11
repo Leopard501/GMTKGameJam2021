@@ -11,6 +11,6 @@ public class Android extends Combatant {
 
     @Override
     protected void abilityEffect(Combatant other) {
-        other.hurt(secondaryDamage);
+        other.hurt(abilityDamage);
     }
 }

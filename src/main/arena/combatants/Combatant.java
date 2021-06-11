@@ -27,20 +27,20 @@ public abstract class Combatant {
     protected int hp;
     protected int maxHp;
     protected int maxMp;
-    protected int primaryDamage;
-    protected int secondaryDamage;
+    protected int attackDamage;
+    protected int abilityDamage;
 
     /**
      * These are the little dudes that will fight.
      */
-    public Combatant(PApplet p, int maxHp, int maxMp, int mpCost, int primaryDamage,
-                     int secondaryDamage) {
+    public Combatant(PApplet p, int maxHp, int maxMp, int mpCost, int attackDamage,
+                     int abilityDamage) {
         P = p;
         this.maxHp = maxHp;
         this.maxMp = maxMp;
         this.mpCost = mpCost;
-        this.primaryDamage = primaryDamage;
-        this.secondaryDamage = secondaryDamage;
+        this.attackDamage = attackDamage;
+        this.abilityDamage = abilityDamage;
 
         alive = true;
         hp = maxHp;
@@ -106,7 +106,7 @@ public abstract class Combatant {
     }
 
     public void attack(Combatant other) {
-        other.hurt(primaryDamage);
+        other.hurt(attackDamage);
     }
 
     public void ability(Combatant other) {
