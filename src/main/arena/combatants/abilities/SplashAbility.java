@@ -1,4 +1,4 @@
-package main.arena.combatants.types;
+package main.arena.combatants.abilities;
 
 import main.arena.combatants.Combatant;
 

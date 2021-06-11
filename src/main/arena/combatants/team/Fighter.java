@@ -1,7 +1,7 @@
 package main.arena.combatants.team;
 
 import main.arena.combatants.Combatant;
-import main.arena.combatants.types.DamageAbility;
+import main.arena.combatants.abilities.DamageAbility;
 import processing.core.PApplet;
 
 public class Fighter extends Combatant implements DamageAbility {

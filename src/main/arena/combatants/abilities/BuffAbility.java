@@ -1,8 +1,8 @@
-package main.arena.combatants.types;
+package main.arena.combatants.abilities;
 
 import main.arena.combatants.Combatant;
 
-public interface DamageAbility {
+public interface BuffAbility {
 
     void ability(Combatant other);
 }

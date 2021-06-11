@@ -1,7 +1,7 @@
 package main.arena.combatants.team;
 
 import main.arena.combatants.Combatant;
-import main.arena.combatants.types.BuffAbility;
+import main.arena.combatants.abilities.BuffAbility;
 import processing.core.PApplet;
 
 public class Healer extends Combatant implements BuffAbility {

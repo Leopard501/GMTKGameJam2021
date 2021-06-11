@@ -1,7 +1,7 @@
 package main.arena.combatants.team;
 
 import main.arena.combatants.Combatant;
-import main.arena.combatants.types.SplashAbility;
+import main.arena.combatants.abilities.SplashAbility;
 import processing.core.PApplet;
 
 public class Slime extends Combatant implements SplashAbility {

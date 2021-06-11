@@ -6,9 +6,9 @@ import main.arena.combatants.enemies.Android;
 import main.arena.combatants.team.Fighter;
 import main.arena.combatants.team.Healer;
 import main.arena.combatants.team.Slime;
-import main.arena.combatants.types.BuffAbility;
-import main.arena.combatants.types.DamageAbility;
-import main.arena.combatants.types.SplashAbility;
+import main.arena.combatants.abilities.BuffAbility;
+import main.arena.combatants.abilities.DamageAbility;
+import main.arena.combatants.abilities.SplashAbility;
 import processing.core.PApplet;
 import processing.core.PVector;
 
