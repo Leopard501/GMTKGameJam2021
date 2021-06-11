@@ -1,5 +1,6 @@
 package main.arena;
 
+import com.sun.istack.internal.NotNull;
 import main.arena.combatants.Combatant;
 import main.arena.combatants.enemies.Android;
 import main.arena.combatants.team.Fighter;
@@ -10,6 +11,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.BOARD_SIZE;
+import static main.Main.arena;
 
 public class Arena {
 
@@ -47,6 +49,7 @@ public class Arena {
         ENEMY_SLOTS[0].setCombatant(new Android(P));
         ENEMY_SLOTS[1].setCombatant(new Android(P));
         ENEMY_SLOTS[2].setCombatant(new Android(P));
+        for (Slot slot: ENEMY_SLOTS) slot.combatant.enemy = true;
     }
 
     public void main() {
@@ -89,7 +92,7 @@ public class Arena {
                 TEAM_SLOTS[selected].attack(slot);
                 advanceTurn();
             } else if (actionState == 2) {
-                if (TEAM_SLOTS[selected].ability(slot, true)) {
+                if (TEAM_SLOTS[selected].ability(slot)) {
                     actionTimer = 0;
                     advanceTurn();
                 }
@@ -98,7 +101,7 @@ public class Arena {
             //none, left, right
             int actionState = slot.actionState();
             if (actionState == 2) {
-                if (TEAM_SLOTS[selected].ability(slot, false)) {
+                if (TEAM_SLOTS[selected].ability(slot)) {
                     actionTimer = 0;
                     advanceTurn();
                 }
@@ -161,15 +164,25 @@ public class Arena {
             combatant.attack(other.combatant);
         }
 
+        private static boolean onOpposingTeams(Combatant a, Combatant b) {
+            return a.enemy != b.enemy;
+        }
+
         /**
-         * @return true if can use ability, false if can't
+         * @return true if used ability, false if couldn't
          */
-        private boolean ability(Slot other, boolean usingOnEnemy) {
+        @NotNull
+        private boolean ability(Slot other) {
             if (combatant == null) return false;
             if (combatant.mp < combatant.mpCost) return false;
-            if (combatant instanceof DamageAbility) ((DamageAbility) combatant).damageAbility(other.combatant);
-            if (combatant instanceof BuffAbility) ((BuffAbility) combatant).buffAbility(other.combatant);
-            //temp, return false if it can't use ability on
+            if (combatant instanceof DamageAbility) {
+                if (!onOpposingTeams(combatant, other.combatant)) return false;
+                ((DamageAbility) combatant).damageAbility(other.combatant);
+            }
+            if (combatant instanceof BuffAbility) {
+                if (onOpposingTeams(combatant, other.combatant)) return false;
+                ((BuffAbility) combatant).buffAbility(other.combatant);
+            }
             return true;
         }
 

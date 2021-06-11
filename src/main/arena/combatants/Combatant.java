@@ -16,6 +16,7 @@ import static processing.core.PConstants.CORNER;
 public abstract class Combatant {
 
     public boolean alive;
+    public boolean enemy;
     public int mp;
     public int mpCost;
 
