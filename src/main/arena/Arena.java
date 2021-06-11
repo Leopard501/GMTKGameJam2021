@@ -37,9 +37,13 @@ public class Arena {
           new Slot(new PVector(BOARD_SIZE.x - 110, 300))
         };
 
+        TEAM_SLOTS[0].setCombatant(new Fighter(P));
         TEAM_SLOTS[1].setCombatant(new Fighter(P));
+        TEAM_SLOTS[2].setCombatant(new Fighter(P));
 
+        ENEMY_SLOTS[0].setCombatant(new Android(P));
         ENEMY_SLOTS[1].setCombatant(new Android(P));
+        ENEMY_SLOTS[2].setCombatant(new Android(P));
 
         selected = -1;
         advanceTurn();
