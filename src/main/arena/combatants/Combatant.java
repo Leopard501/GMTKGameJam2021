@@ -16,6 +16,8 @@ import static processing.core.PConstants.CORNER;
 public abstract class Combatant {
 
     public boolean alive;
+    public int mp;
+    public int mpCost;
 
     protected static final PVector SIZE = new PVector(50, 50);
 
@@ -24,11 +26,9 @@ public abstract class Combatant {
     protected PVector position;
     protected int hp;
     protected int maxHp;
-    protected int mp;
     protected int maxMp;
     protected int primaryDamage;
     protected int secondaryDamage;
-    protected int mpCost;
 
     /**
      * These are the little dudes that will fight.
@@ -59,7 +59,7 @@ public abstract class Combatant {
         mpBar();
     }
 
-    public void hpBar() {
+    private void hpBar() {
         P.rectMode(CORNER);
         Color barColor = new Color(255, 0, 0);
         float barWidth = SIZE.x * (hp / (float) maxHp);
@@ -71,7 +71,7 @@ public abstract class Combatant {
         P.rectMode(CENTER);
     }
 
-    public void mpBar() {
+    private void mpBar() {
         P.rectMode(CORNER);
         Color barColor = new Color(0, 175, 255);
         float barWidth = SIZE.x * (mp / (float) maxMp);
@@ -89,27 +89,32 @@ public abstract class Combatant {
         P.rect(position.x, position.y, SIZE.x, SIZE.y);
     }
 
-    public boolean isClicked() {
+    public int actionState() {
         if (pointOnRect(position, new PVector(SIZE.x / 2, SIZE.y / 2), matrixMousePosition)) {
             if (inputHandler.leftMousePressedPulse) playSound(Main.sounds.get("clickIn"), 1, 1);
             if (inputHandler.leftMouseReleasedPulse) {
                 playSound(Main.sounds.get("clickOut"), 1, 1);
-                return true;
+                return 1;
+            }
+            if (inputHandler.rightMousePressedPulse) playSound(Main.sounds.get("clickIn"), 1, 1);
+            if (inputHandler.rightMouseReleasedPulse) {
+                playSound(Main.sounds.get("clickOut"), 1, 1);
+                return 2;
             }
         }
-        return false;
+        return 0;
     }
 
-    public void primaryAttack(Combatant other) {
+    public void attack(Combatant other) {
         other.hurt(primaryDamage);
     }
 
-    public void secondaryAttack(Combatant other) {
+    public void ability(Combatant other) {
         mp -= mpCost;
-        secondaryAttackEffect(other);
+        abilityEffect(other);
     }
 
-    protected abstract void secondaryAttackEffect(Combatant other);
+    protected abstract void abilityEffect(Combatant other);
 
     public void hurt(int amount) {
         hp -= amount;

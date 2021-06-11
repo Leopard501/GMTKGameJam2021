@@ -6,11 +6,11 @@ import processing.core.PApplet;
 public class Fighter extends Combatant {
 
     public Fighter(PApplet p) {
-        super(p, 100, 25, 5, 20, 40);
+        super(p, 100, 10, 5, 20, 40);
     }
 
     @Override
-    protected void secondaryAttackEffect(Combatant other) {
-        //inflict bleeding
+    protected void abilityEffect(Combatant other) {
+        other.hurt(secondaryDamage);
     }
 }

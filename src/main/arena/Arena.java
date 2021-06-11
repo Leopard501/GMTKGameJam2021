@@ -64,7 +64,7 @@ public class Arena {
         while (target.empty()) {
             target = TEAM_SLOTS[(int) P.random(TEAM_SLOTS.length)];
         }
-        ENEMY_SLOTS[selected].primaryAttack(target);
+        ENEMY_SLOTS[selected].attack(target);
         actionTimer = 0;
         advanceTurn();
     }
@@ -79,10 +79,26 @@ public class Arena {
     private void simTeamTurn() {
         if (TEAM_SLOTS[selected].empty()) advanceTurn();
         for (Slot slot : ENEMY_SLOTS) {
-            if (slot.isClicked()) {
+            //none, left, right
+            int actionState = slot.actionState();
+            if (actionState == 1) {
                 actionTimer = 0;
-                TEAM_SLOTS[selected].primaryAttack(slot);
+                TEAM_SLOTS[selected].attack(slot);
                 advanceTurn();
+            } else if (actionState == 2) {
+                if (TEAM_SLOTS[selected].ability(slot, true)) {
+                    actionTimer = 0;
+                    advanceTurn();
+                }
+            }
+        } for (Slot slot : TEAM_SLOTS) {
+            //none, left, right
+            int actionState = slot.actionState();
+            if (actionState == 2) {
+                if (TEAM_SLOTS[selected].ability(slot, false)) {
+                    actionTimer = 0;
+                    advanceTurn();
+                }
             }
         }
     }
@@ -132,14 +148,25 @@ public class Arena {
             combatant.setPosition(POSITION.x, POSITION.y);
         }
 
-        private boolean isClicked() {
-            if (combatant == null) return false;
-            return combatant.isClicked();
+        private int actionState() {
+            if (combatant == null) return 0;
+            return combatant.actionState();
         }
 
-        private void primaryAttack(Slot other) {
+        private void attack(Slot other) {
             if (combatant == null) return;
-            combatant.primaryAttack(other.combatant);
+            combatant.attack(other.combatant);
+        }
+
+        /**
+         * @return true if can use ability, false if can't
+         */
+        private boolean ability(Slot other, boolean usingOnEnemy) {
+            if (combatant == null) return false;
+            if (combatant.mp < combatant.mpCost) return false;
+            combatant.ability(other.combatant);
+            //temp, return false if it can't use ability on
+            return true;
         }
 
         private void selectionOverlay() {
