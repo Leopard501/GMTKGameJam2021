@@ -39,7 +39,7 @@ public class Arena {
         };
 
         TEAM_SLOTS[0].setCombatant(new Fighter(P));
-        TEAM_SLOTS[1].setCombatant(new Fighter(P));
+        TEAM_SLOTS[1].setCombatant(new Healer(P));
         TEAM_SLOTS[2].setCombatant(new Fighter(P));
 
         ENEMY_SLOTS[0].setCombatant(new Android(P));
