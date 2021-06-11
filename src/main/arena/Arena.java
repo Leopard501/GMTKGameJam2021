@@ -10,11 +10,12 @@ import static main.Main.BOARD_SIZE;
 
 public class Arena {
 
+    public boolean enemiesTurn;
+
     private final PApplet P;
     private final Slot[] TEAM_SLOTS;
     private final Slot[] ENEMY_SLOTS;
 
-    private boolean enemiesTurn;
     private Slot selected;
 
     /**
@@ -38,12 +39,17 @@ public class Arena {
         ENEMY_SLOTS[1].setCombatant(new Android(P));
     }
 
-    public void display() {
+    public void main() {
+        display();
+        for (Slot slot : TEAM_SLOTS) System.out.println(slot.isClicked());
+    }
+
+    private void display() {
         for (Slot slot : TEAM_SLOTS) slot.display();
         for (Slot slot : ENEMY_SLOTS) slot.display();
     }
 
-    private class Slot {
+    private static class Slot {
 
         private final PVector POSITION;
         private Combatant combatant;
@@ -60,6 +66,11 @@ public class Arena {
         private void setCombatant(Combatant combatant) {
             this.combatant = combatant;
             combatant.setPosition(POSITION.x, POSITION.y);
+        }
+
+        private boolean isClicked() {
+            if (combatant == null) return false;
+            return combatant.isClicked();
         }
     }
 }

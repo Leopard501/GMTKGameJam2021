@@ -5,6 +5,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 import processing.sound.SoundFile;
 
+import javax.crypto.interfaces.PBEKey;
 import java.awt.*;
 
 import static main.Main.*;
@@ -318,5 +319,23 @@ public class Utilities {
      */
     public static float randomizeBy(PApplet p, float input, float by) {
         return input + p.random(-input * by, input * by);
+    }
+
+    /**
+     * Checks if a point is on a rectangle.
+     * @param aPosition center of fist rect
+     * @param aSize extend of first rect
+     * @param bPosition center of second rect
+     */
+    public static boolean pointOnRect(PVector aPosition, PVector aSize, PVector bPosition) {
+        float aRight = aPosition.x + aSize.x;
+        float aLeft = aPosition.x - aSize.x;
+        float aTop = aPosition.y - aSize.y;
+        float aBottom = aPosition.y + aSize.y;
+
+        boolean x = bPosition.x >= aLeft && bPosition.x <= aRight;
+        boolean y = bPosition.y >= aTop && bPosition.y <= aBottom;
+
+        return x && y;
     }
 }

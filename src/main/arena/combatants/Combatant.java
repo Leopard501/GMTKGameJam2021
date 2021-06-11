@@ -1,7 +1,13 @@
 package main.arena.combatants;
 
+import main.Main;
 import processing.core.PApplet;
 import processing.core.PVector;
+
+import static main.Main.inputHandler;
+import static main.Main.matrixMousePosition;
+import static main.misc.Utilities.pointOnRect;
+import static main.sound.SoundUtilities.playSound;
 
 public abstract class Combatant {
 
@@ -40,6 +46,17 @@ public abstract class Combatant {
     public void display() {
         P.fill(255);
         P.rect(position.x, position.y, SIZE.x, SIZE.y);
+    }
+
+    public boolean isClicked() {
+        if (pointOnRect(position, SIZE, matrixMousePosition)) {
+            if (inputHandler.leftMousePressedPulse) playSound(Main.sounds.get("clickIn"), 1, 1);
+            if (inputHandler.leftMouseReleasedPulse) {
+                playSound(Main.sounds.get("clickOut"), 1, 1);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void primaryAttack(Combatant other) {
