@@ -167,12 +167,8 @@ public class Arena {
         private boolean ability(Slot other, boolean usingOnEnemy) {
             if (combatant == null) return false;
             if (combatant.mp < combatant.mpCost) return false;
-            try {
-                ((DamageAbility) combatant).damageAbility(other.combatant);
-            } catch (ClassCastException ignored) {}
-            try {
-                ((BuffAbility) combatant).buffAbility(other.combatant);
-            } catch (ClassCastException ignored) {}
+            if (combatant instanceof DamageAbility) ((DamageAbility) combatant).damageAbility(other.combatant);
+            if (combatant instanceof BuffAbility) ((BuffAbility) combatant).buffAbility(other.combatant);
             //temp, return false if it can't use ability on
             return true;
         }
