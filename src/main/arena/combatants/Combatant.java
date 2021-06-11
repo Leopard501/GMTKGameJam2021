@@ -123,4 +123,8 @@ public abstract class Combatant {
         hp += amount;
         if (hp > maxHp) hp = maxHp;
     }
+
+    public void updateBuffs() {
+        if (bleeding != null) bleeding.effect(this);
+    }
 }

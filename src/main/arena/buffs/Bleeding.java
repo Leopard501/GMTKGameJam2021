@@ -10,8 +10,10 @@ public class Bleeding extends Buff {
     }
 
     @Override
-    public void effect(Combatant other) {
-        other.hurt(10);
+    public void effect(Combatant combatant) {
+        lifeTimer--;
+        combatant.hurt(10);
+        if (lifeTimer == 0) combatant.bleeding = null;
     }
 
     @Override

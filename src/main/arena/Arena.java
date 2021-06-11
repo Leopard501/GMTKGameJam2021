@@ -115,16 +115,24 @@ public class Arena {
     private void advanceTurn() {
         selected++;
         if (enemiesTurn) {
-            if (selected >= ENEMY_SLOTS.length) {
-                enemiesTurn = false;
-                selected = 0;
-            } else if (ENEMY_SLOTS[selected].empty()) advanceTurn();
+            if (selected >= ENEMY_SLOTS.length) endEnemyTurn();
+            else if (ENEMY_SLOTS[selected].empty()) advanceTurn();
         } else {
-            if (selected >= TEAM_SLOTS.length) {
-                enemiesTurn = true;
-                selected = 0;
-            } else if (TEAM_SLOTS[selected].empty()) advanceTurn();
+            if (selected >= TEAM_SLOTS.length) endTeamTurn();
+            else if (TEAM_SLOTS[selected].empty()) advanceTurn();
         }
+    }
+
+    private void endEnemyTurn() {
+        enemiesTurn = false;
+        selected = 0;
+        for (Slot slot : ENEMY_SLOTS) slot.updateBuffs();
+    }
+
+    private void endTeamTurn() {
+        enemiesTurn = true;
+        selected = 0;
+        for (Slot slot : TEAM_SLOTS) slot.updateBuffs();
     }
 
     private void display() {
@@ -146,24 +154,24 @@ public class Arena {
         }
 
         private void display() {
-            if (combatant == null) return;
+            if (empty()) return;
             combatant.display();
             if (!combatant.alive) setCombatant(null);
         }
 
         private void setCombatant(Combatant combatant) {
             this.combatant = combatant;
-            if (combatant == null) return;
+            if (empty()) return;
             combatant.setPosition(POSITION.x, POSITION.y);
         }
 
         private int actionState() {
-            if (combatant == null) return 0;
+            if (empty()) return 0;
             return combatant.actionState();
         }
 
         private void attack(Slot other) {
-            if (combatant == null) return;
+            if (empty()) return;
             combatant.attack(other.combatant);
         }
 
@@ -176,7 +184,7 @@ public class Arena {
          */
         @NotNull
         private boolean ability(Slot other) {
-            if (combatant == null) return false;
+            if (empty()) return false;
             if (combatant.mp < combatant.mpCost) return false;
             if (combatant instanceof DamageAbility) {
                 if (!onOpposingTeams(combatant, other.combatant)) return false;
@@ -206,12 +214,17 @@ public class Arena {
         }
 
         private void selectionOverlay() {
-            if (combatant == null) return;
+            if (empty()) return;
             combatant.selectionOverlay();
         }
 
         private boolean empty() {
             return combatant == null;
+        }
+
+        private void updateBuffs() {
+            if (empty()) return;
+            combatant.updateBuffs();
         }
     }
 }
