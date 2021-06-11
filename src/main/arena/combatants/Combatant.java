@@ -4,10 +4,14 @@ import main.Main;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+import java.awt.*;
+
 import static main.Main.inputHandler;
 import static main.Main.matrixMousePosition;
 import static main.misc.Utilities.pointOnRect;
 import static main.sound.SoundUtilities.playSound;
+import static processing.core.PConstants.CENTER;
+import static processing.core.PConstants.CORNER;
 
 public abstract class Combatant {
 
@@ -49,7 +53,34 @@ public abstract class Combatant {
 
     public void display() {
         P.fill(255);
+        P.noStroke();
         P.circle(position.x, position.y, SIZE.x);
+        hpBar();
+        mpBar();
+    }
+
+    public void hpBar() {
+        P.rectMode(CORNER);
+        Color barColor = new Color(255, 0, 0);
+        float barWidth = SIZE.x * (hp / (float) maxHp);
+        P.stroke(barColor.getRGB());
+        P.noFill();
+        P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 6, SIZE.x, 6);
+        P.fill(barColor.getRGB());
+        if (hp > 0) P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 6, barWidth, 6);
+        P.rectMode(CENTER);
+    }
+
+    public void mpBar() {
+        P.rectMode(CORNER);
+        Color barColor = new Color(0, 175, 255);
+        float barWidth = SIZE.x * (mp / (float) maxMp);
+        P.stroke(barColor.getRGB());
+        P.noFill();
+        P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 12, SIZE.x, 6);
+        P.fill(barColor.getRGB());
+        if (mp > 0) P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 12, barWidth, 6);
+        P.rectMode(CENTER);
     }
 
     public void selectionOverlay() {
