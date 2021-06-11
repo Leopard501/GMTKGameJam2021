@@ -14,6 +14,9 @@ public class Slime extends Combatant implements SplashAbility {
     public void ability(Combatant[] others) {
         mp -= mpCost;
         if (mp < 0) mp = 0;
-        for (Combatant other : others) other.hurt(abilityDamage);
+        for (Combatant other : others) {
+            if (other == null) continue;
+            other.hurt(abilityDamage);
+        }
     }
 }
