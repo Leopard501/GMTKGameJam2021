@@ -28,6 +28,8 @@ public class Arena {
           new Slot(new PVector(BOARD_SIZE.x - 150, 200)),
           new Slot(new PVector(BOARD_SIZE.x - 110, 300))
         };
+
+        GOOD_SLOTS[1].setCombatant(new Fighter(P));
     }
 
     public void display() {
@@ -47,6 +49,11 @@ public class Arena {
         private void display() {
             if (combatant == null) return;
             combatant.display();
+        }
+
+        private void setCombatant(Combatant combatant) {
+            this.combatant = combatant;
+            combatant.setPosition(position);
         }
     }
 }

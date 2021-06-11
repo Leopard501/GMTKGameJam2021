@@ -23,12 +23,15 @@ public abstract class Combatant {
     /**
      * These are the little dudes that will fight.
      */
-    public Combatant(PApplet p, float x, float y, int maxHp, int maxMp, int mpCost, int primaryDamage,
+    public Combatant(PApplet p, int maxHp, int maxMp, int mpCost, int primaryDamage,
                      int secondaryDamage) {
         P = p;
-        position = new PVector(x, y);
         this.maxHp = maxHp;
         this.maxMp = maxMp;
+    }
+
+    public void setPosition(PVector position) {
+        this.position = position;
     }
 
     public void display() {

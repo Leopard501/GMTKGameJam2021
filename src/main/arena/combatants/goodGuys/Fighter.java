@@ -5,8 +5,8 @@ import processing.core.PApplet;
 
 public class Fighter extends Combatant {
 
-    public Fighter(PApplet p, float x, float y) {
-        super(p, x, y, 100, 25, 5, 10, 20);
+    public Fighter(PApplet p) {
+        super(p, 100, 25, 5, 10, 20);
     }
 
     @Override
