@@ -26,7 +26,7 @@ public class Main extends PApplet {
     private static final int FRAMERATE = 60;
     private static final String TITLE = "template";
 
-    public static final PVector BOARD_SIZE = new PVector(1100, 900);
+    public static final PVector BOARD_SIZE = new PVector(600, 500);
 
     public static float globalVolume = 0.25f;
 

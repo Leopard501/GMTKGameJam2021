@@ -28,13 +28,13 @@ public class Arena {
         P = p;
 
         TEAM_SLOTS = new Slot[] {
-          new Slot(new PVector(100, 100)),
-          new Slot(new PVector(150, 200)),
-          new Slot(new PVector(110, 300))
+          new Slot(new PVector(125, 100)),
+          new Slot(new PVector(175, 225)),
+          new Slot(new PVector(145, 350))
         }; ENEMY_SLOTS = new Slot[] {
-          new Slot(new PVector(BOARD_SIZE.x - 100, 100)),
-          new Slot(new PVector(BOARD_SIZE.x - 150, 200)),
-          new Slot(new PVector(BOARD_SIZE.x - 110, 300))
+          new Slot(new PVector(BOARD_SIZE.x - 145, 100)),
+          new Slot(new PVector(BOARD_SIZE.x - 175, 225)),
+          new Slot(new PVector(BOARD_SIZE.x - 125, 350))
         };
 
         TEAM_SLOTS[0].setCombatant(new Fighter(P));

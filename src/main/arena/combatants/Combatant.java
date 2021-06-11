@@ -77,9 +77,9 @@ public abstract class Combatant {
         float barWidth = SIZE.x * (mp / (float) maxMp);
         P.stroke(barColor.getRGB());
         P.noFill();
-        P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 12, SIZE.x, 6);
+        P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 13, SIZE.x, 6);
         P.fill(barColor.getRGB());
-        if (mp > 0) P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 12, barWidth, 6);
+        if (mp > 0) P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 13, barWidth, 6);
         P.rectMode(CENTER);
     }
 
