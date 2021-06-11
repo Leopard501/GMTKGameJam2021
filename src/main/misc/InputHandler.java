@@ -65,6 +65,17 @@ public class InputHandler {
         }
     }
 
+    public void reset() {
+        rightMouseReleasedPulse = false;
+        leftMouseReleasedPulse = false;
+        rightMousePressedPulse = false;
+        leftMousePressedPulse = false;
+        for (KeyDS.KeyDSItem key : keysPressed.items) {
+            key.pressedPulse = false;
+            key.releasedPulse = false;
+        }
+    }
+
     public static class KeyDS {
 
         public KeyDSItem[] items;

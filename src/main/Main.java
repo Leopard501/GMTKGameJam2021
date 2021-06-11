@@ -117,6 +117,7 @@ public class Main extends PApplet {
 
         arena.main();
 
+        inputHandler.reset();
         popFullscreen();
     }
 

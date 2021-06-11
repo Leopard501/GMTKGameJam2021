@@ -41,7 +41,7 @@ public class Arena {
 
     public void main() {
         display();
-        for (Slot slot : TEAM_SLOTS) System.out.println(slot.isClicked());
+        for (Slot slot : TEAM_SLOTS) slot.isClicked();
     }
 
     private void display() {

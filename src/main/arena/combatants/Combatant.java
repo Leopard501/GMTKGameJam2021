@@ -49,7 +49,7 @@ public abstract class Combatant {
     }
 
     public boolean isClicked() {
-        if (pointOnRect(position, SIZE, matrixMousePosition)) {
+        if (pointOnRect(position, new PVector(SIZE.x / 2, SIZE.y / 2), matrixMousePosition)) {
             if (inputHandler.leftMousePressedPulse) playSound(Main.sounds.get("clickIn"), 1, 1);
             if (inputHandler.leftMouseReleasedPulse) {
                 playSound(Main.sounds.get("clickOut"), 1, 1);
