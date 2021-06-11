@@ -120,4 +120,9 @@ public abstract class Combatant {
         hp -= amount;
         if (hp <= 0) alive = false;
     }
+
+    public void heal(int amount) {
+        hp += amount;
+        if (hp > maxMp) hp = maxHp;
+    }
 }
