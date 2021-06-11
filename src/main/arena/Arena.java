@@ -11,7 +11,6 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.BOARD_SIZE;
-import static main.Main.arena;
 
 public class Arena {
 
@@ -49,7 +48,7 @@ public class Arena {
         ENEMY_SLOTS[0].setCombatant(new Android(P));
         ENEMY_SLOTS[1].setCombatant(new Android(P));
         ENEMY_SLOTS[2].setCombatant(new Android(P));
-        for (Slot slot: ENEMY_SLOTS) slot.combatant.enemy = true;
+        for (Slot slot: ENEMY_SLOTS) slot.combatant.isEnemy = true;
     }
 
     public void main() {
@@ -165,7 +164,7 @@ public class Arena {
         }
 
         private static boolean onOpposingTeams(Combatant a, Combatant b) {
-            return a.enemy != b.enemy;
+            return a.isEnemy != b.isEnemy;
         }
 
         /**

@@ -7,9 +7,8 @@ import processing.core.PApplet;
 public class Healer extends Combatant implements BuffAbility {
 
     public Healer(PApplet p) {
-        super(p, 80, 20, 10, 10, 25);
+        super(p, 80, 50, 10, 10, 25);
     }
-
 
     @Override
     public void buffAbility(Combatant other) {

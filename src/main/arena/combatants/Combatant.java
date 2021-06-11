@@ -16,7 +16,7 @@ import static processing.core.PConstants.CORNER;
 public abstract class Combatant {
 
     public boolean alive;
-    public boolean enemy;
+    public boolean isEnemy;
     public int mp;
     public int mpCost;
 
@@ -117,6 +117,6 @@ public abstract class Combatant {
 
     public void heal(int amount) {
         hp += amount;
-        if (hp > maxMp) hp = maxHp;
+        if (hp > maxHp) hp = maxHp;
     }
 }
