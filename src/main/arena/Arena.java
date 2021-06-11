@@ -16,7 +16,7 @@ public class Arena {
     private final Slot[] TEAM_SLOTS;
     private final Slot[] ENEMY_SLOTS;
 
-    private Slot selected;
+    private int selected;
 
     /**
      * This will hold the players and gui and stuff
@@ -37,11 +37,45 @@ public class Arena {
         TEAM_SLOTS[1].setCombatant(new Fighter(P));
 
         ENEMY_SLOTS[1].setCombatant(new Android(P));
+
+        selected = -1;
+        advanceTurn();
     }
 
     public void main() {
         display();
-        for (Slot slot : TEAM_SLOTS) slot.isClicked();
+        if (enemiesTurn) simEnemyTurn();
+        else simTeamTurn();
+    }
+
+    private void simEnemyTurn() {
+        enemiesTurn = false;
+    }
+
+    private void simTeamTurn() {
+        for (Slot slot : ENEMY_SLOTS) {
+            if (slot.isClicked()) {
+                TEAM_SLOTS[selected].primaryAttack(slot);
+                advanceTurn();
+            }
+        }
+    }
+
+    private void advanceTurn() {
+        selected++;
+        if (enemiesTurn) {
+            if (selected >= ENEMY_SLOTS.length) {
+                enemiesTurn = false;
+                selected = 0;
+            }
+            if (ENEMY_SLOTS[selected] == null) advanceTurn();
+        } else {
+            if (selected >= TEAM_SLOTS.length) {
+                enemiesTurn = true;
+                selected = 0;
+            }
+            if (TEAM_SLOTS[selected] == null) advanceTurn();
+        }
     }
 
     private void display() {
@@ -61,16 +95,23 @@ public class Arena {
         private void display() {
             if (combatant == null) return;
             combatant.display();
+            if (!combatant.alive) setCombatant(null);
         }
 
         private void setCombatant(Combatant combatant) {
             this.combatant = combatant;
+            if (combatant == null) return;
             combatant.setPosition(POSITION.x, POSITION.y);
         }
 
         private boolean isClicked() {
             if (combatant == null) return false;
             return combatant.isClicked();
+        }
+
+        private void primaryAttack(Slot other) {
+            if (combatant == null) return;
+            combatant.primaryAttack(other.combatant);
         }
     }
 }

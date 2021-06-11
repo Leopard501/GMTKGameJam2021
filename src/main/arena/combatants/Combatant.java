@@ -37,6 +37,8 @@ public abstract class Combatant {
         this.mpCost = mpCost;
         this.primaryDamage = primaryDamage;
         this.secondaryDamage = secondaryDamage;
+
+        alive = true;
     }
 
     public void setPosition(float x, float y) {
