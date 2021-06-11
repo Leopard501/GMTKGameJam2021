@@ -33,8 +33,8 @@ public abstract class Combatant {
         this.secondaryDamage = secondaryDamage;
     }
 
-    public void setPosition(PVector position) {
-        this.position = position;
+    public void setPosition(float x, float y) {
+        position = new PVector(x, y);
     }
 
     public void display() {

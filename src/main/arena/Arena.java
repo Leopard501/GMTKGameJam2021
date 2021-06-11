@@ -53,7 +53,7 @@ public class Arena {
 
         private void setCombatant(Combatant combatant) {
             this.combatant = combatant;
-            combatant.setPosition(position);
+            combatant.setPosition(position.x, position.y);
         }
     }
 }
