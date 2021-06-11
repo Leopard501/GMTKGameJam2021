@@ -7,7 +7,7 @@ import processing.core.PApplet;
 public class Slime extends Combatant implements SplashAbility {
 
     public Slime(PApplet p) {
-        super(p, 120, 20, 8, 15, 10);
+        super(p, 120, 20, 5, 15, 10);
     }
 
     @Override
