@@ -44,9 +44,6 @@ public class Arena {
         ENEMY_SLOTS[0].setCombatant(new Android(P));
         ENEMY_SLOTS[1].setCombatant(new Android(P));
         ENEMY_SLOTS[2].setCombatant(new Android(P));
-
-        selected = -1;
-        advanceTurn();
     }
 
     public void main() {
@@ -80,6 +77,7 @@ public class Arena {
     }
 
     private void simTeamTurn() {
+        if (TEAM_SLOTS[selected].empty()) advanceTurn();
         for (Slot slot : ENEMY_SLOTS) {
             if (slot.isClicked()) {
                 actionTimer = 0;
