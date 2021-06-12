@@ -11,10 +11,13 @@ public class Spider extends Combatant implements OffensiveAbility {
 
     public Spider(PApplet p) {
         super(p, 80, 20, 5, 15, 10, new Color(123, 200, 0));
+        loadAnimations("spider");
     }
 
     @Override
     public void ability(Combatant other) {
+        mp -= mpCost;
+        if (mp < 0) mp = 0;
         other.sticky = new Sticky(P);
     }
 }
