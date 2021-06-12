@@ -11,16 +11,19 @@ public class Level_1 extends Level {
         super(p);
 
         waves = new Combatant[][]{{
-              new Drone(p)
+            new Android(p)
           }, {
-              new Drone(p),
-              new Drone(p)
+            new Android(p),
+            new Android(p)
           }, {
-              new Android(p),
-              new Drone(p),
-              new Android(p)
-          }
-        };
+            new Drone(p),
+            new Android(p),
+            new Android(p)
+          }, {
+            new Drone(p),
+            new Drone(p),
+            new Android(p)
+        }};
         for (Combatant[] combatants : waves) {
             for (Combatant combatant : combatants) {
                 combatant.isEnemy = true;

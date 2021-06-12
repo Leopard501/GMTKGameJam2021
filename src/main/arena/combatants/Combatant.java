@@ -65,7 +65,7 @@ public abstract class Combatant {
         P.noStroke();
         P.circle(position.x, position.y, SIZE.x);
         hpBar();
-        mpBar();
+        if (maxMp > 0) mpBar();
     }
 
     private void hpBar() {
