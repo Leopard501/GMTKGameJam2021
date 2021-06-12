@@ -14,7 +14,7 @@ public abstract class Buff {
         this.lifeTimer = lifeTimer;
     }
 
-    public abstract void effect(Combatant other);
+    public abstract void effect(Combatant combatant);
 
     public abstract void display();
 }

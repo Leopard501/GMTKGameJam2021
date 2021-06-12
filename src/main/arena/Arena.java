@@ -3,12 +3,12 @@ package main.arena;
 import com.sun.istack.internal.NotNull;
 import main.arena.combatants.Combatant;
 import main.arena.combatants.enemies.Android;
-import main.arena.combatants.team.Fighter;
 import main.arena.combatants.team.Healer;
 import main.arena.combatants.team.Slime;
 import main.arena.combatants.abilities.BuffAbility;
 import main.arena.combatants.abilities.DamageAbility;
 import main.arena.combatants.abilities.SplashAbility;
+import main.arena.combatants.team.Spider;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -45,7 +45,7 @@ public class Arena {
           new Slot(new PVector(BOARD_SIZE.x - 125, 350))
         };
 
-        TEAM_SLOTS[0].setCombatant(new Fighter(P));
+        TEAM_SLOTS[0].setCombatant(new Spider(P));
         TEAM_SLOTS[1].setCombatant(new Healer(P));
         TEAM_SLOTS[2].setCombatant(new Slime(P));
 
@@ -73,7 +73,7 @@ public class Arena {
         while (target.empty()) {
             target = TEAM_SLOTS[(int) P.random(TEAM_SLOTS.length)];
         }
-        ENEMY_SLOTS[selected].attack(target);
+        if (!ENEMY_SLOTS[selected].cantAttack()) ENEMY_SLOTS[selected].attack(target);
         actionTimer = 0;
         advanceTurn();
     }
@@ -86,7 +86,7 @@ public class Arena {
     }
 
     private void simTeamTurn() {
-        if (TEAM_SLOTS[selected].empty()) advanceTurn();
+        if (TEAM_SLOTS[selected].cantAttack()) advanceTurn();
         for (Slot slot : ENEMY_SLOTS) {
             //none, left, right
             int actionState = slot.actionState();
@@ -225,6 +225,10 @@ public class Arena {
         private void updateBuffs() {
             if (empty()) return;
             combatant.updateBuffs();
+        }
+
+        private boolean cantAttack() {
+            return empty() || combatant.sticky != null;
         }
     }
 }

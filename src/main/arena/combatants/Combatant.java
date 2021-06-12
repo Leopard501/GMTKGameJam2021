@@ -2,6 +2,7 @@ package main.arena.combatants;
 
 import main.Main;
 import main.arena.buffs.Bleeding;
+import main.arena.buffs.Sticky;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -34,6 +35,7 @@ public abstract class Combatant {
 
     //This might suck, but it's a game jam so who cares.
     public Bleeding bleeding;
+    public Sticky sticky;
 
     /**
      * These are the little dudes that will fight.
@@ -126,5 +128,6 @@ public abstract class Combatant {
 
     public void updateBuffs() {
         if (bleeding != null) bleeding.effect(this);
+        if (sticky != null) sticky.effect(this);
     }
 }
