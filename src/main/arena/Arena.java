@@ -53,7 +53,7 @@ public class Arena {
         };
 
         teamSlots[0].setCombatant(new Fighter(P));
-        teamSlots[1].setCombatant(new Slime(P));
+        teamSlots[1].setCombatant(new Healer(P));
         teamSlots[2].setCombatant(new Necromancer(P));
 
         currentWave = -1;
