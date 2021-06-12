@@ -64,6 +64,8 @@ public class SpriteLoader {
     }
 
     public static void loadSprites(PApplet p) {
+        //buffs
         sprites.put("stickyBF", p.loadImage("sprites/buffs/sticky.png"));
+        sprites.put("shieldedBF", p.loadImage("sprites/buffs/shielded.png"));
     }
 }
