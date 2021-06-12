@@ -97,7 +97,7 @@ public abstract class Combatant {
     }
 
     public void display() {
-        animate();
+        if (sticky == null) animate();
         if (isEnemy) {
             P.pushMatrix();
             P.scale(-1, 1);

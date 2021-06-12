@@ -64,6 +64,6 @@ public class SpriteLoader {
     }
 
     public static void loadSprites(PApplet p) {
-
+        sprites.put("stickyBF", p.loadImage("sprites/buffs/sticky.png"));
     }
 }
