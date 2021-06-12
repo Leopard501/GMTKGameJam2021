@@ -6,6 +6,7 @@ import processing.core.PApplet;
 
 public abstract class Level {
 
+    public Combatant[] team;
     public Combatant[][] waves;
     public Dialogue[][] dialogues;
 

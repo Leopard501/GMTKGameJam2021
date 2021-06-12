@@ -16,6 +16,10 @@ public class Level_1 extends Level {
     public Level_1(PApplet p) {
         super(p);
 
+        team = new Combatant[] {
+          new Fighter(p)
+        };
+
         waves = new Combatant[][]{{
             new T800(p),
             new Drone(p),

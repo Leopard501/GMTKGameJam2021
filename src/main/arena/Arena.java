@@ -3,7 +3,6 @@ package main.arena;
 import com.sun.istack.internal.NotNull;
 import main.arena.combatants.Combatant;
 import main.arena.combatants.abilities.Ability;
-import main.arena.combatants.team.*;
 import main.arena.combatants.abilities.DefensiveAbility;
 import main.arena.combatants.abilities.OffensiveAbility;
 import main.arena.combatants.abilities.SplashOffensiveAbility;
@@ -16,8 +15,8 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
-import static main.Main.BOARD_SIZE;
 import static main.Main.arena;
+import static main.misc.Utilities.getPositionFromSlot;
 
 public class Arena {
 
@@ -35,9 +34,10 @@ public class Arena {
     private int selected;
     private int actionTimer;
     private int dialogueTimer;
-    private int dialogueCount;
+    private int currentDialogue;
     private int currentWave;
-    private Level level;
+    private int currentLevel;
+    private Level[] levels;
 
     /**
      * This will hold the players and gui and stuff
@@ -49,21 +49,29 @@ public class Arena {
         dialogues = new ArrayList<>();
 
         teamSlots = new Slot[] {
-          new Slot(new PVector(BOARD_SIZE.x / 6, BOARD_SIZE.y / 4)),
-          new Slot(new PVector(BOARD_SIZE.x / 3, BOARD_SIZE.y / 2)),
-          new Slot(new PVector(BOARD_SIZE.x / 6, 3 * (BOARD_SIZE.y / 4)))
+          new Slot(getPositionFromSlot(0)),
+          new Slot(getPositionFromSlot(1)),
+          new Slot(getPositionFromSlot(2))
         }; enemySlots = new Slot[] {
-          new Slot(new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), BOARD_SIZE.y / 4)),
-          new Slot(new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 3), BOARD_SIZE.y / 2)),
-          new Slot(new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), 3 * (BOARD_SIZE.y / 4)))
+          new Slot(getPositionFromSlot(3)),
+          new Slot(getPositionFromSlot(4)),
+          new Slot(getPositionFromSlot(5))
         };
 
-        teamSlots[0].setCombatant(new Fighter(P));
-        teamSlots[1].setCombatant(new Healer(P));
-        teamSlots[2].setCombatant(new Shielder(P));
+        currentLevel = -1;
+        levels = new Level[] {
+          new Level_1(p)
+        };
+        advanceLevel();
+    }
 
+    private void advanceLevel() {
+        currentLevel++;
         currentWave = -1;
-        level = new Level_1(p);
+        currentDialogue = 0;
+        for (int i = 0; i < levels[currentLevel].team.length; i++) {
+            teamSlots[i].setCombatant(levels[currentLevel].team[i]);
+        }
         advanceWave();
     }
 
@@ -71,13 +79,12 @@ public class Arena {
         enemiesTurn = false;
         selected = 0;
         actionTimer = 0;
+        dialogueTimer = 0;
+        currentDialogue = 0;
         currentWave++;
-        if (currentWave >= level.waves.length) System.out.println("You win!\nPromptly crashing...");
-        for (int i = 0; i < level.waves[currentWave].length; i++) {
-            enemySlots[i].setCombatant(level.waves[currentWave][i]);
-        }
-        if (currentWave < level.dialogues.length) {
-            dialogueCount = 0;
+        if (currentWave >= levels[currentLevel].waves.length) System.out.println("You win!\nPromptly crashing...");
+        for (int i = 0; i < levels[currentLevel].waves[currentWave].length; i++) {
+            enemySlots[i].setCombatant(levels[currentLevel].waves[currentWave][i]);
         }
     }
 
@@ -87,12 +94,12 @@ public class Arena {
             if (enemiesTurn) simEnemyTurn();
             else simPlayerTurn();
         }
-        if (currentWave < level.dialogues.length && dialogueCount < level.dialogues[currentWave].length) {
+        if (currentWave < levels[currentLevel].dialogues.length && currentDialogue < levels[currentLevel].dialogues[currentWave].length) {
             dialogueTimer++;
             if (dialogueTimer >= TIME_BETWEEN_DIALOGUE) {
-                dialogues.add(level.dialogues[currentWave][dialogueCount]);
+                dialogues.add(levels[currentLevel].dialogues[currentWave][currentDialogue]);
                 dialogueTimer = 0;
-                dialogueCount++;
+                currentDialogue++;
             }
         }
         if (noEnemies()) advanceWave();
