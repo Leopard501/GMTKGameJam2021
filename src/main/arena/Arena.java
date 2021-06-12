@@ -52,9 +52,9 @@ public class Arena {
           new Slot(new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), 3 * (BOARD_SIZE.y / 4)))
         };
 
-        teamSlots[0].setCombatant(new Spider(P));
-        teamSlots[1].setCombatant(new Slime(P));
-        teamSlots[2].setCombatant(new Necromancer(P));
+        teamSlots[0].setCombatant(new Fighter(P));
+        teamSlots[1].setCombatant(new Healer(P));
+        teamSlots[2].setCombatant(new Shielder(P));
 
         currentWave = -1;
         level = new Level_1(p);
@@ -76,7 +76,7 @@ public class Arena {
         display();
         if (actionTimer >= TIME_BETWEEN_ACTIONS) {
             if (enemiesTurn) simEnemyTurn();
-            else simTeamTurn();
+            else simPlayerTurn();
         }
         if (noEnemies()) advanceWave();
         actionTimer++;
@@ -140,7 +140,7 @@ public class Arena {
         return true;
     }
 
-    private void simTeamTurn() {
+    private void simPlayerTurn() {
         if (teamSlots[selected].cantAct()) advanceTurn();
         for (Slot slot : enemySlots) {
             //none, left, right

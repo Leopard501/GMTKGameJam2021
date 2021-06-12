@@ -45,6 +45,7 @@ public abstract class Combatant {
     protected int betweenIdleFrames;
     protected float abilityStrength;
 
+    private int animationState;
     private int frame;
     private int betweenFrameTimer;
     private PImage[] idleAnimation;
@@ -78,15 +79,14 @@ public abstract class Combatant {
     }
 
     public void display() {
-        if (idleAnimation == null) {
-            P.fill(255);
-            P.noStroke();
-            P.circle(position.x, position.y, SIZE.x);
-        } else {
-            animate();
-            if (isEnemy) P.image(idleAnimation[frame], position.x, position.y, -SIZE.x, SIZE.y);
-            P.image(idleAnimation[frame], position.x, position.y);
+        animate();
+        if (isEnemy) {
+            P.pushMatrix();
+            P.scale(-1, 1);
+            P.image(idleAnimation[frame], -position.x, position.y);
+            P.popMatrix();
         }
+        else P.image(idleAnimation[frame], position.x, position.y);
         hpBar();
         if (maxMp > 0) mpBar();
     }
