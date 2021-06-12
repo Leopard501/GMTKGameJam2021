@@ -18,7 +18,7 @@ public class Drone extends Combatant implements SplashOffensiveAbility {
         if (mp < 0) mp = 0;
         for (Combatant other : others) {
             if (other == null) continue;
-            other.hurt(abilityDamage);
+            other.hurt(abilityStrength);
         }
     }
 }

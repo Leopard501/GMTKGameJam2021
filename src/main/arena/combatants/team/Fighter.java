@@ -17,7 +17,7 @@ public class Fighter extends Combatant implements OffensiveAbility {
     public void ability(Combatant other) {
         mp -= mpCost;
         if (mp < 0) mp = 0;
-        other.hurt(abilityDamage);
+        other.hurt(abilityStrength);
         other.bleeding = new Bleeding(P);
     }
 }

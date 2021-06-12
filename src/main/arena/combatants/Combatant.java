@@ -2,6 +2,7 @@ package main.arena.combatants;
 
 import main.Main;
 import main.arena.buffs.Bleeding;
+import main.arena.buffs.Shielded;
 import main.arena.buffs.Sticky;
 import main.arena.particles.SimpleParticle;
 import processing.core.PApplet;
@@ -32,23 +33,24 @@ public abstract class Combatant {
     protected int maxHp;
     protected int maxMp;
     protected int attackDamage;
-    protected int abilityDamage;
+    protected int abilityStrength;
 
     //This might suck, but it's a game jam so who cares.
     public Bleeding bleeding;
     public Sticky sticky;
+    public Shielded shielded;
 
     /**
      * These are the little dudes that will fight.
      */
     public Combatant(PApplet p, int maxHp, int maxMp, int mpCost, int attackDamage,
-                     int abilityDamage, Color bloodColor) {
+                     int abilityStrength, Color bloodColor) {
         P = p;
         this.maxHp = maxHp;
         this.maxMp = maxMp;
         this.mpCost = mpCost;
         this.attackDamage = attackDamage;
-        this.abilityDamage = abilityDamage;
+        this.abilityStrength = abilityStrength;
         this.bloodColor = bloodColor;
 
         alive = true;
@@ -119,6 +121,7 @@ public abstract class Combatant {
     }
 
     public void hurt(int amount) {
+        if (shielded != null) return;
         hp -= amount;
         for (int i = 0; i < 8; i++) arena.particles.add(new SimpleParticle(P, position.x, position.y, bloodColor));
         if (hp <= 0) alive = false;

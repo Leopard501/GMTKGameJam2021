@@ -3,16 +3,16 @@ package main.arena.buffs;
 import main.arena.combatants.Combatant;
 import processing.core.PApplet;
 
-public class Sticky extends Buff {
+public class Shielded extends Buff {
 
-    public Sticky(PApplet p) {
+    public Shielded(PApplet p) {
         super(p, 2);
     }
 
     @Override
     public void effect(Combatant combatant) {
         lifeTimer--;
-        if (lifeTimer == 0) combatant.sticky = null;
+        if (lifeTimer == 0) combatant.shielded = null;
     }
 
     @Override
