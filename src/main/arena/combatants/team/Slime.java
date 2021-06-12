@@ -1,10 +1,10 @@
 package main.arena.combatants.team;
 
 import main.arena.combatants.Combatant;
-import main.arena.combatants.abilities.SplashAbility;
+import main.arena.combatants.abilities.SplashOffensiveAbility;
 import processing.core.PApplet;
 
-public class Slime extends Combatant implements SplashAbility {
+public class Slime extends Combatant implements SplashOffensiveAbility {
 
     public Slime(PApplet p) {
         super(p, 120, 20, 5, 15, 10);

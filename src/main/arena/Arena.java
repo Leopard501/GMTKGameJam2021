@@ -5,9 +5,9 @@ import main.arena.combatants.Combatant;
 import main.arena.combatants.enemies.Android;
 import main.arena.combatants.team.Healer;
 import main.arena.combatants.team.Slime;
-import main.arena.combatants.abilities.BuffAbility;
-import main.arena.combatants.abilities.DamageAbility;
-import main.arena.combatants.abilities.SplashAbility;
+import main.arena.combatants.abilities.DefensiveAbility;
+import main.arena.combatants.abilities.OffensiveAbility;
+import main.arena.combatants.abilities.SplashOffensiveAbility;
 import main.arena.combatants.team.Spider;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -186,11 +186,11 @@ public class Arena {
         private boolean ability(Slot other) {
             if (empty()) return false;
             if (combatant.mp < combatant.mpCost) return false;
-            if (combatant instanceof DamageAbility) {
+            if (combatant instanceof OffensiveAbility) {
                 if (!onOpposingTeams(combatant, other.combatant)) return false;
-                ((DamageAbility) combatant).ability(other.combatant);
+                ((OffensiveAbility) combatant).ability(other.combatant);
             }
-            if (combatant instanceof SplashAbility) {
+            if (combatant instanceof SplashOffensiveAbility) {
                 if (!onOpposingTeams(combatant, other.combatant)) return false;
                 Combatant[] others;
                 if (combatant.isEnemy) {
@@ -204,11 +204,11 @@ public class Arena {
                         others[i] = arena.ENEMY_SLOTS[i].combatant;
                     }
                 }
-                ((SplashAbility) combatant).ability(others);
+                ((SplashOffensiveAbility) combatant).ability(others);
             }
-            if (combatant instanceof BuffAbility) {
+            if (combatant instanceof DefensiveAbility) {
                 if (onOpposingTeams(combatant, other.combatant)) return false;
-                ((BuffAbility) combatant).ability(other.combatant);
+                ((DefensiveAbility) combatant).ability(other.combatant);
             }
             return true;
         }

@@ -1,10 +1,10 @@
 package main.arena.combatants.team;
 
 import main.arena.combatants.Combatant;
-import main.arena.combatants.abilities.BuffAbility;
+import main.arena.combatants.abilities.DefensiveAbility;
 import processing.core.PApplet;
 
-public class Healer extends Combatant implements BuffAbility {
+public class Healer extends Combatant implements DefensiveAbility {
 
     public Healer(PApplet p) {
         super(p, 80, 50, 10, 10, 25);
