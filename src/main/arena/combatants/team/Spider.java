@@ -10,7 +10,7 @@ import java.awt.*;
 public class Spider extends Combatant implements OffensiveAbility {
 
     public Spider(PApplet p) {
-        super(p, 80, 20, 5, 15, 0, new Color(123, 200, 0));
+        super(p, 80, 20, 5, 15, 10, new Color(123, 200, 0));
     }
 
     @Override
