@@ -25,7 +25,7 @@ public class Arena {
     public Slot[] teamSlots;
     public Slot[] enemySlots;
 
-    private static final int TIME_BETWEEN_ACTIONS = 30;
+    private static final int TIME_BETWEEN_ACTIONS = 45;
 
     private final PApplet P;
 
@@ -53,8 +53,8 @@ public class Arena {
         };
 
         teamSlots[0].setCombatant(new Fighter(P));
-        teamSlots[1].setCombatant(new Healer(P));
-        teamSlots[2].setCombatant(new Shielder(P));
+//        teamSlots[1].setCombatant(new Healer(P));
+//        teamSlots[2].setCombatant(new Shielder(P));
 
         currentWave = -1;
         level = new Level_1(p);
@@ -248,7 +248,7 @@ public class Arena {
             if (combatant.mp < combatant.mpCost) return false;
             if (combatant instanceof OffensiveAbility) {
                 if (!onOpposingTeams(combatant, other.combatant)) return false;
-                ((OffensiveAbility) combatant).ability(other.combatant);
+                combatant.setAbility(other.combatant);
             }
             if (combatant instanceof SplashOffensiveAbility) {
                 if (!onOpposingTeams(combatant, other.combatant)) return false;
@@ -264,11 +264,11 @@ public class Arena {
                         others[i] = arena.enemySlots[i].combatant;
                     }
                 }
-                ((SplashOffensiveAbility) combatant).ability(others);
+                combatant.setAbility(others);
             }
             if (combatant instanceof DefensiveAbility) {
                 if (onOpposingTeams(combatant, other.combatant)) return false;
-                ((DefensiveAbility) combatant).ability(other.combatant);
+                combatant.setAbility(other.combatant);
             }
             return true;
         }

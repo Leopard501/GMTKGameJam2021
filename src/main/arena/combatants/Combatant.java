@@ -5,6 +5,9 @@ import main.arena.buffs.Bleeding;
 import main.arena.buffs.Shielded;
 import main.arena.buffs.StatBoost;
 import main.arena.buffs.Sticky;
+import main.arena.combatants.abilities.DefensiveAbility;
+import main.arena.combatants.abilities.OffensiveAbility;
+import main.arena.combatants.abilities.SplashOffensiveAbility;
 import main.arena.particles.FloatParticle;
 import main.arena.particles.GravityParticle;
 import processing.core.PApplet;
@@ -43,7 +46,9 @@ public abstract class Combatant {
     protected int maxMp;
     protected int attackDamage;
     protected int attackTriggerFrame;
+    protected int abilityTriggerFrame;
     protected int betweenAttackFrames;
+    protected int betweenAbilityFrames;
     protected int betweenIdleFrames;
     protected float abilityStrength;
 
@@ -53,7 +58,9 @@ public abstract class Combatant {
     private PImage frameImage;
     private PImage[] idleAnimation;
     private PImage[] attackAnimation;
+    private PImage[] abilityAnimation;
     private Combatant target;
+    private Combatant[] targets;
 
     /**
      * These are the little dudes that will fight.
@@ -73,6 +80,8 @@ public abstract class Combatant {
         mp = maxMp;
         attackTriggerFrame = 6;
         betweenAttackFrames = 5;
+        abilityTriggerFrame = 6;
+        betweenAbilityFrames = 5;
         betweenIdleFrames = 30;
         betweenFrameTimer = (int) P.random(betweenIdleFrames);
     }
@@ -80,6 +89,7 @@ public abstract class Combatant {
     protected void loadAnimations(String name) {
         idleAnimation = animations.get(name + "idle" + "CB");
         attackAnimation = animations.get(name + "attack" + "CB");
+        abilityAnimation = animations.get(name + "ability" + "CB");
     }
 
     public void setPosition(float x, float y) {
@@ -119,6 +129,21 @@ public abstract class Combatant {
                 }
             }
             frameImage = attackAnimation[frame];
+        } else if (animationState == 2) {
+            if (betweenFrameTimer >= betweenAbilityFrames) {
+                betweenFrameTimer = 0;
+                frame++;
+                if (frame == abilityTriggerFrame) {
+                    if (this instanceof DefensiveAbility) ((DefensiveAbility) this).ability(target);
+                    if (this instanceof OffensiveAbility) ((OffensiveAbility) this).ability(target);
+                    if (this instanceof SplashOffensiveAbility) ((SplashOffensiveAbility) this).ability(targets);
+                }
+                if (frame >= abilityAnimation.length) {
+                    frame = 0;
+                    animationState = 0;
+                }
+            }
+            frameImage = abilityAnimation[frame];
         }
     }
 
@@ -179,6 +204,20 @@ public abstract class Combatant {
         frame = 0;
         betweenFrameTimer = 0;
         animationState = 1;
+    }
+
+    public void setAbility(Combatant other) {
+        target = other;
+        frame = 0;
+        betweenFrameTimer = 0;
+        animationState = 2;
+    }
+
+    public void setAbility(Combatant[] others) {
+        targets = others;
+        frame = 0;
+        betweenFrameTimer = 0;
+        animationState = 2;
     }
 
     private void attack(Combatant other) {

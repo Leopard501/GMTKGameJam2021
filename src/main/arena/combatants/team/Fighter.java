@@ -12,7 +12,7 @@ import static java.lang.Math.round;
 public class Fighter extends Combatant implements OffensiveAbility {
 
     public Fighter(PApplet p) {
-        super(p, 100, 10, 5, 20, 15, new Color(150, 0, 0));
+        super(p, 100, 20, 5, 20, 15, new Color(150, 0, 0));
         loadAnimations("fighter");
     }
 
