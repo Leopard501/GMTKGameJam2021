@@ -12,6 +12,10 @@ public class Drone extends Combatant implements SplashOffensiveAbility {
 
     public Drone(PApplet p) {
         super(p, 50, 10, 5, 10, 15, new Color(255, 255, 0));
+        loadAnimations("drone");
+        betweenIdleFrames = 5;
+        abilityTriggerFrame = 1;
+        attackTriggerFrame = 5;
     }
 
     @Override
