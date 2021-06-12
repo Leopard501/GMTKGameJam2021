@@ -2,6 +2,7 @@ package main.arena;
 
 import com.sun.istack.internal.NotNull;
 import main.arena.combatants.Combatant;
+import main.arena.combatants.abilities.Ability;
 import main.arena.combatants.team.Healer;
 import main.arena.combatants.team.Slime;
 import main.arena.combatants.abilities.DefensiveAbility;
@@ -67,6 +68,7 @@ public class Arena {
         selected = 0;
         actionTimer = 0;
         currentWave++;
+        if (currentWave >= level.waves.length) System.out.println("You win!\nPromptly crashing...");
         for (int i = 0; i < level.waves[currentWave].length; i++) {
             enemySlots[i].setCombatant(level.waves[currentWave][i]);
         }
@@ -87,11 +89,41 @@ public class Arena {
             advanceTurn();
             return;
         }
-        Slot target = teamSlots[(int) P.random(teamSlots.length)];
-        while (target.empty()) {
-            target = teamSlots[(int) P.random(teamSlots.length)];
+        Combatant enemy = enemySlots[selected].combatant;
+        boolean attack = P.random(2) < 1;
+        if (!(enemy instanceof Ability)) attack = true;
+        if (enemySlots[selected].cantAct()) {
+            actionTimer = 0;
+            advanceTurn();
+            return;
         }
-        if (!enemySlots[selected].cantAttack()) enemySlots[selected].attack(target);
+        if (attack) {
+            Slot target = teamSlots[(int) P.random(teamSlots.length)];
+            while (target.empty()) {
+                target = teamSlots[(int) P.random(teamSlots.length)];
+            }
+            enemySlots[selected].attack(target);
+        } else {
+            if (enemy instanceof OffensiveAbility) {
+                Slot target = teamSlots[(int) P.random(teamSlots.length)];
+                while (target.empty()) {
+                    target = teamSlots[(int) P.random(teamSlots.length)];
+                }
+                enemySlots[selected].ability(target);
+            } else if (enemy instanceof DefensiveAbility) {
+                Slot target = enemySlots[(int) P.random(enemySlots.length)];
+                while (target.empty()) {
+                    target = enemySlots[(int) P.random(enemySlots.length)];
+                }
+                enemySlots[selected].ability(target);
+            } else if (enemy instanceof SplashOffensiveAbility) {
+                Slot target = teamSlots[(int) P.random(teamSlots.length)];
+                while (target.empty()) {
+                    target = teamSlots[(int) P.random(teamSlots.length)];
+                }
+                enemySlots[selected].ability(target);
+            }
+        }
         actionTimer = 0;
         advanceTurn();
     }
@@ -111,7 +143,7 @@ public class Arena {
     }
 
     private void simTeamTurn() {
-        if (teamSlots[selected].cantAttack()) advanceTurn();
+        if (teamSlots[selected].cantAct()) advanceTurn();
         for (Slot slot : enemySlots) {
             //none, left, right
             int actionState = slot.actionState();
@@ -256,7 +288,7 @@ public class Arena {
             combatant.updateBuffs();
         }
 
-        private boolean cantAttack() {
+        private boolean cantAct() {
             return empty() || combatant.sticky != null;
         }
     }
