@@ -358,7 +358,8 @@ public class Arena {
         }
 
         private boolean empty() {
-            return combatant == null;
+            if (combatant == null) return false;
+            return !combatant.alive;
         }
 
         private void updateBuffs() {
