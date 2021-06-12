@@ -13,6 +13,11 @@ import static processing.core.PApplet.binary;
 
 public class Level_1 extends Level {
 
+    /**
+     * Tutorial level.
+     * Introduces skeletons, fighter and generally how to play the game.
+     * Very easy.
+     */
     public Level_1(PApplet p) {
         super(p);
 

@@ -51,8 +51,8 @@ public class Dialogue {
         this(p, 5, new Color(255, 255, 255), new Color(100, 100, 100, 200), position, text);
     }
 
-    public void moveUp() {
-        position = new PVector(position.x, position.y - 7);
+    public void moveUp(int amount) {
+        position = new PVector(position.x, position.y - (amount * 6));
     }
 
     public void main() {

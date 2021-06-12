@@ -8,6 +8,7 @@ import main.arena.combatants.abilities.OffensiveAbility;
 import main.arena.combatants.abilities.SplashOffensiveAbility;
 import main.arena.levelStructure.Level;
 import main.arena.levelStructure.Level_1;
+import main.arena.levelStructure.Level_2;
 import main.arena.particles.Particle;
 import main.gui.guiObjects.Dialogue;
 import processing.core.PApplet;
@@ -67,7 +68,8 @@ public class Arena {
 
         currentLevel = -1;
         levels = new Level[] {
-          new Level_1(p)
+          new Level_1(p),
+          new Level_2(p)
         };
         advanceLevel();
     }
@@ -76,6 +78,11 @@ public class Arena {
         currentLevel++;
         currentWave = -1;
         currentDialogue = 0;
+        if (currentLevel >= levels.length) {
+            System.out.println("You win!");
+            P.exit();
+            return;
+        }
         for (int i = 0; i < levels[currentLevel].team.length; i++) {
             teamSlots[i].setCombatant(levels[currentLevel].team[i]);
         }
@@ -90,7 +97,10 @@ public class Arena {
         currentDialogue = 0;
         currentWave++;
         dialogues = new ArrayList<>();
-        if (currentWave >= levels[currentLevel].waves.length) System.out.println("You win!\nPromptly crashing...");
+        if (currentWave >= levels[currentLevel].waves.length) {
+            advanceLevel();
+            return;
+        }
         for (int i = 0; i < levels[currentLevel].waves[currentWave].length; i++) {
             enemySlots[i].setCombatant(levels[currentLevel].waves[currentWave][i]);
         }
@@ -120,7 +130,12 @@ public class Arena {
                 if (slot > 3 && enemySlots[slot - 3].empty()) return;
                 if (currentDialogue > 0) {
                     Dialogue lastDialogOb = levels[currentLevel].dialogues[currentWave][currentDialogue - 1];
-                    if (currentDialogOb.position.equals(lastDialogOb.position)) currentDialogOb.moveUp();
+                    if (currentDialogOb.position.equals(lastDialogOb.position)) currentDialogOb.moveUp(1);
+                } if (currentDialogue > 1) {
+                    Dialogue lastDialogOb = levels[currentLevel].dialogues[currentWave][currentDialogue - 2];
+                    if (currentDialogOb.position.equals(lastDialogOb.position)) {
+                        currentDialogOb.moveUp(2);
+                    }
                 }
                 dialogues.add(currentDialogOb);
                 dialogueTimer = 0;
