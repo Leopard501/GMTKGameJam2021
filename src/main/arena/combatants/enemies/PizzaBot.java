@@ -7,9 +7,9 @@ import processing.core.PApplet;
 
 import java.awt.*;
 
-public class StasisBot extends Combatant implements OffensiveAbility {
+public class PizzaBot extends Combatant implements OffensiveAbility {
 
-    public StasisBot(PApplet p) {
+    public PizzaBot(PApplet p) {
         super(p, 40, 10, 5, 8, 0, new Color(0, 125, 255));
     }
 
