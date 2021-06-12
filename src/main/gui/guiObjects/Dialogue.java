@@ -20,7 +20,7 @@ public class Dialogue {
     private final String TEXT;
 
     private boolean firstPhase;
-    private int alpha;
+    private float alpha;
     private float displacement;
     private float movementSpeed;
 
@@ -47,7 +47,7 @@ public class Dialogue {
     }
 
     public Dialogue(PApplet p, String text, PVector position) {
-        this(p, 8, new Color(255, 255, 255), new Color(100, 100, 100, 200), position, text);
+        this(p, 5, new Color(255, 255, 255), new Color(100, 100, 100, 200), position, text);
     }
 
     public void main() {
@@ -56,7 +56,7 @@ public class Dialogue {
     }
 
     private void display() {
-        int a = alpha;
+        int a = (int) alpha;
         Color textColor = new Color(TEXT_COLOR.getRed(), TEXT_COLOR.getGreen(), TEXT_COLOR.getBlue(), a);
         if (alpha > HIGHLIGHT_COLOR.getAlpha()) a = HIGHLIGHT_COLOR.getAlpha();
         Color highlightColor = new Color(HIGHLIGHT_COLOR.getRed(), HIGHLIGHT_COLOR.getGreen(), HIGHLIGHT_COLOR.getBlue(), a);
@@ -72,7 +72,7 @@ public class Dialogue {
             if (movementSpeed == targetSpeed) firstPhase = false;
         } else {
             movementSpeed = incrementByTo(movementSpeed, delta / 2f, 0);
-            alpha = (int) incrementByTo(alpha, 6, 0);
+            alpha = incrementByTo(alpha, 0.3f, 0);
         }
         if (alpha == 0) arena.dialogues.remove(this);
     }

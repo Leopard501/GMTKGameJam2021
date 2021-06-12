@@ -27,12 +27,15 @@ public class Arena {
     public Slot[] teamSlots;
     public Slot[] enemySlots;
 
-    private static final int TIME_BETWEEN_ACTIONS = 45;
+    private static final int TIME_BETWEEN_ACTIONS = 60;
+    private static final int TIME_BETWEEN_DIALOGUE = 90;
 
     private final PApplet P;
 
     private int selected;
     private int actionTimer;
+    private int dialogueTimer;
+    private int dialogueCount;
     private int currentWave;
     private Level level;
 
@@ -43,6 +46,7 @@ public class Arena {
         P = p;
 
         particles = new ArrayList<>();
+        dialogues = new ArrayList<>();
 
         teamSlots = new Slot[] {
           new Slot(new PVector(BOARD_SIZE.x / 6, BOARD_SIZE.y / 4)),
@@ -72,6 +76,10 @@ public class Arena {
         for (int i = 0; i < level.waves[currentWave].length; i++) {
             enemySlots[i].setCombatant(level.waves[currentWave][i]);
         }
+        if (currentWave < level.dialogues.length) {
+            dialogueCount = 0;
+            dialogues.add(level.dialogues[currentWave][dialogueCount]);
+        }
     }
 
     public void main() {
@@ -79,6 +87,14 @@ public class Arena {
         if (actionTimer >= TIME_BETWEEN_ACTIONS) {
             if (enemiesTurn) simEnemyTurn();
             else simPlayerTurn();
+        }
+        if (currentWave < level.dialogues.length && dialogueCount < level.dialogues[currentWave].length) {
+            dialogueTimer++;
+            if (dialogueTimer >= TIME_BETWEEN_DIALOGUE) {
+                dialogues.add(level.dialogues[currentWave][dialogueCount]);
+                dialogueTimer = 0;
+                dialogueCount++;
+            }
         }
         if (noEnemies()) advanceWave();
         actionTimer++;
@@ -203,6 +219,10 @@ public class Arena {
         for (int i = particles.size() - 1; i >= 0; i--) {
             Particle particle = particles.get(i);
             particle.main();
+        }
+        for (int i = dialogues.size() -1; i >= 0; i--) {
+            Dialogue dialogue = dialogues.get(i);
+            dialogue.main();
         }
     }
 
