@@ -1,7 +1,12 @@
 package main.arena.buffs;
 
+import main.Main;
 import main.arena.combatants.Combatant;
+import main.arena.particles.FloatParticle;
+import main.arena.particles.GravityParticle;
 import processing.core.PApplet;
+
+import java.awt.*;
 
 public class StatBoost extends Buff {
 
@@ -17,6 +22,8 @@ public class StatBoost extends Buff {
 
     @Override
     public void display() {
-
+        if (P.random(0, 15) < 1) {
+            Main.arena.particles.add(new FloatParticle(P, COMBATANT.position.x, COMBATANT.position.y, Color.RED));
+        }
     }
 }

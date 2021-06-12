@@ -8,11 +8,11 @@ import static main.Main.sprites;
 
 public class Sticky extends Buff {
 
-    private PImage sprite;
+    private final PImage SPRITE;
 
     public Sticky(PApplet p, Combatant combatant) {
         super(p, 2, 0, combatant);
-        sprite = sprites.get("stickyBF");
+        SPRITE = sprites.get("stickyBF");
     }
 
     @Override
@@ -23,6 +23,6 @@ public class Sticky extends Buff {
 
     @Override
     public void display() {
-        P.image(sprite, COMBATANT.position.x, COMBATANT.position.y);
+        P.image(SPRITE, COMBATANT.position.x, COMBATANT.position.y);
     }
 }
