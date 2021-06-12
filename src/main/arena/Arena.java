@@ -28,7 +28,7 @@ public class Arena {
     public Slot[] enemySlots;
 
     private static final int TIME_BETWEEN_ACTIONS = 60;
-    private static final int TIME_BETWEEN_DIALOGUE = 90;
+    private static final int TIME_BETWEEN_DIALOGUE = 120;
 
     private final PApplet P;
 

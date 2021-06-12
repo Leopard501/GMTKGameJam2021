@@ -40,7 +40,7 @@ public class Level_1 extends Level {
 
         dialogues = new Dialogue[][]{{
           dialogueFromSlot(0, "test A"),
-          dialogueFromSlot(3, "test B")
+          dialogueFromSlot(0, "test B")
         }, {
             dialogueFromSlot(1, "test C")
         }};

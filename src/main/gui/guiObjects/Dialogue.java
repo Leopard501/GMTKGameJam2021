@@ -72,7 +72,7 @@ public class Dialogue {
             if (movementSpeed == targetSpeed) firstPhase = false;
         } else {
             movementSpeed = incrementByTo(movementSpeed, delta / 2f, 0);
-            alpha = incrementByTo(alpha, 0.3f, 0);
+            alpha = incrementByTo(alpha, 0.5f, 0);
         }
         if (alpha == 0) arena.dialogues.remove(this);
     }
