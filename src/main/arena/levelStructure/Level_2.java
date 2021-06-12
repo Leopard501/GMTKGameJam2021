@@ -22,7 +22,8 @@ public class Level_2 extends Level {
 
         team = new Combatant[] {
           new Fighter(p),
-          new Healer(p)
+          new Healer(p),
+          null
         };
 
         waves = new Combatant[][]{{

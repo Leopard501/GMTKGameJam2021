@@ -9,6 +9,7 @@ import main.arena.combatants.abilities.SplashOffensiveAbility;
 import main.arena.levelStructure.Level;
 import main.arena.levelStructure.Level_1;
 import main.arena.levelStructure.Level_2;
+import main.arena.levelStructure.Level_3;
 import main.arena.particles.Particle;
 import main.gui.guiObjects.Dialogue;
 import processing.core.PApplet;
@@ -69,7 +70,8 @@ public class Arena {
         currentLevel = -1;
         levels = new Level[] {
           new Level_1(p),
-          new Level_2(p)
+          new Level_2(p),
+          new Level_3(p)
         };
         advanceLevel();
     }
@@ -358,7 +360,7 @@ public class Arena {
         }
 
         private boolean empty() {
-            if (combatant == null) return false;
+            if (combatant == null) return true;
             return !combatant.alive;
         }
 
