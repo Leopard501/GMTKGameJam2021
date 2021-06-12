@@ -6,6 +6,8 @@ import processing.core.PApplet;
 
 import java.awt.*;
 
+import static java.lang.Math.round;
+
 public class Healer extends Combatant implements DefensiveAbility {
 
     public Healer(PApplet p) {
@@ -17,6 +19,12 @@ public class Healer extends Combatant implements DefensiveAbility {
     public void ability(Combatant other) {
         mp -= mpCost;
         if (mp < 0) mp = 0;
-        other.heal((int) abilityStrength);
+        int damage = attackDamage;
+        float strength = abilityStrength;
+        if (statBoost != null) {
+            damage = round(damage * statBoost.strength);
+            strength *= statBoost.strength;
+        }
+        other.heal((int) strength);
     }
 }

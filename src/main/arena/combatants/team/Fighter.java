@@ -7,6 +7,8 @@ import processing.core.PApplet;
 
 import java.awt.*;
 
+import static java.lang.Math.round;
+
 public class Fighter extends Combatant implements OffensiveAbility {
 
     public Fighter(PApplet p) {
@@ -18,7 +20,13 @@ public class Fighter extends Combatant implements OffensiveAbility {
     public void ability(Combatant other) {
         mp -= mpCost;
         if (mp < 0) mp = 0;
-        other.hurt(attackDamage);
-        other.bleeding = new Bleeding(P, abilityStrength);
+        int damage = attackDamage;
+        float strength = abilityStrength;
+        if (statBoost != null) {
+            damage = round(damage * statBoost.strength);
+            strength *= statBoost.strength;
+        }
+        other.hurt(damage);
+        other.bleeding = new Bleeding(P, strength);
     }
 }

@@ -6,6 +6,8 @@ import processing.core.PApplet;
 
 import java.awt.*;
 
+import static java.lang.Math.round;
+
 public class Drone extends Combatant implements SplashOffensiveAbility {
 
     public Drone(PApplet p) {
@@ -16,9 +18,15 @@ public class Drone extends Combatant implements SplashOffensiveAbility {
     public void ability(Combatant[] others) {
         mp -= mpCost;
         if (mp < 0) mp = 0;
+        int damage = attackDamage;
+        float strength = abilityStrength;
+        if (statBoost != null) {
+            damage = round(damage * statBoost.strength);
+            strength *= statBoost.strength;
+        }
         for (Combatant other : others) {
             if (other == null) continue;
-            other.hurt((int) abilityStrength);
+            other.hurt((int) strength);
         }
     }
 }
