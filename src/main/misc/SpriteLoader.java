@@ -26,7 +26,7 @@ public class SpriteLoader {
 
         getAnimation(p, "idle", "slime", "CB", 2);
 
-        getAnimation(p, "idle", "necromancer", "CB", 1);
+        getAnimation(p, "idle", "necromancer", "CB", 2);
     }
 
     private static void getAnimation(PApplet p, String name, String folder, String type, int length) {

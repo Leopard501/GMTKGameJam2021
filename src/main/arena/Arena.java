@@ -54,7 +54,7 @@ public class Arena {
 
         teamSlots[0].setCombatant(new Spider(P));
         teamSlots[1].setCombatant(new Slime(P));
-        teamSlots[2].setCombatant(new Shielder(P));
+        teamSlots[2].setCombatant(new Necromancer(P));
 
         currentWave = -1;
         level = new Level_1(p);
