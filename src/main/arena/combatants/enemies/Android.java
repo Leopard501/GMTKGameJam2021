@@ -8,6 +8,7 @@ import java.awt.*;
 public class Android extends Combatant {
 
     public Android(PApplet p) {
-        super(p, 75, 0, 0, 15, 0, new Color(29, 23, 0));
+        super(p, 75, 0, 0, 15, 0, new Color(255, 255, 0));
+        loadAnimations("android");
     }
 }
