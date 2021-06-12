@@ -6,9 +6,9 @@ import processing.core.PVector;
 
 import java.awt.*;
 
-public class SimpleParticle extends Particle {
+public class GravityParticle extends Particle {
 
-    private static final PVector ACCELERATION = new PVector(0, 0.2f);
+    private static final PVector ACCELERATION = new PVector(0, 0.1f);
     private static final int RADIUS = 2;
     private static final int ALPHA_CHANGE = 15;
 
@@ -16,12 +16,13 @@ public class SimpleParticle extends Particle {
 
     private int alpha;
 
-    public SimpleParticle(PApplet p, float x, float y, Color color) {
+    public GravityParticle(PApplet p, float x, float y, Color color) {
         super(p, x, y);
         COLOR = color;
+        position.add(PVector.fromAngle(p.random(PConstants.TWO_PI)).setMag(5));
 
         alpha = 254;
-        velocity = PVector.fromAngle(P.random(PConstants.TWO_PI)).setMag(p.random(2,5));
+        velocity = PVector.fromAngle(P.random(PConstants.TWO_PI)).setMag(p.random(1,2));
     }
 
     @Override

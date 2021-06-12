@@ -5,7 +5,8 @@ import main.arena.buffs.Bleeding;
 import main.arena.buffs.Shielded;
 import main.arena.buffs.StatBoost;
 import main.arena.buffs.Sticky;
-import main.arena.particles.SimpleParticle;
+import main.arena.particles.FloatParticle;
+import main.arena.particles.GravityParticle;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -149,13 +150,15 @@ public abstract class Combatant {
             damage = round((float) damage * (2 - statBoost.strength));
         }
         hp -= damage;
-        for (int i = 0; i < 8; i++) arena.particles.add(new SimpleParticle(P, position.x, position.y, bloodColor));
+        for (int i = 0; i < 8; i++) arena.particles.add(new GravityParticle(P, position.x, position.y, bloodColor));
         if (hp <= 0) alive = false;
     }
 
     public void heal(int amount) {
         hp += amount;
         if (hp > maxHp) hp = maxHp;
+        for (int i = 0; i < 8; i++) arena.particles.add(new FloatParticle(P, position.x, position.y,
+          new Color(0, 255, 120)));
     }
 
     public void updateBuffs() {
