@@ -3,6 +3,7 @@ package main.arena;
 import com.sun.istack.internal.NotNull;
 import main.arena.combatants.Combatant;
 import main.arena.combatants.abilities.Ability;
+import main.arena.combatants.team.Fighter;
 import main.arena.combatants.team.Healer;
 import main.arena.combatants.team.Slime;
 import main.arena.combatants.abilities.DefensiveAbility;
@@ -54,7 +55,7 @@ public class Arena {
           new Slot(new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), 3 * (BOARD_SIZE.y / 4)))
         };
 
-        teamSlots[0].setCombatant(new Spider(P));
+        teamSlots[0].setCombatant(new Fighter(P));
         teamSlots[1].setCombatant(new Healer(P));
         teamSlots[2].setCombatant(new Slime(P));
 

@@ -13,6 +13,7 @@ public abstract class Buff {
     public Buff(PApplet p, int lifeTimer, float strength) {
         P = p;
         this.lifeTimer = lifeTimer;
+        this.strength = strength;
     }
 
     public abstract void effect(Combatant combatant);
