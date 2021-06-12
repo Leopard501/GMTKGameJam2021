@@ -54,7 +54,7 @@ public class Arena {
 
         teamSlots[0].setCombatant(new Fighter(P));
         teamSlots[1].setCombatant(new Healer(P));
-//        teamSlots[2].setCombatant(new Shielder(P));
+        teamSlots[2].setCombatant(new Shielder(P));
 
         currentWave = -1;
         level = new Level_1(p);
