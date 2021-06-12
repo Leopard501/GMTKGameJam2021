@@ -42,13 +42,18 @@ public abstract class Combatant {
     protected int maxHp;
     protected int maxMp;
     protected int attackDamage;
+    protected int attackTriggerFrame;
+    protected int betweenAttackFrames;
     protected int betweenIdleFrames;
     protected float abilityStrength;
 
     private int animationState;
     private int frame;
     private int betweenFrameTimer;
+    private PImage frameImage;
     private PImage[] idleAnimation;
+    private PImage[] attackAnimation;
+    private Combatant target;
 
     /**
      * These are the little dudes that will fight.
@@ -66,12 +71,15 @@ public abstract class Combatant {
         alive = true;
         hp = maxHp;
         mp = maxMp;
+        attackTriggerFrame = 6;
+        betweenAttackFrames = 5;
         betweenIdleFrames = 30;
         betweenFrameTimer = (int) P.random(betweenIdleFrames);
     }
 
     protected void loadAnimations(String name) {
         idleAnimation = animations.get(name + "idle" + "CB");
+        attackAnimation = animations.get(name + "attack" + "CB");
     }
 
     public void setPosition(float x, float y) {
@@ -83,20 +91,34 @@ public abstract class Combatant {
         if (isEnemy) {
             P.pushMatrix();
             P.scale(-1, 1);
-            P.image(idleAnimation[frame], -position.x, position.y);
+            P.image(frameImage, -position.x, position.y);
             P.popMatrix();
         }
-        else P.image(idleAnimation[frame], position.x, position.y);
+        else P.image(frameImage, position.x, position.y);
         hpBar();
         if (maxMp > 0) mpBar();
     }
 
     private void animate() {
         betweenFrameTimer++;
-        if (betweenFrameTimer >= betweenIdleFrames) {
-            betweenFrameTimer = 0;
-            frame++;
-            if (frame >= idleAnimation.length) frame = 0;
+        if (animationState == 0) {
+            if (betweenFrameTimer >= betweenIdleFrames) {
+                betweenFrameTimer = 0;
+                frame++;
+                if (frame >= idleAnimation.length) frame = 0;
+            }
+            frameImage = idleAnimation[frame];
+        } else if (animationState == 1) {
+            if (betweenFrameTimer >= betweenAttackFrames) {
+                betweenFrameTimer = 0;
+                frame++;
+                if (frame == attackTriggerFrame) attack(target);
+                if (frame >= attackAnimation.length) {
+                    frame = 0;
+                    animationState = 0;
+                }
+            }
+            frameImage = attackAnimation[frame];
         }
     }
 
@@ -152,7 +174,14 @@ public abstract class Combatant {
         return 0;
     }
 
-    public void attack(Combatant other) {
+    public void setAttacking(Combatant other) {
+        target = other;
+        frame = 0;
+        betweenFrameTimer = 0;
+        animationState = 1;
+    }
+
+    private void attack(Combatant other) {
         int damage = attackDamage;
         if (statBoost != null) {
             damage = round((float) damage * statBoost.strength);
