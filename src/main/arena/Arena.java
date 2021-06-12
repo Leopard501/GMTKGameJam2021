@@ -79,7 +79,7 @@ public class Arena {
         enemiesTurn = false;
         selected = 0;
         actionTimer = 0;
-        dialogueTimer = 0;
+        dialogueTimer = TIME_BETWEEN_DIALOGUE / 2;
         currentDialogue = 0;
         currentWave++;
         if (currentWave >= levels[currentLevel].waves.length) System.out.println("You win!\nPromptly crashing...");

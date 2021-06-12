@@ -17,38 +17,45 @@ public class Level_1 extends Level {
         super(p);
 
         team = new Combatant[] {
+          null,
           new Fighter(p)
         };
 
         waves = new Combatant[][]{{
-            new T800(p),
-            new Drone(p),
-            new Router(p)
-          }, {
-          new Spider(p),
-          new Slime(p),
-          new Necromancer(p)
-          }, {
-          new Spider(p),
-          new Slime(p),
-          new Necromancer(p)
-          }, {
-          new Spider(p),
-          new Slime(p),
-          new Necromancer(p)
+            null,
+            new Skeleton(p)
+        }, {
+            null,
+            new Skeleton(p)
+        }, {
+            new Skeleton(p),
+            new Skeleton(p)
+        }, {
+            new Skeleton(p),
+            new Skeleton(p),
+            new Skeleton(p)
         }};
         for (Combatant[] combatants : waves) {
             for (Combatant combatant : combatants) {
+                if (combatant == null) continue;
                 combatant.isEnemy = true;
             }
         }
 
         dialogues = new Dialogue[][]{{
-            new Dialogue(P, "test A", getPositionFromSlot(0)),
-          new Dialogue(P, "test B", getPositionFromSlot(0)),
-          new Dialogue(P, "test C", getPositionFromSlot(3))
+            new Dialogue(p, "Another long day of dungeon crawling...", getPositionFromSlot(1)),
+            new Dialogue(p, "[Left click on skeleton to attack]", getPositionFromSlot(1)),
+            new Dialogue(p, "GRRR", getPositionFromSlot(4))
         }, {
-          new Dialogue(P, "test D", getPositionFromSlot(1))
+            new Dialogue(p, "I hope I get some good loot...", getPositionFromSlot(1)),
+            new Dialogue(p, "UURRRGGG", getPositionFromSlot(4))
+        }, {
+        }, {
+            new Dialogue(p, "Uh oh, theres a lot of them!", getPositionFromSlot(1)),
+            new Dialogue(p, "[Right click on skeleton to use ability]", getPositionFromSlot(1)),
+            new Dialogue(p, "GRRAAAA", getPositionFromSlot(5)),
+            new Dialogue(p, "ARRRGG", getPositionFromSlot(4)),
+            new Dialogue(p, "ACK ACK", getPositionFromSlot(3))
         }};
     }
 }
