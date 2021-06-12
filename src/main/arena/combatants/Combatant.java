@@ -229,7 +229,7 @@ public abstract class Combatant {
     }
 
     public void hurt(int amount) {
-        if (shielded != null) return;
+        if (shielded != null && shielded.lifeTimer > 0) return;
         int damage = amount;
         if (statBoost != null) {
             damage = round((float) damage * (2 - statBoost.strength));

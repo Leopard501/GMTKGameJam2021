@@ -12,7 +12,7 @@ public class Shielded extends Buff {
     @Override
     public void effect(Combatant combatant) {
         lifeTimer--;
-        if (lifeTimer == 0) combatant.shielded = null;
+        if (lifeTimer <= 0) combatant.shielded = null;
     }
 
     @Override
