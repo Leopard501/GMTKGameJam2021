@@ -30,6 +30,7 @@ public class SpriteLoader {
 
         getAnimation(p, "idle", "spider", "CB", 2);
         getAnimation(p, "attack", "spider", "CB", 9);
+        getAnimation(p, "ability", "spider", "CB", 12);
 
         getAnimation(p, "idle", "slime", "CB", 2);
         getAnimation(p, "attack", "slime", "CB", 10);

@@ -12,6 +12,7 @@ public class Spider extends Combatant implements OffensiveAbility {
     public Spider(PApplet p) {
         super(p, 80, 20, 5, 15, 10, new Color(123, 200, 0));
         loadAnimations("spider");
+        abilityTriggerFrame = 9;
     }
 
     @Override
