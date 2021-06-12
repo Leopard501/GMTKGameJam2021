@@ -12,12 +12,13 @@ public class SimpleParticle extends Particle {
     private static final int RADIUS = 5;
     private static final int ALPHA_CHANGE = 15;
 
-    private Color color;
+    private final Color COLOR;
+
     private int alpha;
 
     public SimpleParticle(PApplet p, float x, float y, Color color) {
         super(p, x, y);
-        this.color = color;
+        COLOR = color;
 
         alpha = 254;
         velocity = PVector.fromAngle(P.random(PConstants.TWO_PI)).setMag(p.random(2,5));
@@ -32,7 +33,7 @@ public class SimpleParticle extends Particle {
     @Override
     public void display() {
         P.noStroke();
-        P.fill(color.getRGB(), alpha);
+        P.fill(COLOR.getRGB(), alpha);
         P.circle(position.x, position.y, RADIUS);
         alpha -= ALPHA_CHANGE;
         if (alpha < 0) dead = true;
