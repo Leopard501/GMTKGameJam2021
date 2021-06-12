@@ -12,22 +12,32 @@ public class SpriteLoader {
      * @param p the PApplet
      */
     public static void loadAnimations(PApplet p) {
+        //ui
         getAnimation(p, "genericButton", "BT", 3);
+        //combatants
+        getAnimation(p, "idle", "fighter", "CB", 1);
     }
 
-    private static void getAnimation(PApplet p, String name, String type, int length) {
+    private static void getAnimation(PApplet p, String name, String folder, String type, int length) {
         StringBuilder path = new StringBuilder().append("sprites/");
         switch (type) {
             case "BT":
                 path.append("gui/buttons/");
                 break;
+            case "CB":
+                path.append("combatants/");
         }
+        path.append(folder).append("/");
         path.append(name).append("/");
-        String fullName = name+type;
+        String fullName = folder+name+type;
         animations.put(fullName, new PImage[length]);
         for (int i = length-1; i >= 0; i--) {
             animations.get(fullName)[i] = p.loadImage(path + PApplet.nf(i,3) + ".png");
         }
+    }
+
+    private static void getAnimation(PApplet p, String name, String type, int length) {
+        getAnimation(p, name, "", type, length);
     }
 
     public static void loadSprites(PApplet p) {

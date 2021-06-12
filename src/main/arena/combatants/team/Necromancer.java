@@ -1,6 +1,5 @@
 package main.arena.combatants.team;
 
-import main.arena.buffs.Shielded;
 import main.arena.buffs.StatBoost;
 import main.arena.combatants.Combatant;
 import main.arena.combatants.abilities.DefensiveAbility;

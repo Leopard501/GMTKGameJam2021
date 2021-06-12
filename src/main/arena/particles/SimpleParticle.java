@@ -9,7 +9,7 @@ import java.awt.*;
 public class SimpleParticle extends Particle {
 
     private static final PVector ACCELERATION = new PVector(0, 0.2f);
-    private static final int RADIUS = 5;
+    private static final int RADIUS = 3;
     private static final int ALPHA_CHANGE = 15;
 
     private final Color COLOR;

@@ -26,7 +26,7 @@ public class Main extends PApplet {
     private static final int FRAMERATE = 60;
     private static final String TITLE = "template";
 
-    public static final PVector BOARD_SIZE = new PVector(600, 500);
+    public static final PVector BOARD_SIZE = new PVector(250, 200);
 
     public static float globalVolume = 0.25f;
 
@@ -66,6 +66,7 @@ public class Main extends PApplet {
         frameRate(FRAMERATE);
         surface.setTitle(TITLE);
         rectMode(CENTER);
+        imageMode(CENTER);
 
         setupSound();
         setupSprites();

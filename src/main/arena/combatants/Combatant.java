@@ -7,6 +7,7 @@ import main.arena.buffs.StatBoost;
 import main.arena.buffs.Sticky;
 import main.arena.particles.SimpleParticle;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
 import java.awt.*;
@@ -24,7 +25,13 @@ public abstract class Combatant {
     public int mp;
     public int mpCost;
 
-    protected static final PVector SIZE = new PVector(50, 50);
+    //This might suck, but it's a game jam so who cares.
+    public Bleeding bleeding;
+    public Sticky sticky;
+    public Shielded shielded;
+    public StatBoost statBoost;
+
+    protected static final PVector SIZE = new PVector(20, 20);
 
     protected final PApplet P;
 
@@ -36,11 +43,7 @@ public abstract class Combatant {
     protected int attackDamage;
     protected float abilityStrength;
 
-    //This might suck, but it's a game jam so who cares.
-    public Bleeding bleeding;
-    public Sticky sticky;
-    public Shielded shielded;
-    public StatBoost statBoost;
+    private PImage[] idleAnimation;
 
     /**
      * These are the little dudes that will fight.
@@ -60,40 +63,53 @@ public abstract class Combatant {
         mp = maxMp;
     }
 
+    protected void loadAnimations(String name) {
+        idleAnimation = animations.get(name + "idle" + "CB");
+    }
+
     public void setPosition(float x, float y) {
         position = new PVector(x, y);
     }
 
     public void display() {
-        P.fill(255);
-        P.noStroke();
-        P.circle(position.x, position.y, SIZE.x);
+        if (idleAnimation == null) {
+            P.fill(255);
+            P.noStroke();
+            P.circle(position.x, position.y, SIZE.x);
+        } else {
+            if (isEnemy) P.image(idleAnimation[0], position.x, position.y, -SIZE.x, SIZE.y);
+            P.image(idleAnimation[0], position.x, position.y);
+        }
         hpBar();
         if (maxMp > 0) mpBar();
     }
 
     private void hpBar() {
         P.rectMode(CORNER);
+        P.strokeWeight(0.3f);
         Color barColor = new Color(255, 0, 0);
         float barWidth = SIZE.x * (hp / (float) maxHp);
         P.stroke(barColor.getRGB());
         P.noFill();
-        P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 6, SIZE.x, 6);
+        P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 3, SIZE.x, 3);
         P.fill(barColor.getRGB());
-        if (hp > 0) P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 6, barWidth, 6);
+        if (hp > 0) P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 3, barWidth, 3);
         P.rectMode(CENTER);
+        P.strokeWeight(1);
     }
 
     private void mpBar() {
         P.rectMode(CORNER);
+        P.strokeWeight(0.2f);
         Color barColor = new Color(0, 175, 255);
         float barWidth = SIZE.x * (mp / (float) maxMp);
         P.stroke(barColor.getRGB());
         P.noFill();
-        P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 13, SIZE.x, 6);
+        P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 7, SIZE.x, 3);
         P.fill(barColor.getRGB());
-        if (mp > 0) P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 13, barWidth, 6);
+        if (mp > 0) P.rect(position.x - SIZE.x / 2, position.y + SIZE.y / 2 + 7, barWidth, 3);
         P.rectMode(CENTER);
+        P.strokeWeight(1);
     }
 
     public void selectionOverlay() {

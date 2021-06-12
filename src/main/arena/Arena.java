@@ -45,13 +45,13 @@ public class Arena {
         particles = new ArrayList<>();
 
         teamSlots = new Slot[] {
-          new Slot(new PVector(125, 100)),
-          new Slot(new PVector(175, 225)),
-          new Slot(new PVector(145, 350))
+          new Slot(new PVector(BOARD_SIZE.x / 6, BOARD_SIZE.y / 4)),
+          new Slot(new PVector(BOARD_SIZE.x / 3, BOARD_SIZE.y / 2)),
+          new Slot(new PVector(BOARD_SIZE.x / 6, 3 * (BOARD_SIZE.y / 4)))
         }; enemySlots = new Slot[] {
-          new Slot(new PVector(BOARD_SIZE.x - 145, 100)),
-          new Slot(new PVector(BOARD_SIZE.x - 175, 225)),
-          new Slot(new PVector(BOARD_SIZE.x - 125, 350))
+          new Slot(new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), BOARD_SIZE.y / 4)),
+          new Slot(new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 3), BOARD_SIZE.y / 2)),
+          new Slot(new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), 3 * (BOARD_SIZE.y / 4)))
         };
 
         teamSlots[0].setCombatant(new Spider(P));
