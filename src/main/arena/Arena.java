@@ -101,6 +101,7 @@ public class Arena {
                 target = teamSlots[(int) P.random(teamSlots.length)];
             }
             enemySlots[selected].attack(target);
+            actionTimer = 0;
         } else {
             if (enemy instanceof OffensiveAbility) {
                 Slot target = teamSlots[(int) P.random(teamSlots.length)];
