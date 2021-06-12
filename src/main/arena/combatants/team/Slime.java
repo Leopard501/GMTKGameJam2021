@@ -18,7 +18,7 @@ public class Slime extends Combatant implements SplashOffensiveAbility {
         if (mp < 0) mp = 0;
         for (Combatant other : others) {
             if (other == null) continue;
-            other.hurt(abilityStrength);
+            other.hurt((int) abilityStrength);
         }
     }
 }

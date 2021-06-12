@@ -10,14 +10,14 @@ import java.awt.*;
 public class Fighter extends Combatant implements OffensiveAbility {
 
     public Fighter(PApplet p) {
-        super(p, 100, 10, 5, 20, 20, new Color(150, 0, 0));
+        super(p, 100, 10, 5, 20, 15, new Color(150, 0, 0));
     }
 
     @Override
     public void ability(Combatant other) {
         mp -= mpCost;
         if (mp < 0) mp = 0;
-        other.hurt(abilityStrength);
-        other.bleeding = new Bleeding(P);
+        other.hurt(attackDamage);
+        other.bleeding = new Bleeding(P, abilityStrength);
     }
 }

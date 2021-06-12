@@ -3,10 +3,10 @@ package main.arena.buffs;
 import main.arena.combatants.Combatant;
 import processing.core.PApplet;
 
-public class Shielded extends Buff {
+public class StatBoost extends Buff {
 
-    public Shielded(PApplet p) {
-        super(p, 2, 0);
+    public StatBoost(PApplet p, float amount) {
+        super(p, 3, amount);
     }
 
     @Override

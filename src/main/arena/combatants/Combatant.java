@@ -3,6 +3,7 @@ package main.arena.combatants;
 import main.Main;
 import main.arena.buffs.Bleeding;
 import main.arena.buffs.Shielded;
+import main.arena.buffs.StatBoost;
 import main.arena.buffs.Sticky;
 import main.arena.particles.SimpleParticle;
 import processing.core.PApplet;
@@ -33,18 +34,19 @@ public abstract class Combatant {
     protected int maxHp;
     protected int maxMp;
     protected int attackDamage;
-    protected int abilityStrength;
+    protected float abilityStrength;
 
     //This might suck, but it's a game jam so who cares.
     public Bleeding bleeding;
     public Sticky sticky;
     public Shielded shielded;
+    public StatBoost statBoost;
 
     /**
      * These are the little dudes that will fight.
      */
     public Combatant(PApplet p, int maxHp, int maxMp, int mpCost, int attackDamage,
-                     int abilityStrength, Color bloodColor) {
+                     float abilityStrength, Color bloodColor) {
         P = p;
         this.maxHp = maxHp;
         this.maxMp = maxMp;
@@ -117,12 +119,20 @@ public abstract class Combatant {
     }
 
     public void attack(Combatant other) {
-        other.hurt(attackDamage);
+        int damage = attackDamage;
+        if (statBoost != null) {
+            damage = round((float) damage * statBoost.strength);
+        }
+        other.hurt(damage);
     }
 
     public void hurt(int amount) {
         if (shielded != null) return;
-        hp -= amount;
+        int damage = amount;
+        if (statBoost != null) {
+            damage = round((float) damage * (2 - statBoost.strength));
+        }
+        hp -= damage;
         for (int i = 0; i < 8; i++) arena.particles.add(new SimpleParticle(P, position.x, position.y, bloodColor));
         if (hp <= 0) alive = false;
     }

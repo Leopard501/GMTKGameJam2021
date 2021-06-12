@@ -6,10 +6,11 @@ import processing.core.PApplet;
 public abstract class Buff {
 
     public int lifeTimer;
+    public float strength;
 
     protected final PApplet P;
 
-    public Buff(PApplet p, int lifeTimer) {
+    public Buff(PApplet p, int lifeTimer, float strength) {
         P = p;
         this.lifeTimer = lifeTimer;
     }

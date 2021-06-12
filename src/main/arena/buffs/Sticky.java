@@ -6,7 +6,7 @@ import processing.core.PApplet;
 public class Sticky extends Buff {
 
     public Sticky(PApplet p) {
-        super(p, 2);
+        super(p, 2, 0);
     }
 
     @Override
