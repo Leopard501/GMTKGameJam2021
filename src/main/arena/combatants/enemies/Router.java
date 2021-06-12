@@ -8,10 +8,12 @@ import java.awt.*;
 
 import static java.lang.Math.round;
 
-public class HealBot extends Combatant implements DefensiveAbility {
+public class Router extends Combatant implements DefensiveAbility {
 
-    public HealBot(PApplet p) {
+    public Router(PApplet p) {
         super(p, 40, 10, 5, 5, 15, new Color(0, 125, 255));
+        loadAnimations("router");
+        attackTriggerFrame = 4;
     }
 
     @Override

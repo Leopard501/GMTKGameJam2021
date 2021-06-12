@@ -46,6 +46,10 @@ public class SpriteLoader {
         getAnimation(p, "idle", "drone", "CB", 2);
         getAnimation(p, "attack", "drone", "CB", 10);
         getAnimation(p, "ability", "drone", "CB", 11);
+
+        getAnimation(p, "idle", "router", "CB", 2);
+        getAnimation(p, "attack", "router", "CB", 7);
+        getAnimation(p, "ability", "router", "CB", 10);
     }
 
     private static void getAnimation(PApplet p, String name, String folder, String type, int length) {
