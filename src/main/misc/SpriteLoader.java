@@ -22,6 +22,7 @@ public class SpriteLoader {
 
         getAnimation(p, "idle", "healer", "CB", 2);
         getAnimation(p, "attack", "healer", "CB", 10);
+        getAnimation(p, "ability", "healer", "CB", 8);
 
         getAnimation(p, "idle", "shielder", "CB", 2);
         getAnimation(p, "attack", "shielder", "CB", 9);

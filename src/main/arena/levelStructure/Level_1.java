@@ -12,7 +12,8 @@ public class Level_1 extends Level {
         super(p);
 
         waves = new Combatant[][]{{
-            new Fighter(p)
+            new Fighter(p),
+            new Healer(p)
           }, {
           new Spider(p),
           new Slime(p),
