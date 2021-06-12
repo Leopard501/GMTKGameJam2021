@@ -2,7 +2,6 @@ package main.arena.combatants.enemies;
 
 import main.arena.combatants.Combatant;
 import processing.core.PApplet;
-import processing.core.PVector;
 
 import java.awt.*;
 

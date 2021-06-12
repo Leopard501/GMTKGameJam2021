@@ -2,13 +2,14 @@ package main.arena;
 
 import com.sun.istack.internal.NotNull;
 import main.arena.combatants.Combatant;
-import main.arena.combatants.enemies.Android;
 import main.arena.combatants.team.Healer;
 import main.arena.combatants.team.Slime;
 import main.arena.combatants.abilities.DefensiveAbility;
 import main.arena.combatants.abilities.OffensiveAbility;
 import main.arena.combatants.abilities.SplashOffensiveAbility;
 import main.arena.combatants.team.Spider;
+import main.arena.levelStructure.Level;
+import main.arena.levelStructure.Level_1;
 import main.arena.particles.Particle;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -20,11 +21,10 @@ import static main.Main.arena;
 
 public class Arena {
 
-    public final Slot[] TEAM_SLOTS;
-    public final Slot[] ENEMY_SLOTS;
-
     public boolean enemiesTurn;
     public ArrayList<Particle> particles;
+    public Slot[] teamSlots;
+    public Slot[] enemySlots;
 
     private static final int TIME_BETWEEN_ACTIONS = 30;
 
@@ -32,6 +32,8 @@ public class Arena {
 
     private int selected;
     private int actionTimer;
+    private int currentWave;
+    private Level level;
 
     /**
      * This will hold the players and gui and stuff
@@ -41,24 +43,33 @@ public class Arena {
 
         particles = new ArrayList<>();
 
-        TEAM_SLOTS = new Slot[] {
+        teamSlots = new Slot[] {
           new Slot(new PVector(125, 100)),
           new Slot(new PVector(175, 225)),
           new Slot(new PVector(145, 350))
-        }; ENEMY_SLOTS = new Slot[] {
+        }; enemySlots = new Slot[] {
           new Slot(new PVector(BOARD_SIZE.x - 145, 100)),
           new Slot(new PVector(BOARD_SIZE.x - 175, 225)),
           new Slot(new PVector(BOARD_SIZE.x - 125, 350))
         };
 
-        TEAM_SLOTS[0].setCombatant(new Spider(P));
-        TEAM_SLOTS[1].setCombatant(new Healer(P));
-        TEAM_SLOTS[2].setCombatant(new Slime(P));
+        teamSlots[0].setCombatant(new Spider(P));
+        teamSlots[1].setCombatant(new Healer(P));
+        teamSlots[2].setCombatant(new Slime(P));
 
-        ENEMY_SLOTS[0].setCombatant(new Android(P));
-        ENEMY_SLOTS[1].setCombatant(new Android(P));
-        ENEMY_SLOTS[2].setCombatant(new Android(P));
-        for (Slot slot: ENEMY_SLOTS) slot.combatant.isEnemy = true;
+        currentWave = -1;
+        level = new Level_1(p);
+        advanceWave();
+    }
+
+    private void advanceWave() {
+        enemiesTurn = false;
+        selected = 0;
+        actionTimer = 0;
+        currentWave++;
+        for (int i = 0; i < level.waves[currentWave].length; i++) {
+            enemySlots[i].setCombatant(level.waves[currentWave][i]);
+        }
     }
 
     public void main() {
@@ -67,50 +78,58 @@ public class Arena {
             if (enemiesTurn) simEnemyTurn();
             else simTeamTurn();
         }
+        if (noEnemies()) advanceWave();
         actionTimer++;
     }
 
     private void simEnemyTurn() {
-        if (ENEMY_SLOTS[selected].empty() || noTeam()) {
+        if (enemySlots[selected].empty() || noTeam()) {
             advanceTurn();
             return;
         }
-        Slot target = TEAM_SLOTS[(int) P.random(TEAM_SLOTS.length)];
+        Slot target = teamSlots[(int) P.random(teamSlots.length)];
         while (target.empty()) {
-            target = TEAM_SLOTS[(int) P.random(TEAM_SLOTS.length)];
+            target = teamSlots[(int) P.random(teamSlots.length)];
         }
-        if (!ENEMY_SLOTS[selected].cantAttack()) ENEMY_SLOTS[selected].attack(target);
+        if (!enemySlots[selected].cantAttack()) enemySlots[selected].attack(target);
         actionTimer = 0;
         advanceTurn();
     }
 
+    private boolean noEnemies() {
+        for (Slot slot : enemySlots) {
+            if (!slot.empty()) return false;
+        }
+        return true;
+    }
+
     private boolean noTeam() {
-        for (Slot slot : TEAM_SLOTS) {
+        for (Slot slot : teamSlots) {
             if (!slot.empty()) return false;
         }
         return true;
     }
 
     private void simTeamTurn() {
-        if (TEAM_SLOTS[selected].cantAttack()) advanceTurn();
-        for (Slot slot : ENEMY_SLOTS) {
+        if (teamSlots[selected].cantAttack()) advanceTurn();
+        for (Slot slot : enemySlots) {
             //none, left, right
             int actionState = slot.actionState();
             if (actionState == 1) {
                 actionTimer = 0;
-                TEAM_SLOTS[selected].attack(slot);
+                teamSlots[selected].attack(slot);
                 advanceTurn();
             } else if (actionState == 2) {
-                if (TEAM_SLOTS[selected].ability(slot)) {
+                if (teamSlots[selected].ability(slot)) {
                     actionTimer = 0;
                     advanceTurn();
                 }
             }
-        } for (Slot slot : TEAM_SLOTS) {
+        } for (Slot slot : teamSlots) {
             //none, left, right
             int actionState = slot.actionState();
             if (actionState == 2) {
-                if (TEAM_SLOTS[selected].ability(slot)) {
+                if (teamSlots[selected].ability(slot)) {
                     actionTimer = 0;
                     advanceTurn();
                 }
@@ -121,32 +140,32 @@ public class Arena {
     private void advanceTurn() {
         selected++;
         if (enemiesTurn) {
-            if (selected >= ENEMY_SLOTS.length) endEnemyTurn();
-            else if (ENEMY_SLOTS[selected].empty()) advanceTurn();
+            if (selected >= enemySlots.length) endEnemyTurn();
+            else if (enemySlots[selected].empty()) advanceTurn();
         } else {
-            if (selected >= TEAM_SLOTS.length) endTeamTurn();
-            else if (TEAM_SLOTS[selected].empty()) advanceTurn();
+            if (selected >= teamSlots.length) endTeamTurn();
+            else if (teamSlots[selected].empty()) advanceTurn();
         }
     }
 
     private void endEnemyTurn() {
         enemiesTurn = false;
         selected = 0;
-        for (Slot slot : ENEMY_SLOTS) slot.updateBuffs();
+        for (Slot slot : enemySlots) slot.updateBuffs();
     }
 
     private void endTeamTurn() {
         enemiesTurn = true;
         selected = 0;
-        for (Slot slot : TEAM_SLOTS) slot.updateBuffs();
+        for (Slot slot : teamSlots) slot.updateBuffs();
     }
 
     private void display() {
-        for (Slot slot : TEAM_SLOTS) slot.display();
-        for (Slot slot : ENEMY_SLOTS) slot.display();
+        for (Slot slot : teamSlots) slot.display();
+        for (Slot slot : enemySlots) slot.display();
         if (actionTimer >= TIME_BETWEEN_ACTIONS) {
-            if (enemiesTurn) ENEMY_SLOTS[selected].selectionOverlay();
-            else TEAM_SLOTS[selected].selectionOverlay();
+            if (enemiesTurn) enemySlots[selected].selectionOverlay();
+            else teamSlots[selected].selectionOverlay();
         }
         for (int i = particles.size() - 1; i >= 0; i--) {
             Particle particle = particles.get(i);
@@ -204,14 +223,14 @@ public class Arena {
                 if (!onOpposingTeams(combatant, other.combatant)) return false;
                 Combatant[] others;
                 if (combatant.isEnemy) {
-                    others = new Combatant[arena.TEAM_SLOTS.length];
+                    others = new Combatant[arena.teamSlots.length];
                     for (int i = 0; i < others.length; i++) {
-                        others[i] = arena.TEAM_SLOTS[i].combatant;
+                        others[i] = arena.teamSlots[i].combatant;
                     }
                 } else {
-                    others = new Combatant[arena.ENEMY_SLOTS.length];
+                    others = new Combatant[arena.enemySlots.length];
                     for (int i = 0; i < others.length; i++) {
-                        others[i] = arena.ENEMY_SLOTS[i].combatant;
+                        others[i] = arena.enemySlots[i].combatant;
                     }
                 }
                 ((SplashOffensiveAbility) combatant).ability(others);
