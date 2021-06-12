@@ -15,8 +15,11 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
+import static main.Main.BOARD_SIZE;
 import static main.Main.arena;
 import static main.misc.Utilities.getPositionFromSlot;
+import static processing.core.PConstants.CENTER;
+import static processing.core.PConstants.CORNER;
 
 public class Arena {
 
@@ -28,9 +31,12 @@ public class Arena {
 
     private static final int TIME_BETWEEN_ACTIONS = 60;
     private static final int TIME_BETWEEN_DIALOGUE = 240;
+    private static final int GET_DARK_AMOUNT = 5;
 
     private final PApplet P;
 
+    private boolean gettingDark;
+    private int darkAmount;
     private int selected;
     private int actionTimer;
     private int dialogueTimer;
@@ -82,6 +88,7 @@ public class Arena {
         dialogueTimer = TIME_BETWEEN_DIALOGUE / 2;
         currentDialogue = 0;
         currentWave++;
+        dialogues = new ArrayList<>();
         if (currentWave >= levels[currentLevel].waves.length) System.out.println("You win!\nPromptly crashing...");
         for (int i = 0; i < levels[currentLevel].waves[currentWave].length; i++) {
             enemySlots[i].setCombatant(levels[currentLevel].waves[currentWave][i]);
@@ -102,7 +109,10 @@ public class Arena {
                 currentDialogue++;
             }
         }
-        if (noEnemies()) advanceWave();
+        if (noEnemies()) {
+            if (darkAmount > 254) advanceWave();
+            else gettingDark = true;
+        }
         actionTimer++;
     }
 
@@ -230,6 +240,19 @@ public class Arena {
             Dialogue dialogue = dialogues.get(i);
             dialogue.main();
         }
+        if (gettingDark) {
+            darkAmount += GET_DARK_AMOUNT;
+            if (darkAmount >= 254) {
+                gettingDark = false;
+            }
+        } else {
+            if (darkAmount > 0) darkAmount -= GET_DARK_AMOUNT;
+        }
+        P.rectMode(CORNER);
+        P.fill(0, darkAmount);
+        P.noStroke();
+        P.rect(0, 0, BOARD_SIZE.x, BOARD_SIZE.y);
+        P.rectMode(CENTER);
     }
 
     private static class Slot {
