@@ -131,7 +131,9 @@ public abstract class Combatant {
     public void selectionOverlay() {
         P.noFill();
         P.stroke(255);
+        P.strokeWeight(0.3f);
         P.rect(position.x, position.y, SIZE.x, SIZE.y);
+        P.strokeWeight(1);
     }
 
     public int actionState() {
