@@ -6,10 +6,7 @@ import main.arena.combatants.abilities.Ability;
 import main.arena.combatants.abilities.DefensiveAbility;
 import main.arena.combatants.abilities.OffensiveAbility;
 import main.arena.combatants.abilities.SplashOffensiveAbility;
-import main.arena.levelStructure.Level;
-import main.arena.levelStructure.Level_1;
-import main.arena.levelStructure.Level_2;
-import main.arena.levelStructure.Level_3;
+import main.arena.levelStructure.*;
 import main.arena.particles.Particle;
 import main.gui.guiObjects.Dialogue;
 import processing.core.PApplet;
@@ -71,7 +68,8 @@ public class Arena {
         levels = new Level[] {
           new Level_1(p),
           new Level_2(p),
-          new Level_3(p)
+          new Level_3(p),
+          new Level_4(p)
         };
         advanceLevel();
     }
