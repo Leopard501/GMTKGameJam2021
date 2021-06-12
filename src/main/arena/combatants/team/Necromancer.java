@@ -12,6 +12,7 @@ public class Necromancer extends Combatant implements DefensiveAbility {
     public Necromancer(PApplet p) {
         super(p, 70, 60, 10, 15, 1.5f, new Color(255, 255, 200));
         loadAnimations("necromancer");
+        abilityTriggerFrame = 3;
     }
 
     @Override
