@@ -10,6 +10,7 @@ import main.arena.combatants.abilities.SplashOffensiveAbility;
 import main.arena.levelStructure.Level;
 import main.arena.levelStructure.Level_1;
 import main.arena.particles.Particle;
+import main.gui.guiObjects.Dialogue;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -22,6 +23,7 @@ public class Arena {
 
     public boolean enemiesTurn;
     public ArrayList<Particle> particles;
+    public ArrayList<Dialogue> dialogues;
     public Slot[] teamSlots;
     public Slot[] enemySlots;
 
