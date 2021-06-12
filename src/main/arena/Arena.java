@@ -52,7 +52,7 @@ public class Arena {
           new Slot(new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), 3 * (BOARD_SIZE.y / 4)))
         };
 
-        teamSlots[0].setCombatant(new Spider(P));
+        teamSlots[0].setCombatant(new Fighter(P));
         teamSlots[1].setCombatant(new Slime(P));
         teamSlots[2].setCombatant(new Necromancer(P));
 

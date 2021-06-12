@@ -16,7 +16,7 @@ public class SpriteLoader {
         getAnimation(p, "genericButton", "BT", 3);
 
         //combatants
-        getAnimation(p, "idle", "fighter", "CB", 1);
+        getAnimation(p, "idle", "fighter", "CB", 2);
 
         getAnimation(p, "idle", "healer", "CB", 1);
 

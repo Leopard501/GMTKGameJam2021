@@ -42,8 +42,11 @@ public abstract class Combatant {
     protected int maxHp;
     protected int maxMp;
     protected int attackDamage;
+    protected int betweenIdleFrames;
     protected float abilityStrength;
 
+    private int frame;
+    private int betweenFrameTimer;
     private PImage[] idleAnimation;
 
     /**
@@ -62,6 +65,8 @@ public abstract class Combatant {
         alive = true;
         hp = maxHp;
         mp = maxMp;
+        betweenIdleFrames = 30;
+        betweenFrameTimer = (int) P.random(betweenIdleFrames);
     }
 
     protected void loadAnimations(String name) {
@@ -78,11 +83,21 @@ public abstract class Combatant {
             P.noStroke();
             P.circle(position.x, position.y, SIZE.x);
         } else {
-            if (isEnemy) P.image(idleAnimation[0], position.x, position.y, -SIZE.x, SIZE.y);
-            P.image(idleAnimation[0], position.x, position.y);
+            animate();
+            if (isEnemy) P.image(idleAnimation[frame], position.x, position.y, -SIZE.x, SIZE.y);
+            P.image(idleAnimation[frame], position.x, position.y);
         }
         hpBar();
         if (maxMp > 0) mpBar();
+    }
+
+    private void animate() {
+        betweenFrameTimer++;
+        if (betweenFrameTimer >= betweenIdleFrames) {
+            betweenFrameTimer = 0;
+            frame++;
+            if (frame >= idleAnimation.length) frame = 0;
+        }
     }
 
     private void hpBar() {
