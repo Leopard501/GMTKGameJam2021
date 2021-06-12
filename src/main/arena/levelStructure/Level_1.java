@@ -1,10 +1,7 @@
 package main.arena.levelStructure;
 
 import main.arena.combatants.Combatant;
-import main.arena.combatants.enemies.Android;
-import main.arena.combatants.enemies.Drone;
-import main.arena.combatants.enemies.Router;
-import main.arena.combatants.enemies.Skeleton;
+import main.arena.combatants.enemies.*;
 import main.arena.combatants.team.*;
 import processing.core.PApplet;
 
@@ -14,7 +11,7 @@ public class Level_1 extends Level {
         super(p);
 
         waves = new Combatant[][]{{
-            new Skeleton(p),
+            new T800(p),
             new Drone(p),
             new Router(p)
           }, {

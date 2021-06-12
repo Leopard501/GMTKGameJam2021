@@ -9,10 +9,13 @@ import java.awt.*;
 
 import static java.lang.Math.round;
 
-public class MetalDude extends Combatant implements OffensiveAbility {
+public class T800 extends Combatant implements OffensiveAbility {
 
-    public MetalDude(PApplet p) {
-        super(p, 100, 10, 5, 20, 10, new Color(29, 23, 0));
+    public T800(PApplet p) {
+        super(p, 150, 25, 5, 30, 30, new Color(29, 23, 0));
+        loadAnimations("t800");
+        abilityTriggerFrame = 17;
+        attackTriggerFrame = 18;
     }
 
     @Override
