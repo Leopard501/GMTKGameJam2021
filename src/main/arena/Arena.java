@@ -9,18 +9,22 @@ import main.arena.combatants.abilities.DefensiveAbility;
 import main.arena.combatants.abilities.OffensiveAbility;
 import main.arena.combatants.abilities.SplashOffensiveAbility;
 import main.arena.combatants.team.Spider;
+import main.arena.particles.Particle;
 import processing.core.PApplet;
 import processing.core.PVector;
+
+import java.util.ArrayList;
 
 import static main.Main.BOARD_SIZE;
 import static main.Main.arena;
 
 public class Arena {
 
-    public boolean enemiesTurn;
-
     public final Slot[] TEAM_SLOTS;
     public final Slot[] ENEMY_SLOTS;
+
+    public boolean enemiesTurn;
+    public ArrayList<Particle> particles;
 
     private static final int TIME_BETWEEN_ACTIONS = 30;
 
@@ -34,6 +38,8 @@ public class Arena {
      */
     public Arena(PApplet p) {
         P = p;
+
+        particles = new ArrayList<>();
 
         TEAM_SLOTS = new Slot[] {
           new Slot(new PVector(125, 100)),
@@ -141,6 +147,10 @@ public class Arena {
         if (actionTimer >= TIME_BETWEEN_ACTIONS) {
             if (enemiesTurn) ENEMY_SLOTS[selected].selectionOverlay();
             else TEAM_SLOTS[selected].selectionOverlay();
+        }
+        for (int i = particles.size() - 1; i >= 0; i--) {
+            Particle particle = particles.get(i);
+            particle.main();
         }
     }
 

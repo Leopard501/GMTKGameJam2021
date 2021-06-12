@@ -5,10 +5,12 @@ import main.arena.combatants.Combatant;
 import main.arena.combatants.abilities.OffensiveAbility;
 import processing.core.PApplet;
 
+import java.awt.*;
+
 public class Fighter extends Combatant implements OffensiveAbility {
 
     public Fighter(PApplet p) {
-        super(p, 100, 10, 5, 20, 20);
+        super(p, 100, 10, 5, 20, 20, new Color(150, 0, 0));
     }
 
     @Override

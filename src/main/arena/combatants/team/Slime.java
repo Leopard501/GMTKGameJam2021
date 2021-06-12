@@ -4,10 +4,12 @@ import main.arena.combatants.Combatant;
 import main.arena.combatants.abilities.SplashOffensiveAbility;
 import processing.core.PApplet;
 
+import java.awt.*;
+
 public class Slime extends Combatant implements SplashOffensiveAbility {
 
     public Slime(PApplet p) {
-        super(p, 120, 20, 5, 15, 10);
+        super(p, 120, 20, 5, 15, 10, new Color(46, 201, 46));
     }
 
     @Override

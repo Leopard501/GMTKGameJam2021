@@ -4,10 +4,12 @@ import main.arena.combatants.Combatant;
 import main.arena.combatants.abilities.DefensiveAbility;
 import processing.core.PApplet;
 
+import java.awt.*;
+
 public class Healer extends Combatant implements DefensiveAbility {
 
     public Healer(PApplet p) {
-        super(p, 80, 50, 10, 10, 25);
+        super(p, 80, 50, 10, 10, 25, new Color(150, 0, 0));
     }
 
     @Override
