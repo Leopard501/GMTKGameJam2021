@@ -9,14 +9,16 @@ public abstract class Buff {
     public float strength;
 
     protected final PApplet P;
+    protected final Combatant COMBATANT;
 
-    public Buff(PApplet p, int lifeTimer, float strength) {
+    public Buff(PApplet p, int lifeTimer, float strength, Combatant combatant) {
         P = p;
         this.lifeTimer = lifeTimer;
         this.strength = strength;
+        COMBATANT = combatant;
     }
 
-    public abstract void effect(Combatant combatant);
+    public abstract void effect();
 
     public abstract void display();
 }

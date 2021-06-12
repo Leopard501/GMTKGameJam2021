@@ -5,14 +5,14 @@ import processing.core.PApplet;
 
 public class Sticky extends Buff {
 
-    public Sticky(PApplet p) {
-        super(p, 2, 0);
+    public Sticky(PApplet p, Combatant combatant) {
+        super(p, 2, 0, combatant);
     }
 
     @Override
-    public void effect(Combatant combatant) {
+    public void effect() {
         lifeTimer--;
-        if (lifeTimer == 0) combatant.sticky = null;
+        if (lifeTimer == 0) COMBATANT.sticky = null;
     }
 
     @Override

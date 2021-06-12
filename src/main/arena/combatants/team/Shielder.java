@@ -19,6 +19,6 @@ public class Shielder extends Combatant implements DefensiveAbility {
     public void ability(Combatant other) {
         mp -= mpCost;
         if (mp < 0) mp = 0;
-        other.shielded = new Shielded(P);
+        other.shielded = new Shielded(P, other);
     }
 }

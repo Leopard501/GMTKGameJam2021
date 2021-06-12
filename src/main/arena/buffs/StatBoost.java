@@ -5,14 +5,14 @@ import processing.core.PApplet;
 
 public class StatBoost extends Buff {
 
-    public StatBoost(PApplet p, float amount) {
-        super(p, 3, amount);
+    public StatBoost(PApplet p, float amount, Combatant combatant) {
+        super(p, 3, amount, combatant);
     }
 
     @Override
-    public void effect(Combatant combatant) {
+    public void effect() {
         lifeTimer--;
-        if (lifeTimer == 0) combatant.shielded = null;
+        if (lifeTimer == 0) COMBATANT.shielded = null;
     }
 
     @Override

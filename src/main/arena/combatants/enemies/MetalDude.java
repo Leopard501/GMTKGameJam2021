@@ -26,6 +26,6 @@ public class MetalDude extends Combatant implements OffensiveAbility {
             strength *= statBoost.strength;
         }
         other.hurt(damage);
-        other.bleeding = new Bleeding(P, strength);
+        other.bleeding = new Bleeding(P, strength, other);
     }
 }

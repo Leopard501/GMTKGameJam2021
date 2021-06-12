@@ -19,6 +19,6 @@ public class Necromancer extends Combatant implements DefensiveAbility {
     public void ability(Combatant other) {
         mp -= mpCost;
         if (mp < 0) mp = 0;
-        other.statBoost = new StatBoost(P, abilityStrength);
+        other.statBoost = new StatBoost(P, abilityStrength, other);
     }
 }

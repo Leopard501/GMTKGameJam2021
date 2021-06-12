@@ -15,6 +15,6 @@ public class StasisBot extends Combatant implements OffensiveAbility {
 
     @Override
     public void ability(Combatant other) {
-        other.sticky = new Sticky(P);
+        other.sticky = new Sticky(P, other);
     }
 }

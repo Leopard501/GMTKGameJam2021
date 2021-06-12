@@ -19,6 +19,6 @@ public class Spider extends Combatant implements OffensiveAbility {
     public void ability(Combatant other) {
         mp -= mpCost;
         if (mp < 0) mp = 0;
-        other.sticky = new Sticky(P);
+        other.sticky = new Sticky(P, other);
     }
 }

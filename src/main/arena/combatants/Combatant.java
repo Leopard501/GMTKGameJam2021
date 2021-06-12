@@ -28,6 +28,8 @@ public abstract class Combatant {
     public boolean isEnemy;
     public int mp;
     public int mpCost;
+    public PVector position;
+    public Color bloodColor;
 
     //This might suck, but it's a game jam so who cares.
     public Bleeding bleeding;
@@ -39,8 +41,6 @@ public abstract class Combatant {
 
     protected final PApplet P;
 
-    protected PVector position;
-    protected Color bloodColor;
     protected int hp;
     protected int maxHp;
     protected int maxMp;
@@ -105,6 +105,10 @@ public abstract class Combatant {
             P.popMatrix();
         }
         else P.image(frameImage, position.x, position.y);
+        if (bleeding != null) bleeding.display();
+        if (shielded != null) shielded.display();
+        if (statBoost != null) statBoost.display();
+        if (sticky != null) sticky.display();
         hpBar();
         if (maxMp > 0) mpBar();
     }
@@ -229,7 +233,7 @@ public abstract class Combatant {
     }
 
     public void hurt(int amount) {
-        if (shielded != null && shielded.lifeTimer > 0) return;
+        if (shielded != null) return;
         int damage = amount;
         if (statBoost != null) {
             damage = round((float) damage * (2 - statBoost.strength));
@@ -247,7 +251,9 @@ public abstract class Combatant {
     }
 
     public void updateBuffs() {
-        if (bleeding != null) bleeding.effect(this);
-        if (sticky != null) sticky.effect(this);
+        if (bleeding != null) bleeding.effect();
+        if (sticky != null) sticky.effect();
+        if (statBoost != null) statBoost.effect();
+        if (shielded != null) shielded.effect();
     }
 }
