@@ -18,8 +18,8 @@ public class FloatParticle extends Particle {
     public FloatParticle(PApplet p, float x, float y, Color color) {
         super(p, x, y);
         COLOR = color;
-        position.add(PVector.fromAngle(p.random(PConstants.TWO_PI)).setMag(5));
 
+        position.add(PVector.fromAngle(p.random(PConstants.TWO_PI)).setMag(5));
         alpha = 254;
         velocity = PVector.fromAngle(P.random(PConstants.TWO_PI)).setMag(p.random(0.05f,0.2f));
     }
