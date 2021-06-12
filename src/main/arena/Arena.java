@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import static main.Main.BOARD_SIZE;
 import static main.Main.arena;
 import static main.misc.Utilities.getPositionFromSlot;
+import static main.misc.Utilities.getSlotFromPosition;
 import static processing.core.PConstants.CENTER;
 import static processing.core.PConstants.CORNER;
 
@@ -101,10 +102,22 @@ public class Arena {
             if (enemiesTurn) simEnemyTurn();
             else simPlayerTurn();
         }
+        updateDialogue();
+        if (noEnemies()) {
+            if (darkAmount > 254) advanceWave();
+            else gettingDark = true;
+        }
+        actionTimer++;
+    }
+
+    private void updateDialogue() {
         if (currentWave < levels[currentLevel].dialogues.length && currentDialogue < levels[currentLevel].dialogues[currentWave].length) {
             dialogueTimer++;
             if (dialogueTimer >= TIME_BETWEEN_DIALOGUE) {
                 Dialogue currentDialogOb = levels[currentLevel].dialogues[currentWave][currentDialogue];
+                int slot = getSlotFromPosition(currentDialogOb.position);
+                if (slot < 3 && teamSlots[slot].empty()) return;
+                if (slot > 3 && enemySlots[slot - 3].empty()) return;
                 if (currentDialogue > 0) {
                     Dialogue lastDialogOb = levels[currentLevel].dialogues[currentWave][currentDialogue - 1];
                     if (currentDialogOb.position.equals(lastDialogOb.position)) currentDialogOb.moveUp();
@@ -114,11 +127,6 @@ public class Arena {
                 currentDialogue++;
             }
         }
-        if (noEnemies()) {
-            if (darkAmount > 254) advanceWave();
-            else gettingDark = true;
-        }
-        actionTimer++;
     }
 
     private void simEnemyTurn() {

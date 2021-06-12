@@ -340,30 +340,31 @@ public class Utilities {
     }
 
     public static PVector getPositionFromSlot(int slot) {
-        PVector position;
         switch (slot) {
             case 0:
-                position = new PVector(BOARD_SIZE.x / 6, BOARD_SIZE.y / 4);
-                break;
+                return new PVector(BOARD_SIZE.x / 6, BOARD_SIZE.y / 4);
             case 1:
-                position = new PVector(BOARD_SIZE.x / 3, BOARD_SIZE.y / 2);
-                break;
+                return new PVector(BOARD_SIZE.x / 3, BOARD_SIZE.y / 2);
             case 2:
-                position = new PVector(BOARD_SIZE.x / 6, 3 * (BOARD_SIZE.y / 4));
-                break;
+                return new PVector(BOARD_SIZE.x / 6, 3 * (BOARD_SIZE.y / 4));
             case 3:
-                position = new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), BOARD_SIZE.y / 4);
-                break;
+                return new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), BOARD_SIZE.y / 4);
             case 4:
-                position = new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 3), BOARD_SIZE.y / 2);
-                break;
+                return new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 3), BOARD_SIZE.y / 2);
             case 5:
-                position = new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), 3 * (BOARD_SIZE.y / 4));
-                break;
+                return new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), 3 * (BOARD_SIZE.y / 4));
             default:
-                position = new PVector(BOARD_SIZE.x / 2, BOARD_SIZE.y / 2);
-                break;
+                return new PVector(BOARD_SIZE.x / 2, BOARD_SIZE.y / 2);
         }
-        return position;
+    }
+
+    public static int getSlotFromPosition(PVector position) {
+        if (position.equals(new PVector(BOARD_SIZE.x / 6, BOARD_SIZE.y / 4))) return 0;
+        if (position.equals(new PVector(BOARD_SIZE.x / 3, BOARD_SIZE.y / 2))) return 1;
+        if (position.equals(new PVector(BOARD_SIZE.x / 6, 3 * (BOARD_SIZE.y / 4)))) return 2;
+        if (position.equals(new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), BOARD_SIZE.y / 4))) return 3;
+        if (position.equals(new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 3), BOARD_SIZE.y / 2))) return 4;
+        if (position.equals(new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), 3 * (BOARD_SIZE.y / 4)))) return 5;
+        return -1;
     }
 }
