@@ -12,11 +12,12 @@ import static processing.core.PConstants.CENTER;
 
 public class Dialogue {
 
+    public PVector position;
+
     private final PApplet P;
     private final int SIZE;
     private final Color TEXT_COLOR;
     private final Color HIGHLIGHT_COLOR;
-    private final PVector POSITION;
     private final String TEXT;
 
     private boolean firstPhase;
@@ -38,7 +39,7 @@ public class Dialogue {
         SIZE = size;
         TEXT_COLOR = textColor;
         HIGHLIGHT_COLOR = highlightColor;
-        POSITION = position;
+        this.position = position;
         TEXT = text;
 
         firstPhase = true;
@@ -48,6 +49,10 @@ public class Dialogue {
 
     public Dialogue(PApplet p, String text, PVector position) {
         this(p, 5, new Color(255, 255, 255), new Color(100, 100, 100, 200), position, text);
+    }
+
+    public void moveUp() {
+        position = new PVector(position.x, position.y - 7);
     }
 
     public void main() {
@@ -60,7 +65,7 @@ public class Dialogue {
         Color textColor = new Color(TEXT_COLOR.getRed(), TEXT_COLOR.getGreen(), TEXT_COLOR.getBlue(), a);
         if (alpha > HIGHLIGHT_COLOR.getAlpha()) a = HIGHLIGHT_COLOR.getAlpha();
         Color highlightColor = new Color(HIGHLIGHT_COLOR.getRed(), HIGHLIGHT_COLOR.getGreen(), HIGHLIGHT_COLOR.getBlue(), a);
-        highlightedText(P, TEXT, new PVector((int) POSITION.x, (int) (POSITION.y - (SIZE / 2f) - displacement)), textColor, highlightColor, SIZE, CENTER);
+        highlightedText(P, TEXT, new PVector((int) position.x, (int) (position.y - (SIZE / 2f) - displacement)), textColor, highlightColor, SIZE, CENTER);
     }
 
     private void update() {

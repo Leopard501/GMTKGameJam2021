@@ -30,7 +30,7 @@ public class Arena {
     public Slot[] enemySlots;
 
     private static final int TIME_BETWEEN_ACTIONS = 60;
-    private static final int TIME_BETWEEN_DIALOGUE = 240;
+    private static final int TIME_BETWEEN_DIALOGUE = 120;
     private static final int GET_DARK_AMOUNT = 5;
 
     private final PApplet P;
@@ -104,7 +104,12 @@ public class Arena {
         if (currentWave < levels[currentLevel].dialogues.length && currentDialogue < levels[currentLevel].dialogues[currentWave].length) {
             dialogueTimer++;
             if (dialogueTimer >= TIME_BETWEEN_DIALOGUE) {
-                dialogues.add(levels[currentLevel].dialogues[currentWave][currentDialogue]);
+                Dialogue currentDialogOb = levels[currentLevel].dialogues[currentWave][currentDialogue];
+                if (currentDialogue > 0) {
+                    Dialogue lastDialogOb = levels[currentLevel].dialogues[currentWave][currentDialogue - 1];
+                    if (currentDialogOb.position.equals(lastDialogOb.position)) currentDialogOb.moveUp();
+                }
+                dialogues.add(currentDialogOb);
                 dialogueTimer = 0;
                 currentDialogue++;
             }
