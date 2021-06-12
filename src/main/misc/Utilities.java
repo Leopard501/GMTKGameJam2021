@@ -338,4 +338,32 @@ public class Utilities {
 
         return x && y;
     }
+
+    public static PVector getPositionFromSlot(int slot) {
+        PVector position;
+        switch (slot) {
+            case 0:
+                position = new PVector(BOARD_SIZE.x / 6, BOARD_SIZE.y / 4);
+                break;
+            case 1:
+                position = new PVector(BOARD_SIZE.x / 3, BOARD_SIZE.y / 2);
+                break;
+            case 2:
+                position = new PVector(BOARD_SIZE.x / 6, 3 * (BOARD_SIZE.y / 4));
+                break;
+            case 3:
+                position = new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), BOARD_SIZE.y / 4);
+                break;
+            case 4:
+                position = new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 3), BOARD_SIZE.y / 2);
+                break;
+            case 5:
+                position = new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), 3 * (BOARD_SIZE.y / 4));
+                break;
+            default:
+                position = new PVector(BOARD_SIZE.x / 2, BOARD_SIZE.y / 2);
+                break;
+        }
+        return position;
+    }
 }

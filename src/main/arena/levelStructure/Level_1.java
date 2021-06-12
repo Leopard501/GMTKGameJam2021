@@ -8,6 +8,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import static main.Main.BOARD_SIZE;
+import static main.misc.Utilities.getPositionFromSlot;
 import static processing.core.PApplet.binary;
 
 public class Level_1 extends Level {
@@ -39,39 +40,11 @@ public class Level_1 extends Level {
         }
 
         dialogues = new Dialogue[][]{{
-          dialogueFromSlot(0, "test A"),
-          dialogueFromSlot(0, "test B")
+            new Dialogue(P, "test A", getPositionFromSlot(0)),
+          new Dialogue(P, "test B", getPositionFromSlot(0)),
+          new Dialogue(P, "test C", getPositionFromSlot(3))
         }, {
-            dialogueFromSlot(1, "test C")
+          new Dialogue(P, "test D", getPositionFromSlot(1))
         }};
     }
-
-    private Dialogue dialogueFromSlot(int slot, String text) {
-        PVector position;
-        switch (slot) {
-            case 0:
-                position = new PVector(BOARD_SIZE.x / 6, BOARD_SIZE.y / 4);
-                break;
-            case 1:
-                position = new PVector(BOARD_SIZE.x / 3, BOARD_SIZE.y / 2);
-                break;
-            case 2:
-                position = new PVector(BOARD_SIZE.x / 6, 3 * (BOARD_SIZE.y / 4));
-                break;
-            case 3:
-                position = new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), BOARD_SIZE.y / 4);
-                break;
-            case 4:
-                position = new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 3), BOARD_SIZE.y / 2);
-                break;
-            case 5:
-                position = new PVector(BOARD_SIZE.x - (BOARD_SIZE.x / 6), 3 * (BOARD_SIZE.y / 4));
-                break;
-            default:
-                position = new PVector(BOARD_SIZE.x / 2, BOARD_SIZE.y / 2);
-                break;
-        }
-        return new Dialogue(P, text, position);
-    }
-
 }

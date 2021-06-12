@@ -28,7 +28,7 @@ public class Arena {
     public Slot[] enemySlots;
 
     private static final int TIME_BETWEEN_ACTIONS = 60;
-    private static final int TIME_BETWEEN_DIALOGUE = 120;
+    private static final int TIME_BETWEEN_DIALOGUE = 240;
 
     private final PApplet P;
 
@@ -78,7 +78,6 @@ public class Arena {
         }
         if (currentWave < level.dialogues.length) {
             dialogueCount = 0;
-            dialogues.add(level.dialogues[currentWave][dialogueCount]);
         }
     }
 
