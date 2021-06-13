@@ -13,7 +13,7 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 public class Healer extends Combatant implements DefensiveAbility {
 
     public Healer(PApplet p) {
-        super(p, 80, 50, 10, 15, 40, new Color(150, 0, 0));
+        super(p, 80, 50, 10, 15, 40, new Color(200, 0, 0));
         loadAnimations("healer");
         hurtSound = sounds.get("squish");
         abilitySound = sounds.get("magic");

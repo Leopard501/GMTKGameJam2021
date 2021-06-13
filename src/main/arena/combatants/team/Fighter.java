@@ -14,7 +14,7 @@ import static main.sound.SoundUtilities.playSoundRandomSpeed;
 public class Fighter extends Combatant implements OffensiveAbility {
 
     public Fighter(PApplet p) {
-        super(p, 100, 20, 5, 20, 15, new Color(150, 0, 0));
+        super(p, 100, 20, 5, 20, 15, new Color(200, 0, 0));
         loadAnimations("fighter");
         hurtSound = sounds.get("squish");
         abilitySound = sounds.get("whooshImpact");
