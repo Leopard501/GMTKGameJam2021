@@ -31,7 +31,7 @@ public class Arena {
 
     private static final int TIME_BETWEEN_ACTIONS = 60;
     private static final int TIME_BETWEEN_DIALOGUE = 120;
-    private static final int GET_DARK_AMOUNT = 5;
+    private static final int INCREASE_DARK = 5;
 
     private final PApplet P;
 
@@ -69,7 +69,8 @@ public class Arena {
           new Level_1(p),
           new Level_2(p),
           new Level_3(p),
-          new Level_4(p)
+          new Level_4(p),
+          new Level_5(p)
         };
         advanceLevel();
     }
@@ -108,7 +109,14 @@ public class Arena {
 
     public void main() {
         display();
-        if (actionTimer >= TIME_BETWEEN_ACTIONS) {
+        if (levels[currentLevel].isCutscene) {
+            boolean ranOutOfDialogue = currentDialogue >= levels[currentLevel].dialogues[currentWave].length;
+            if (ranOutOfDialogue) dialogueTimer++;
+            if (ranOutOfDialogue && dialogueTimer > TIME_BETWEEN_DIALOGUE * 2) {
+                if (darkAmount > 254) advanceWave();
+                else gettingDark = true;
+            }
+        } else if (actionTimer >= TIME_BETWEEN_ACTIONS) {
             if (enemiesTurn) simEnemyTurn();
             else simPlayerTurn();
         }
@@ -256,7 +264,7 @@ public class Arena {
     private void display() {
         for (Slot slot : teamSlots) slot.display();
         for (Slot slot : enemySlots) slot.display();
-        if (actionTimer >= TIME_BETWEEN_ACTIONS) {
+        if (actionTimer >= TIME_BETWEEN_ACTIONS && !levels[currentWave].isCutscene) {
             if (enemiesTurn) enemySlots[selected].selectionOverlay();
             else teamSlots[selected].selectionOverlay();
         }
@@ -269,13 +277,9 @@ public class Arena {
             dialogue.main();
         }
         if (gettingDark) {
-            darkAmount += GET_DARK_AMOUNT;
-            if (darkAmount >= 254) {
-                gettingDark = false;
-            }
-        } else {
-            if (darkAmount > 0) darkAmount -= GET_DARK_AMOUNT;
-        }
+            darkAmount += INCREASE_DARK;
+            if (darkAmount >= 254) gettingDark = false;
+        } else if (darkAmount > 0) darkAmount -= INCREASE_DARK;
         P.rectMode(CORNER);
         P.fill(0, darkAmount);
         P.noStroke();

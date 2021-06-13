@@ -6,6 +6,7 @@ import processing.core.PApplet;
 
 public abstract class Level {
 
+    public boolean isCutscene;
     public Combatant[] team;
     public Combatant[][] waves;
     public Dialogue[][] dialogues;
@@ -14,5 +15,6 @@ public abstract class Level {
 
     public Level(PApplet p) {
         P = p;
+        isCutscene = false;
     }
 }

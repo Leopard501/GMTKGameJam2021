@@ -10,6 +10,11 @@ import static main.misc.Utilities.getPositionFromSlot;
 
 public class Level_3 extends Level {
 
+    /**
+     * Tutorial level.
+     * Introduces shielder, spider and necromancer.
+     * Less easy.
+     */
     public Level_3(PApplet p) {
         super(p);
 

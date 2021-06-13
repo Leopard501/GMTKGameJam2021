@@ -13,6 +13,10 @@ import static main.misc.Utilities.getPositionFromSlot;
 
 public class Level_4 extends Level {
 
+    /**
+     * Introduces Androids and drone.
+     * Mediumish.
+     */
     public Level_4(PApplet p) {
         super(p);
 
