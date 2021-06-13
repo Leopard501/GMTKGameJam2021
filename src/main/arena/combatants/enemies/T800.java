@@ -12,7 +12,7 @@ import static java.lang.Math.round;
 public class T800 extends Combatant implements OffensiveAbility {
 
     public T800(PApplet p) {
-        super(p, 150, 25, 5, 30, 30, new Color(29, 23, 0));
+        super(p, 100, 5, 5, 20, 20, new Color(29, 23, 0));
         loadAnimations("t800");
         abilityTriggerFrame = 17;
         attackTriggerFrame = 18;

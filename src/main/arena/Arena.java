@@ -71,6 +71,7 @@ public class Arena {
 
         currentLevel = -1;
         levels = new Level[] {
+          new Level_9(p),
           new Level_1(p),
           new Level_2(p),
           new Level_3(p),
