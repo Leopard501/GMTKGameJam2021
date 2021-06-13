@@ -9,7 +9,9 @@ import main.arena.combatants.abilities.OffensiveAbility;
 import main.arena.combatants.abilities.SplashOffensiveAbility;
 import main.arena.levelStructure.*;
 import main.arena.particles.Particle;
+import main.gui.PauseMenu;
 import main.gui.guiObjects.Dialogue;
+import main.gui.guiObjects.buttons.MenuButton;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -25,6 +27,7 @@ import static processing.core.PConstants.CORNER;
 
 public class Arena {
 
+    public boolean paused;
     public boolean enemiesTurn;
     public ArrayList<Particle> particles;
     public ArrayList<Dialogue> dialogues;
@@ -37,6 +40,7 @@ public class Arena {
 
     private final PApplet P;
     private final PImage BACKGROUND;
+    private final PauseMenu PAUSE_MENU;
 
     private boolean gettingDark;
     private int darkAmount;
@@ -47,6 +51,7 @@ public class Arena {
     private int currentWave;
     private int currentLevel;
     private Level[] levels;
+    private MenuButton pauseButton;
 
     /**
      * This will hold the players and gui and stuff
@@ -55,11 +60,13 @@ public class Arena {
         P = p;
 
         BACKGROUND = Main.sprites.get("arenaBG");
+        PAUSE_MENU = new PauseMenu(p);
 
         particles = new ArrayList<>();
         dialogues = new ArrayList<>();
 
         darkAmount = 254;
+        pauseButton = new MenuButton(p, 0, 5);
 
         teamSlots = new Slot[] {
           new Slot(getPositionFromSlot(0)),
@@ -127,6 +134,15 @@ public class Arena {
 
     public void main() {
         display();
+        pauseButton.hover();
+        if (pauseButton.isPressed()) {
+            paused = true;
+            PAUSE_MENU.locked = true;
+        }
+        if (paused) {
+            PAUSE_MENU.main();
+            return;
+        }
         boolean ranOutOfDialogue = currentDialogue >= levels[currentLevel].dialogues[currentWave].length;
         if (levels[currentLevel].isCutscene) {
             if (ranOutOfDialogue) dialogueTimer++;
@@ -293,11 +309,11 @@ public class Arena {
         P.image(BACKGROUND, 0, 0);
         P.imageMode(CENTER);
         for (Slot slot : teamSlots) {
-            slot.display();
+            slot.display(paused);
             if (!levels[currentLevel].isCutscene) slot.displayBars();
         }
         for (Slot slot : enemySlots) {
-            slot.display();
+            slot.display(paused);
             if (!levels[currentLevel].isCutscene) slot.displayBars();
 
         }
@@ -312,6 +328,13 @@ public class Arena {
         for (int i = dialogues.size() -1; i >= 0; i--) {
             Dialogue dialogue = dialogues.get(i);
             dialogue.main();
+        }
+        if (!paused) {
+            P.fill(20);
+            P.textSize(8);
+            P.textAlign(CENTER);
+            pauseButton.main();
+            P.text("Pause", 20, 8);
         }
         if (gettingDark) {
             darkAmount += INCREASE_DARK;
@@ -333,9 +356,9 @@ public class Arena {
             POSITION = position;
         }
 
-        private void display() {
+        private void display(boolean paused) {
             if (empty()) return;
-            combatant.display();
+            combatant.display(paused);
             if (!combatant.alive) setCombatant(null);
         }
 

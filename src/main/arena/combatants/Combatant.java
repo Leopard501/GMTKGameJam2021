@@ -94,11 +94,11 @@ public abstract class Combatant {
         position = new PVector(x, y);
     }
 
-    public void display() {
+    public void display(boolean paused) {
         P.noStroke();
         P.fill(0, 100);
         P.ellipse(position.x, position.y + (SIZE.y / 2), SIZE.x, SIZE.y / 3);
-        if (sticky == null && pizza == null) animate();
+        if (sticky == null && pizza == null && !paused) animate();
         if (isEnemy) {
             P.pushMatrix();
             P.scale(-1, 1);
@@ -106,9 +106,9 @@ public abstract class Combatant {
             P.popMatrix();
         }
         else P.image(frameImage, position.x, position.y);
-        if (bleeding != null) bleeding.display();
+        if (bleeding != null && !paused) bleeding.display();
         if (shielded != null) shielded.display();
-        if (statBoost != null) statBoost.display();
+        if (statBoost != null && !paused) statBoost.display();
         if (sticky != null) sticky.display();
         if (pizza != null) pizza.display();
     }
