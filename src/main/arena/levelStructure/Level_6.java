@@ -15,7 +15,7 @@ import static main.misc.Utilities.getPositionFromSlot;
 public class Level_6 extends Level {
 
     /**
-     * Introduce router
+     * Introduce router & playable slime
      */
     public Level_6(PApplet p) {
         super(p);

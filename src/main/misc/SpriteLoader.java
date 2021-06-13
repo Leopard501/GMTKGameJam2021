@@ -57,6 +57,10 @@ public class SpriteLoader {
         getAnimation(p, "idle", "t800", "CB", 2);
         getAnimation(p, "attack", "t800", "CB", 24);
         getAnimation(p, "ability", "t800", "CB", 25);
+
+        getAnimation(p, "idle", "pizzaBot", "CB", 2);
+        getAnimation(p, "attack", "pizzaBot", "CB", 10);
+        getAnimation(p, "ability", "pizzaBot", "CB", 7);
     }
 
     private static void getAnimation(PApplet p, String name, String folder, String type, int length) {
@@ -85,5 +89,6 @@ public class SpriteLoader {
         //buffs
         sprites.put("stickyBF", p.loadImage("sprites/buffs/sticky.png"));
         sprites.put("shieldedBF", p.loadImage("sprites/buffs/shielded.png"));
+        sprites.put("pizzaBF", p.loadImage("sprites/buffs/pizza.png"));
     }
 }

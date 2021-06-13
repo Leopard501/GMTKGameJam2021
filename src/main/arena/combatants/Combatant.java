@@ -1,10 +1,7 @@
 package main.arena.combatants;
 
 import main.Main;
-import main.arena.buffs.Bleeding;
-import main.arena.buffs.Shielded;
-import main.arena.buffs.StatBoost;
-import main.arena.buffs.Sticky;
+import main.arena.buffs.*;
 import main.arena.combatants.abilities.DefensiveAbility;
 import main.arena.combatants.abilities.OffensiveAbility;
 import main.arena.combatants.abilities.SplashOffensiveAbility;
@@ -36,6 +33,7 @@ public abstract class Combatant {
     public Sticky sticky;
     public Shielded shielded;
     public StatBoost statBoost;
+    public Pizza pizza;
 
     protected static final PVector SIZE = new PVector(20, 20);
 
@@ -97,7 +95,7 @@ public abstract class Combatant {
     }
 
     public void display() {
-        if (sticky == null) animate();
+        if (sticky == null && pizza == null) animate();
         if (isEnemy) {
             P.pushMatrix();
             P.scale(-1, 1);
@@ -109,6 +107,7 @@ public abstract class Combatant {
         if (shielded != null) shielded.display();
         if (statBoost != null) statBoost.display();
         if (sticky != null) sticky.display();
+        if (pizza != null) pizza.display();
     }
 
     private void animate() {
@@ -258,5 +257,6 @@ public abstract class Combatant {
         if (sticky != null) sticky.effect();
         if (statBoost != null) statBoost.effect();
         if (shielded != null) shielded.effect();
+        if (pizza != null) pizza.effect();
     }
 }

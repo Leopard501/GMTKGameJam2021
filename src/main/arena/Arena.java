@@ -66,6 +66,7 @@ public class Arena {
 
         currentLevel = -1;
         levels = new Level[] {
+          new Level_7(p),
           new Level_1(p),
           new Level_2(p),
           new Level_3(p),
@@ -385,7 +386,7 @@ public class Arena {
         }
 
         private boolean cantAct() {
-            return empty() || combatant.sticky != null;
+            return empty() || combatant.sticky != null || combatant.pizza != null;
         }
     }
 }
