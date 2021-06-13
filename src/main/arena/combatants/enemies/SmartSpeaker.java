@@ -10,7 +10,7 @@ import java.awt.*;
 public class SmartSpeaker extends Combatant implements DefensiveAbility {
 
     public SmartSpeaker(PApplet p) {
-        super(p, 80, 15, 5, 8, 0, new Color(0, 85, 255));
+        super(p, 80, 10, 5, 8, 0, new Color(0, 85, 255));
         loadAnimations("smartSpeaker");
         attackTriggerFrame = 5;
         abilityTriggerFrame = 2;
