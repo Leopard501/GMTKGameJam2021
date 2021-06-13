@@ -4,9 +4,13 @@ import main.Main;
 import main.gui.guiObjects.buttons.MenuButton;
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.core.PVector;
+
+import java.awt.*;
 
 import static main.Main.BOARD_SIZE;
 import static main.Main.sprites;
+import static main.misc.Utilities.shadowedText;
 import static processing.core.PConstants.CENTER;
 import static processing.core.PConstants.CORNER;
 
@@ -71,6 +75,13 @@ public class MainMenu {
         P.imageMode(CORNER);
         P.image(BACKGROUND, 0, 0);
         P.imageMode(CENTER);
+
+        shadowedText(P, "Adventurers & Monsters", new PVector(BOARD_SIZE.x / 2, (BOARD_SIZE.y / 2) - 50),
+          new Color(200, 200, 200), new Color(87, 87, 87), 12, CENTER);
+        shadowedText(P, "vs.", new PVector(BOARD_SIZE.x / 2, (BOARD_SIZE.y / 2) - 40),
+          new Color(200, 200, 200), new Color(87, 87, 87), 10, CENTER);
+        shadowedText(P, "the Machines", new PVector(BOARD_SIZE.x / 2, (BOARD_SIZE.y / 2) - 25),
+          new Color(200, 200, 200), new Color(87, 87, 87), 12, CENTER);
 
         P.fill(20);
         P.textSize(10);

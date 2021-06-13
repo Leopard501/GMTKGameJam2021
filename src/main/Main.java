@@ -25,7 +25,7 @@ public class Main extends PApplet {
     private static final Color BACKGROUND_COLOR = new Color(0, 10, 30);
     private static final boolean FULLSCREEN = true;
     private static final int FRAMERATE = 60;
-    private static final String TITLE = "template";
+    private static final String TITLE = "Adventurers & Monsters vs. the Machines";
 
     public static final PVector BOARD_SIZE = new PVector(250, 200);
 
