@@ -53,7 +53,7 @@ public class Level_3 extends Level {
         dialogues = new Dialogue[][]{{
             new Dialogue(p, "Hi!", getPositionFromSlot(0)),
             new Dialogue(p, "Want to join our party?", getPositionFromSlot(0)),
-            new Dialogue(p, "Uhhh, sure I guess.", getPositionFromSlot(2)),
+            new Dialogue(p, "Uhhh, s-sure.", getPositionFromSlot(2)),
             new Dialogue(p, "GAAAAAHHH", getPositionFromSlot(4))
         }, {
             new Dialogue(p, "Cool shield and armor!", getPositionFromSlot(1)),
@@ -64,8 +64,8 @@ public class Level_3 extends Level {
         }, {
             new Dialogue(p, "I can protect you t-too,", getPositionFromSlot(2)),
             new Dialogue(p, "if you want...", getPositionFromSlot(2)),
-            new Dialogue(p, "My ability can make you...", getPositionFromSlot(2)),
-            new Dialogue(p, "...temporarily invulnerable.", getPositionFromSlot(2)),
+            new Dialogue(p, "My ability can make you", getPositionFromSlot(2)),
+            new Dialogue(p, "temporarily invulnerable.", getPositionFromSlot(2)),
             new Dialogue(p, "...that could be useful.", getPositionFromSlot(1))
         }, {
             new Dialogue(p, "GURGLE", getPositionFromSlot(4))

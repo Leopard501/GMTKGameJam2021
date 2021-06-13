@@ -31,9 +31,6 @@ public class Level_1 extends Level {
             null,
             new Skeleton(p)
         }, {
-            null,
-            new Skeleton(p)
-        }, {
             new Skeleton(p),
             new Skeleton(p)
         }, {
@@ -55,7 +52,6 @@ public class Level_1 extends Level {
         }, {
             new Dialogue(p, "I hope I get some good loot...", getPositionFromSlot(1)),
             new Dialogue(p, "UURRRGGG", getPositionFromSlot(4))
-        }, {
         }, {
             new Dialogue(p, "Uh oh, theres a lot of them!", getPositionFromSlot(1)),
             new Dialogue(p, "[Right click on skeleton to use ability]", getPositionFromSlot(1)),

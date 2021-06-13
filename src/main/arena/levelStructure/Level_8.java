@@ -60,6 +60,7 @@ public class Level_8 extends Level {
             new Dialogue(p, "XD", getPositionFromSlot(4))
         }, {
             new Dialogue(p, "S-sorry about that...", getPositionFromSlot(2)),
+            new Dialogue(p, "I shouldn't have said that.", getPositionFromSlot(2)),
             new Dialogue(p, "Hey, I get it,", getPositionFromSlot(0)),
             new Dialogue(p, "being undead n'all.", getPositionFromSlot(0)),
             new Dialogue(p, "Hey, look at you guys making up!", getPositionFromSlot(1)),
@@ -75,8 +76,8 @@ public class Level_8 extends Level {
             new Dialogue(p, "...", getPositionFromSlot(0)),
             new Dialogue(p, "...thanks for helping us.", getPositionFromSlot(0)),
             new Dialogue(p, "It's uh, really no problem.", getPositionFromSlot(2)),
-            new Dialogue(p, "No really, you don't know...", getPositionFromSlot(0)),
-            new Dialogue(p, "...how much this means to us.", getPositionFromSlot(0)),
+            new Dialogue(p, "No really, you don't know", getPositionFromSlot(0)),
+            new Dialogue(p, "how much this means to us.", getPositionFromSlot(0)),
             new Dialogue(p, ":')", getPositionFromSlot(4)),
             new Dialogue(p, "Shut up.", getPositionFromSlot(0))
         }};

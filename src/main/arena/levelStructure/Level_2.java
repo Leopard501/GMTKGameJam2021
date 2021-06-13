@@ -59,8 +59,8 @@ public class Level_2 extends Level {
         }, {
             new Dialogue(p, "What's with the staff and robes?", getPositionFromSlot(0)),
             new Dialogue(p, "I've spec'd into healing!", getPositionFromSlot(1)),
-            new Dialogue(p, "That means I can heal you or myself...", getPositionFromSlot(1)),
-            new Dialogue(p, "... as my special ability.", getPositionFromSlot(1)),
+            new Dialogue(p, "That means I can heal you or myself", getPositionFromSlot(1)),
+            new Dialogue(p, "as my special ability.", getPositionFromSlot(1)),
             new Dialogue(p, "Cool!", getPositionFromSlot(0)),
             new Dialogue(p, "GRRAAAAGG", getPositionFromSlot(5))
         }, {
