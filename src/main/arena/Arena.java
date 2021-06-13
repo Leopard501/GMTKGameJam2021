@@ -162,6 +162,7 @@ public class Arena {
         Combatant enemy = enemySlots[selected].combatant;
         boolean attack = P.random(2) < 1;
         if (!(enemy instanceof Ability)) attack = true;
+        if (enemy.mp < enemy.mpCost) attack = true;
         if (enemySlots[selected].cantAct()) {
             actionTimer = 0;
             advanceTurn();
