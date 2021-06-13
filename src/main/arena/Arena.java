@@ -119,13 +119,10 @@ public class Arena {
         }
     }
 
-    private void resetWave() {
-        currentWave--;
+    private void resetLevel() {
+        currentLevel--;
         gettingDark = false;
-        for (int i = 0; i < levels[currentLevel].team.length; i++) {
-            teamSlots[i].setCombatant(levels[currentLevel].team[i]);
-        }
-        advanceWave();
+        advanceLevel();
     }
 
     public void main() {
@@ -147,7 +144,7 @@ public class Arena {
         }
         updateDialogue();
         if (noTeam()) {
-            if (darkAmount >= 254) resetWave();
+            if (darkAmount >= 254) resetLevel();
             else gettingDark = true;
         }
         if (noEnemies()) {
