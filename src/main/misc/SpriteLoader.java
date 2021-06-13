@@ -71,7 +71,7 @@ public class SpriteLoader {
         StringBuilder path = new StringBuilder().append("sprites/");
         switch (type) {
             case "BT":
-                path.append("gui/buttons/");
+                path.append("gui/buttons");
                 break;
             case "CB":
                 path.append("combatants/");
