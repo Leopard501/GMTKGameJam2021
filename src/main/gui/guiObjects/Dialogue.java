@@ -48,7 +48,7 @@ public class Dialogue {
     }
 
     public Dialogue(PApplet p, String text, PVector position) {
-        this(p, 5, new Color(255, 255, 255), new Color(100, 100, 100, 200), position, text);
+        this(p, 5, new Color(255, 255, 255, 254), new Color(100, 100, 100, 255), position, text);
     }
 
     public void moveUp(int amount) {

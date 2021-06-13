@@ -1,6 +1,7 @@
 package main.arena;
 
 import com.sun.istack.internal.NotNull;
+import main.Main;
 import main.arena.combatants.Combatant;
 import main.arena.combatants.abilities.Ability;
 import main.arena.combatants.abilities.DefensiveAbility;
@@ -10,6 +11,7 @@ import main.arena.levelStructure.*;
 import main.arena.particles.Particle;
 import main.gui.guiObjects.Dialogue;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class Arena {
     private static final int INCREASE_DARK = 5;
 
     private final PApplet P;
+    private final PImage BACKGROUND;
 
     private boolean gettingDark;
     private int darkAmount;
@@ -50,6 +53,8 @@ public class Arena {
      */
     public Arena(PApplet p) {
         P = p;
+
+        BACKGROUND = Main.sprites.get("arenaBG");
 
         particles = new ArrayList<>();
         dialogues = new ArrayList<>();
@@ -265,6 +270,9 @@ public class Arena {
     }
 
     private void display() {
+        P.imageMode(CORNER);
+        P.image(BACKGROUND, 0, 0);
+        P.imageMode(CENTER);
         for (Slot slot : teamSlots) {
             slot.display();
             if (!levels[currentLevel].isCutscene) slot.displayBars();
@@ -293,7 +301,7 @@ public class Arena {
         P.rectMode(CORNER);
         P.fill(0, darkAmount);
         P.noStroke();
-        P.rect(0, 0, BOARD_SIZE.x, BOARD_SIZE.y);
+        P.rect(0, 0, BOARD_SIZE.x + 1, BOARD_SIZE.y + 1);
         P.rectMode(CENTER);
     }
 

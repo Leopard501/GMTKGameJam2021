@@ -90,5 +90,8 @@ public class SpriteLoader {
         sprites.put("stickyBF", p.loadImage("sprites/buffs/sticky.png"));
         sprites.put("shieldedBF", p.loadImage("sprites/buffs/shielded.png"));
         sprites.put("pizzaBF", p.loadImage("sprites/buffs/pizza.png"));
+
+        //backgrounds
+        sprites.put("arenaBG", p.loadImage("sprites/backgrounds/arena.png"));
     }
 }
