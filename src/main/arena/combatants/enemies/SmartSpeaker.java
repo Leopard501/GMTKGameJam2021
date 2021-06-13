@@ -7,10 +7,13 @@ import processing.core.PApplet;
 
 import java.awt.*;
 
-public class ShieldBot extends Combatant implements DefensiveAbility {
+public class SmartSpeaker extends Combatant implements DefensiveAbility {
 
-    public ShieldBot(PApplet p) {
-        super(p, 40, 15, 5, 8, 0, new Color(0, 125, 255));
+    public SmartSpeaker(PApplet p) {
+        super(p, 80, 15, 5, 8, 0, new Color(0, 85, 255));
+        loadAnimations("smartSpeaker");
+        attackTriggerFrame = 5;
+        abilityTriggerFrame = 2;
     }
 
     @Override

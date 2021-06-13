@@ -61,6 +61,10 @@ public class SpriteLoader {
         getAnimation(p, "idle", "pizzaBot", "CB", 2);
         getAnimation(p, "attack", "pizzaBot", "CB", 10);
         getAnimation(p, "ability", "pizzaBot", "CB", 7);
+
+        getAnimation(p, "idle", "smartSpeaker", "CB", 2);
+        getAnimation(p, "attack", "smartSpeaker", "CB", 14);
+        getAnimation(p, "ability", "smartSpeaker", "CB", 5);
     }
 
     private static void getAnimation(PApplet p, String name, String folder, String type, int length) {
