@@ -8,6 +8,7 @@ import java.awt.*;
 
 import static java.lang.Math.round;
 import static main.Main.sounds;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Healer extends Combatant implements DefensiveAbility {
 
@@ -15,6 +16,7 @@ public class Healer extends Combatant implements DefensiveAbility {
         super(p, 80, 50, 10, 15, 40, new Color(150, 0, 0));
         loadAnimations("healer");
         hurtSound = sounds.get("squish");
+        abilitySound = sounds.get("magic");
         abilityTriggerFrame = 3;
     }
 
@@ -28,6 +30,7 @@ public class Healer extends Combatant implements DefensiveAbility {
             damage = round(damage * statBoost.strength);
             strength *= statBoost.strength;
         }
+        playSoundRandomSpeed(P, abilitySound, 1);
         other.heal((int) strength);
     }
 }

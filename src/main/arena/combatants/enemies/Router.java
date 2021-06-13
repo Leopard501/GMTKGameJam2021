@@ -8,12 +8,14 @@ import java.awt.*;
 
 import static java.lang.Math.round;
 import static main.Main.sounds;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Router extends Combatant implements DefensiveAbility {
 
     public Router(PApplet p) {
-        super(p, 60, 10, 5, 5, 15, new Color(255, 255, 0));
+        super(p, 60, 10, 5, 5, 25, new Color(255, 255, 0));
         hurtSound = sounds.get("metalDamage");
+        abilitySound = sounds.get("badMagic");
         loadAnimations("router");
         attackTriggerFrame = 4;
     }
@@ -24,6 +26,7 @@ public class Router extends Combatant implements DefensiveAbility {
         if (mp < 0) mp = 0;
         int damage = attackDamage;
         float strength = abilityStrength;
+        playSoundRandomSpeed(P, abilitySound, 1);
         if (statBoost != null) {
             damage = round(damage * statBoost.strength);
             strength *= statBoost.strength;

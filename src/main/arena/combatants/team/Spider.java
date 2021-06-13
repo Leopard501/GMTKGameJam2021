@@ -9,12 +9,14 @@ import processing.sound.SoundFile;
 import java.awt.*;
 
 import static main.Main.sounds;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Spider extends Combatant implements OffensiveAbility {
 
     public Spider(PApplet p) {
         super(p, 80, 20, 5, 15, 10, new Color(123, 200, 0));
         hurtSound = sounds.get("crunchSquish");
+        abilitySound = sounds.get("slingshot");
         loadAnimations("spider");
         abilityTriggerFrame = 9;
     }
@@ -23,6 +25,7 @@ public class Spider extends Combatant implements OffensiveAbility {
     public void ability(Combatant other) {
         mp -= mpCost;
         if (mp < 0) mp = 0;
+        playSoundRandomSpeed(P, abilitySound, 1);
         other.sticky = new Sticky(P, other);
     }
 }

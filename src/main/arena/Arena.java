@@ -15,6 +15,7 @@ import main.gui.guiObjects.buttons.MenuButton;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
+import processing.sound.SoundFile;
 
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ import static main.Main.BOARD_SIZE;
 import static main.Main.arena;
 import static main.misc.Utilities.getPositionFromSlot;
 import static main.misc.Utilities.getSlotFromPosition;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 import static processing.core.PConstants.CENTER;
 import static processing.core.PConstants.CORNER;
 
@@ -41,6 +43,7 @@ public class Arena {
     private final PApplet P;
     private final PImage BACKGROUND;
     private final PauseMenu PAUSE_MENU;
+    private final SoundFile DIALOGUE_SOUND;
 
     private boolean gettingDark;
     private int darkAmount;
@@ -61,6 +64,7 @@ public class Arena {
 
         BACKGROUND = Main.sprites.get("arenaBG");
         PAUSE_MENU = new PauseMenu(p);
+        DIALOGUE_SOUND = Main.sounds.get("popup");
 
         particles = new ArrayList<>();
         dialogues = new ArrayList<>();
@@ -186,6 +190,7 @@ public class Arena {
                         currentDialogOb.moveUp(2);
                     }
                 }
+                playSoundRandomSpeed(P, DIALOGUE_SOUND, 1);
                 dialogues.add(currentDialogOb);
                 dialogueTimer = 0;
                 currentDialogue++;

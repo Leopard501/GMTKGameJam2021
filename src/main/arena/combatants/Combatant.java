@@ -52,6 +52,7 @@ public abstract class Combatant {
     protected int betweenIdleFrames;
     protected float abilityStrength;
     protected SoundFile hurtSound;
+    protected SoundFile abilitySound;
 
     private int animationState;
     private int frame;
@@ -62,6 +63,7 @@ public abstract class Combatant {
     private PImage[] abilityAnimation;
     private Combatant target;
     private Combatant[] targets;
+    private SoundFile deflectSound;
 
     /**
      * These are the little dudes that will fight.
@@ -85,6 +87,7 @@ public abstract class Combatant {
         betweenAbilityFrames = 5;
         betweenIdleFrames = 30;
         betweenFrameTimer = (int) P.random(betweenIdleFrames);
+        deflectSound = sounds.get("deflect");
     }
 
     protected void loadAnimations(String name) {
@@ -243,6 +246,7 @@ public abstract class Combatant {
     public void hurt(int amount) {
         if (shielded != null) {
             for (int i = 0; i < 8; i++) arena.particles.add(new FloatParticle(P, position.x, position.y, Color.WHITE));
+            playSoundRandomSpeed(P, deflectSound, 1);
             return;
         }
         int damage = amount;

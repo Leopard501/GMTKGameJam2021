@@ -9,6 +9,7 @@ import java.awt.*;
 
 import static main.Main.sounds;
 import static java.lang.Math.round;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 
 public class Fighter extends Combatant implements OffensiveAbility {
 
@@ -16,6 +17,7 @@ public class Fighter extends Combatant implements OffensiveAbility {
         super(p, 100, 20, 5, 20, 15, new Color(150, 0, 0));
         loadAnimations("fighter");
         hurtSound = sounds.get("squish");
+        abilitySound = sounds.get("whooshImpact");
     }
 
     @Override
@@ -28,6 +30,7 @@ public class Fighter extends Combatant implements OffensiveAbility {
             damage = round(damage * statBoost.strength);
             strength *= statBoost.strength;
         }
+        playSoundRandomSpeed(P, abilitySound, 1);
         other.hurt(damage);
         other.bleeding = new Bleeding(P, strength, other);
     }
