@@ -95,6 +95,9 @@ public abstract class Combatant {
     }
 
     public void display() {
+        P.noStroke();
+        P.fill(0, 100);
+        P.ellipse(position.x, position.y + (SIZE.y / 2), SIZE.x, SIZE.y / 3);
         if (sticky == null && pizza == null) animate();
         if (isEnemy) {
             P.pushMatrix();
@@ -190,7 +193,7 @@ public abstract class Combatant {
     }
 
     public int actionState() {
-        if (pointOnRect(position, new PVector(SIZE.x / 2, SIZE.y / 2), matrixMousePosition)) {
+        if (pointOnRect(position, new PVector(SIZE.x, SIZE.y), matrixMousePosition)) {
             if (inputHandler.leftMousePressedPulse) playSound(Main.sounds.get("clickIn"), 1, 1);
             if (inputHandler.leftMouseReleasedPulse) {
                 playSound(Main.sounds.get("clickOut"), 1, 1);

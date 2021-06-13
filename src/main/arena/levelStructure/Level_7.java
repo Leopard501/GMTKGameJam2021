@@ -36,10 +36,6 @@ public class Level_7 extends Level {
             new Router(p),
             new Drone(p)
         }, {
-            new Router(p),
-            new Drone(p),
-            new Router(p)
-        }, {
             new Android(p),
             new PizzaBot(p),
             new Router(p)
@@ -61,8 +57,6 @@ public class Level_7 extends Level {
             new Dialogue(p, "HISS", getPositionFromSlot(1))
         }, {
             new Dialogue(p, "BEEP", getPositionFromSlot(4))
-        }, {
-            new Dialogue(p, "How many of these are there?", getPositionFromSlot(0))
         }, {
             new Dialogue(p, "Awww, its so cute!", getPositionFromSlot(2)),
             new Dialogue(p, ":)", getPositionFromSlot(4)),

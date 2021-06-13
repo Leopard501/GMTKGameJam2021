@@ -67,6 +67,7 @@ public class Main extends PApplet {
         surface.setTitle(TITLE);
         rectMode(CENTER);
         imageMode(CENTER);
+        ellipseMode(CENTER);
 
         setupSound();
         setupSprites();
