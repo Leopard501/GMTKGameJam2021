@@ -11,7 +11,7 @@ import static java.lang.Math.round;
 public class Slime extends Combatant implements SplashOffensiveAbility {
 
     public Slime(PApplet p) {
-        super(p, 120, 20, 5, 15, 10, new Color(46, 201, 46));
+        super(p, 120, 20, 5, 15, 15, new Color(46, 201, 46));
         loadAnimations("slime");
         abilityTriggerFrame = 8;
     }

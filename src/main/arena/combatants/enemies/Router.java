@@ -11,7 +11,7 @@ import static java.lang.Math.round;
 public class Router extends Combatant implements DefensiveAbility {
 
     public Router(PApplet p) {
-        super(p, 40, 10, 5, 5, 15, new Color(255, 255, 0));
+        super(p, 60, 10, 5, 5, 15, new Color(255, 255, 0));
         loadAnimations("router");
         attackTriggerFrame = 4;
     }
