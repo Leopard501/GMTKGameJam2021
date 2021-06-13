@@ -59,7 +59,7 @@ public class Level_4 extends Level {
         }, {
             new Dialogue(p, "STOP RESISTING", getPositionFromSlot(3)),
             new Dialogue(p, "IF YOU CONTINUE WE WILL", getPositionFromSlot(3)),
-            new Dialogue(p, "TO SEND REINFORCEMENTS", getPositionFromSlot(3)),
+            new Dialogue(p, "SEND REINFORCEMENTS", getPositionFromSlot(3)),
             new Dialogue(p, "Bring it on!", getPositionFromSlot(0))
         }, {
             new Dialogue(p, "STOP RESISTING", getPositionFromSlot(5)),

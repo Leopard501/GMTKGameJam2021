@@ -109,8 +109,6 @@ public abstract class Combatant {
         if (shielded != null) shielded.display();
         if (statBoost != null) statBoost.display();
         if (sticky != null) sticky.display();
-        hpBar();
-        if (maxMp > 0) mpBar();
     }
 
     private void animate() {
@@ -149,6 +147,11 @@ public abstract class Combatant {
             }
             frameImage = abilityAnimation[frame];
         }
+    }
+
+    public void displayBars() {
+        hpBar();
+        if (maxMp > 0) mpBar();
     }
 
     private void hpBar() {

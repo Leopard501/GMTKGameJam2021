@@ -262,9 +262,16 @@ public class Arena {
     }
 
     private void display() {
-        for (Slot slot : teamSlots) slot.display();
-        for (Slot slot : enemySlots) slot.display();
-        if (actionTimer >= TIME_BETWEEN_ACTIONS && !levels[currentWave].isCutscene) {
+        for (Slot slot : teamSlots) {
+            slot.display();
+            if (!levels[currentLevel].isCutscene) slot.displayBars();
+        }
+        for (Slot slot : enemySlots) {
+            slot.display();
+            if (!levels[currentLevel].isCutscene) slot.displayBars();
+
+        }
+        if (actionTimer >= TIME_BETWEEN_ACTIONS && !levels[currentLevel].isCutscene) {
             if (enemiesTurn) enemySlots[selected].selectionOverlay();
             else teamSlots[selected].selectionOverlay();
         }
@@ -300,6 +307,11 @@ public class Arena {
             if (empty()) return;
             combatant.display();
             if (!combatant.alive) setCombatant(null);
+        }
+
+        private void displayBars() {
+            if (empty()) return;
+            combatant.displayBars();
         }
 
         private void setCombatant(Combatant combatant) {
