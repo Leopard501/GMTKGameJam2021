@@ -10,12 +10,14 @@ import main.arena.particles.GravityParticle;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
+import processing.sound.SoundFile;
 
 import java.awt.*;
 
 import static main.Main.*;
 import static main.misc.Utilities.pointOnRect;
 import static main.sound.SoundUtilities.playSound;
+import static main.sound.SoundUtilities.playSoundRandomSpeed;
 import static processing.core.PConstants.CENTER;
 import static processing.core.PConstants.CORNER;
 
@@ -49,6 +51,7 @@ public abstract class Combatant {
     protected int betweenAbilityFrames;
     protected int betweenIdleFrames;
     protected float abilityStrength;
+    protected SoundFile hurtSound;
 
     private int animationState;
     private int frame;
@@ -247,6 +250,7 @@ public abstract class Combatant {
             damage = round((float) damage * (2 - statBoost.strength));
         }
         hp -= damage;
+        playSoundRandomSpeed(P, hurtSound, 1);
         for (int i = 0; i < 8; i++) arena.particles.add(new GravityParticle(P, position.x, position.y, bloodColor));
         if (hp <= 0) alive = false;
     }

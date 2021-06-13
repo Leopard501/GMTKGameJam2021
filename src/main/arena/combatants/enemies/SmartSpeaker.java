@@ -7,10 +7,13 @@ import processing.core.PApplet;
 
 import java.awt.*;
 
+import static main.Main.sounds;
+
 public class SmartSpeaker extends Combatant implements DefensiveAbility {
 
     public SmartSpeaker(PApplet p) {
         super(p, 80, 10, 5, 8, 0, new Color(0, 85, 255));
+        hurtSound = sounds.get("metalDamage");
         loadAnimations("smartSpeaker");
         attackTriggerFrame = 5;
         abilityTriggerFrame = 2;

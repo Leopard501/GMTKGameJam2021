@@ -7,11 +7,13 @@ import processing.core.PApplet;
 import java.awt.*;
 
 import static java.lang.Math.round;
+import static main.Main.sounds;
 
 public class Drone extends Combatant implements SplashOffensiveAbility {
 
     public Drone(PApplet p) {
         super(p, 80, 10, 5, 10, 10, new Color(255, 255, 0));
+        hurtSound = sounds.get("metalDamage");
         loadAnimations("drone");
         betweenIdleFrames = 5;
         abilityTriggerFrame = 1;

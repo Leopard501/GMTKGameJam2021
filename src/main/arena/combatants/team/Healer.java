@@ -7,12 +7,14 @@ import processing.core.PApplet;
 import java.awt.*;
 
 import static java.lang.Math.round;
+import static main.Main.sounds;
 
 public class Healer extends Combatant implements DefensiveAbility {
 
     public Healer(PApplet p) {
         super(p, 80, 50, 10, 15, 40, new Color(150, 0, 0));
         loadAnimations("healer");
+        hurtSound = sounds.get("squish");
         abilityTriggerFrame = 3;
     }
 

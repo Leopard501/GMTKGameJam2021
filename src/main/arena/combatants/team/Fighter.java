@@ -7,6 +7,7 @@ import processing.core.PApplet;
 
 import java.awt.*;
 
+import static main.Main.sounds;
 import static java.lang.Math.round;
 
 public class Fighter extends Combatant implements OffensiveAbility {
@@ -14,6 +15,7 @@ public class Fighter extends Combatant implements OffensiveAbility {
     public Fighter(PApplet p) {
         super(p, 100, 20, 5, 20, 15, new Color(150, 0, 0));
         loadAnimations("fighter");
+        hurtSound = sounds.get("squish");
     }
 
     @Override

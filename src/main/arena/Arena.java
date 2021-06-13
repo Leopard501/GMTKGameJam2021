@@ -143,20 +143,19 @@ public class Arena {
             PAUSE_MENU.main();
             return;
         }
-        boolean ranOutOfDialogue = currentDialogue >= levels[currentLevel].dialogues[currentWave].length;
         if (levels[currentLevel].isCutscene) {
+            boolean ranOutOfDialogue = currentDialogue >= levels[currentLevel].dialogues[currentWave].length;
             if (ranOutOfDialogue) dialogueTimer++;
             if (ranOutOfDialogue && dialogueTimer > TIME_BETWEEN_DIALOGUE * 2) {
                 if (darkAmount > 254) advanceWave();
                 else gettingDark = true;
             }
+            if (ranOutOfDialogue && currentLevel == levels.length) {
+                return;
+            }
         } else if (actionTimer >= TIME_BETWEEN_ACTIONS) {
             if (enemiesTurn) simEnemyTurn();
             else simPlayerTurn();
-        }
-        if (ranOutOfDialogue && currentLevel == levels.length) {
-            System.out.println("test");
-            return;
         }
         updateDialogue();
         if (noTeam()) {

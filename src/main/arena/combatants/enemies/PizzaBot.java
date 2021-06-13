@@ -8,11 +8,14 @@ import processing.core.PApplet;
 
 import java.awt.*;
 
+import static main.Main.sounds;
+
 public class PizzaBot extends Combatant implements OffensiveAbility {
 
     public PizzaBot(PApplet p) {
         super(p, 60, 10, 5, 8, 0, new Color(255, 185, 38));
         loadAnimations("pizzaBot");
+        hurtSound = sounds.get("woodDamage");
         attackTriggerFrame = 5;
         abilityTriggerFrame = 1;
     }

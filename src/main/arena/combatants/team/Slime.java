@@ -7,11 +7,13 @@ import processing.core.PApplet;
 import java.awt.*;
 
 import static java.lang.Math.round;
+import static main.Main.sounds;
 
 public class Slime extends Combatant implements SplashOffensiveAbility {
 
     public Slime(PApplet p) {
         super(p, 120, 20, 5, 15, 15, new Color(46, 201, 46));
+        hurtSound = sounds.get("splash");
         loadAnimations("slime");
         abilityTriggerFrame = 8;
     }
