@@ -73,14 +73,14 @@ public class Arena {
 
         currentLevel = -1;
         levels = new Level[] {
-//          new Level_1(p),
-//          new Level_2(p),
-//          new Level_3(p),
-//          new Level_4(p),
-//          new Level_5(p),
-//          new Level_6(p),
-//          new Level_7(p),
-//          new Level_8(p),
+          new Level_1(p),
+          new Level_2(p),
+          new Level_3(p),
+          new Level_4(p),
+          new Level_5(p),
+          new Level_6(p),
+          new Level_7(p),
+          new Level_8(p),
           new Level_9(p),
           new Level_10(p)
         };
@@ -121,6 +121,7 @@ public class Arena {
 
     private void resetWave() {
         currentWave--;
+        gettingDark = false;
         for (int i = 0; i < levels[currentLevel].team.length; i++) {
             teamSlots[i].setCombatant(levels[currentLevel].team[i]);
         }

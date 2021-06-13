@@ -238,7 +238,10 @@ public abstract class Combatant {
     }
 
     public void hurt(int amount) {
-        if (shielded != null) return;
+        if (shielded != null) {
+            for (int i = 0; i < 8; i++) arena.particles.add(new FloatParticle(P, position.x, position.y, Color.WHITE));
+            return;
+        }
         int damage = amount;
         if (statBoost != null) {
             damage = round((float) damage * (2 - statBoost.strength));
