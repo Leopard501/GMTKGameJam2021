@@ -11,7 +11,7 @@ import static java.lang.Math.round;
 public class Drone extends Combatant implements SplashOffensiveAbility {
 
     public Drone(PApplet p) {
-        super(p, 80, 10, 5, 10, 15, new Color(255, 255, 0));
+        super(p, 80, 10, 5, 10, 10, new Color(255, 255, 0));
         loadAnimations("drone");
         betweenIdleFrames = 5;
         abilityTriggerFrame = 1;
