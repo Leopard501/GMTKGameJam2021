@@ -14,7 +14,7 @@ public class MenuButton extends Button {
     public MenuButton(PApplet p, float x, float y) {
         super(p, x, y);
         position = new PVector(x, y);
-        size = new PVector(200, 42);
+        size = new PVector(80, 16);
         spriteIdle = animations.get("genericButtonBT")[0];
         spritePressed = animations.get("genericButtonBT")[1];
         spriteHover = animations.get("genericButtonBT")[2];
@@ -27,8 +27,8 @@ public class MenuButton extends Button {
      */
     @Override
     public void hover(){
-        if (p.mouseX < position.x+size.x/2 && p.mouseX > position.x-size.x/2 && p.mouseY < position.y+size.y/2 &&
-          p.mouseY > position.y-size.y/2) {
+        if (matrixMousePosition.x < position.x+size.x/2 && matrixMousePosition.x > position.x-size.x/2 &&
+          matrixMousePosition.y < position.y+size.y/2 && matrixMousePosition.y > position.y-size.y/2) {
             sprite = spriteHover;
             if (inputHandler.leftMousePressedPulse) playSound(clickIn, 1, 1);
             if (p.mousePressed && p.mouseButton == LEFT) sprite = spritePressed;

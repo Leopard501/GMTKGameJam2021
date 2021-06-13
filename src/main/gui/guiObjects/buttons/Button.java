@@ -56,6 +56,8 @@ public abstract class Button {
     }
 
     public void display() {
+        p.imageMode(CORNER);
         p.image(sprite,position.x-size.x/2,position.y-size.y/2);
+        p.imageMode(CENTER);
     }
 }

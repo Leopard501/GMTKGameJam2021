@@ -59,6 +59,8 @@ public class Arena {
         particles = new ArrayList<>();
         dialogues = new ArrayList<>();
 
+        darkAmount = 254;
+
         teamSlots = new Slot[] {
           new Slot(getPositionFromSlot(0)),
           new Slot(getPositionFromSlot(1)),
@@ -90,8 +92,8 @@ public class Arena {
         currentWave = -1;
         currentDialogue = 0;
         if (currentLevel >= levels.length) {
-            System.out.println("You win!");
-            P.exit();
+            Main.inMainMenu = true;
+            arena = new Arena(P);
             return;
         }
         for (int i = 0; i < levels[currentLevel].team.length; i++) {
@@ -119,8 +121,8 @@ public class Arena {
 
     public void main() {
         display();
+        boolean ranOutOfDialogue = currentDialogue >= levels[currentLevel].dialogues[currentWave].length;
         if (levels[currentLevel].isCutscene) {
-            boolean ranOutOfDialogue = currentDialogue >= levels[currentLevel].dialogues[currentWave].length;
             if (ranOutOfDialogue) dialogueTimer++;
             if (ranOutOfDialogue && dialogueTimer > TIME_BETWEEN_DIALOGUE * 2) {
                 if (darkAmount > 254) advanceWave();
@@ -130,6 +132,7 @@ public class Arena {
             if (enemiesTurn) simEnemyTurn();
             else simPlayerTurn();
         }
+        if (ranOutOfDialogue && currentLevel == levels.length) return;
         updateDialogue();
         if (noEnemies()) {
             if (darkAmount > 254) advanceWave();

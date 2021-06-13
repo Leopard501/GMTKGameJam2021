@@ -1,6 +1,7 @@
 package main;
 
 import main.arena.Arena;
+import main.gui.MainMenu;
 import main.misc.InputHandler;
 import main.sound.FadeSoundLoop;
 import main.sound.SoundWithAlts;
@@ -33,6 +34,8 @@ public class Main extends PApplet {
     private static float matrixScale;
     private static float matrixOffset;
 
+    public static boolean inMainMenu;
+
     public static HashMap<String, PImage> sprites;
     public static HashMap<String, PImage[]> animations;
 
@@ -47,6 +50,7 @@ public class Main extends PApplet {
     public static PVector matrixMousePosition;
 
     public static Arena arena;
+    public static MainMenu mainMenu;
 
     public static void main(String[] args) {
         PApplet.main("main.Main", args);
@@ -78,6 +82,8 @@ public class Main extends PApplet {
 
     private void setupArena() {
         arena = new Arena(this);
+        mainMenu = new MainMenu(this);
+        inMainMenu = true;
     }
 
     private void setupMisc() {
@@ -117,7 +123,8 @@ public class Main extends PApplet {
         drawSound();
         pushFullscreen();
 
-        arena.main();
+        if (inMainMenu) mainMenu.main();
+        else arena.main();
 
         inputHandler.reset();
         popFullscreen();

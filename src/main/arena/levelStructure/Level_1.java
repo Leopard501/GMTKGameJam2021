@@ -56,8 +56,6 @@ public class Level_1 extends Level {
             new Dialogue(p, "Uh oh, theres a lot of them!", getPositionFromSlot(1)),
             new Dialogue(p, "[Right click on skeleton to use ability]", getPositionFromSlot(1)),
             new Dialogue(p, "GRRAAAA", getPositionFromSlot(5)),
-            new Dialogue(p, "ARRRGG", getPositionFromSlot(4)),
-            new Dialogue(p, "ACK ACK", getPositionFromSlot(3))
         }};
     }
 }
