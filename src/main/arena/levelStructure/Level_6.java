@@ -67,7 +67,7 @@ public class Level_6 extends Level {
             new Dialogue(p, "GURGLE", getPositionFromSlot(2))
         }, {
             new Dialogue(p, "What the heck is that?", getPositionFromSlot(0)),
-            new Dialogue(p, "...", getPositionFromSlot(5))
+            new Dialogue(p, "BEEP BOOP", getPositionFromSlot(5))
         }};
     }
 }
