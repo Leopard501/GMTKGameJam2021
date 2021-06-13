@@ -12,6 +12,11 @@ import static main.misc.Utilities.getPositionFromSlot;
 
 public class Level_9 extends Level {
 
+    /**
+     * FINAL BATTLE!
+     * Introduces T800s
+     * The monsters finally get their revenge...
+     */
     public Level_9(PApplet p) {
         super(p);
 

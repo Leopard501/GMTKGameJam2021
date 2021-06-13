@@ -71,7 +71,6 @@ public class Arena {
 
         currentLevel = -1;
         levels = new Level[] {
-          new Level_9(p),
           new Level_1(p),
           new Level_2(p),
           new Level_3(p),
@@ -79,7 +78,9 @@ public class Arena {
           new Level_5(p),
           new Level_6(p),
           new Level_7(p),
-          new Level_8(p)
+          new Level_8(p),
+          new Level_9(p),
+          new Level_10(p)
         };
         advanceLevel();
     }
