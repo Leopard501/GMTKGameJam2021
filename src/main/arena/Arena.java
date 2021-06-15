@@ -24,6 +24,8 @@ import static main.Main.arena;
 import static main.misc.Utilities.getPositionFromSlot;
 import static main.misc.Utilities.getSlotFromPosition;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
+import static processing.core.PApplet.ceil;
+import static processing.core.PApplet.floor;
 import static processing.core.PConstants.CENTER;
 import static processing.core.PConstants.CORNER;
 
@@ -337,6 +339,7 @@ public class Arena {
             pauseButton.main();
             P.text("Pause", 20, 8);
         }
+        displayProgress();
         if (gettingDark) {
             darkAmount += INCREASE_DARK;
             if (darkAmount >= 254) gettingDark = false;
@@ -346,6 +349,25 @@ public class Arena {
         P.noStroke();
         P.rect(0, 0, BOARD_SIZE.x + 1, BOARD_SIZE.y + 1);
         P.rectMode(CENTER);
+    }
+
+    private void displayProgress() {
+        int length = levels[currentLevel].waves.length;
+        int size = 5;
+        float from = ceil(-(length / 2f));
+        float to = floor(length / 2f);
+        if (length % 2 == 0) {
+            from = -(length / 2f) + 0.5f;
+            to = (length / 2f) - 0.5f;
+        }
+        for (float i = from; i <= to; i++) {
+            P.stroke(255);
+            P.strokeWeight(0.4f);
+            P.rectMode(CENTER);
+            if (i + to < currentWave + 1) P.fill(255);
+            else P.noFill();
+            P.rect((2 * size * i) + (BOARD_SIZE.x / 2), BOARD_SIZE.y - (2 * size), size, size);
+        }
     }
 
     private void displayOverlays() {
@@ -455,11 +477,6 @@ public class Arena {
                 combatant.setAbility(other.combatant);
             }
             return true;
-        }
-
-        private void selectionOverlay() {
-            if (empty()) return;
-            combatant.selectionOverlay();
         }
 
         private void abilityOverlay() {
