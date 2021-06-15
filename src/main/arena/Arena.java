@@ -373,33 +373,16 @@ public class Arena {
 
     private void displayOverlays() {
         if (actionTimer >= TIME_BETWEEN_ACTIONS) {
-            if (enemiesTurn) {
-                if (!enemySlots[selected].empty()) {
-                    Combatant enemy = enemySlots[selected].combatant;
-                    enemy.selectionOverlay();
-                    if (enemy instanceof OffensiveAbility || enemy instanceof SplashOffensiveAbility) {
-                        for (Slot slot : teamSlots) {
-                            slot.abilityOverlay();
-                        }
-                    } else if (enemy instanceof DefensiveAbility) {
-                        for (Slot slot : enemySlots) {
-                            slot.abilityOverlay();
-                        }
+            if (!enemiesTurn && !teamSlots[selected].empty()) {
+                Combatant teamMember = teamSlots[selected].combatant;
+                teamMember.selectionOverlay();
+                if (teamMember instanceof OffensiveAbility || teamMember instanceof SplashOffensiveAbility) {
+                    for (Slot slot : enemySlots) {
+                        slot.abilityOverlay();
                     }
-                }
-            }
-            else {
-                if (!teamSlots[selected].empty()) {
-                    Combatant teamMember = teamSlots[selected].combatant;
-                    teamMember.selectionOverlay();
-                    if (teamMember instanceof OffensiveAbility || teamMember instanceof SplashOffensiveAbility) {
-                        for (Slot slot : enemySlots) {
-                            slot.abilityOverlay();
-                        }
-                    } else if (teamMember instanceof DefensiveAbility) {
-                        for (Slot slot : teamSlots) {
-                            slot.abilityOverlay();
-                        }
+                } else if (teamMember instanceof DefensiveAbility) {
+                    for (Slot slot : teamSlots) {
+                        slot.abilityOverlay();
                     }
                 }
             }
