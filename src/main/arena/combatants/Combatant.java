@@ -162,7 +162,7 @@ public abstract class Combatant {
 
     public void displayBars() {
         hpBar();
-        if (maxMp > 0) mpBar();
+        if (maxMp > 0 && !arena.dontDisplayMp()) mpBar();
     }
 
     private void hpBar() {

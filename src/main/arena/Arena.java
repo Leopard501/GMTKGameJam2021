@@ -388,6 +388,7 @@ public class Arena {
             if (!enemiesTurn && !teamSlots[selected].empty() && !noEnemies()) {
                 Combatant teamMember = teamSlots[selected].combatant;
                 teamMember.selectionOverlay();
+                if (dontDisplayMp()) return;
                 if (teamMember instanceof OffensiveAbility || teamMember instanceof SplashOffensiveAbility) {
                     for (Slot slot : enemySlots) {
                         slot.abilityOverlay();
@@ -399,6 +400,10 @@ public class Arena {
                 }
             }
         }
+    }
+
+    public boolean dontDisplayMp() {
+        return currentLevel == 0 && currentWave < 2;
     }
 
     private static class Slot {
