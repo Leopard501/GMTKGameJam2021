@@ -64,6 +64,7 @@ public class Level_2 extends Level {
             new Dialogue(p, "Cool!", getPositionFromSlot(0)),
             new Dialogue(p, "GRRAAAAGG", getPositionFromSlot(5))
         }, {
+            new Dialogue(p, "GRUUUUHH", getPositionFromSlot(3))
         }, {
             new Dialogue(p, "GLORP", getPositionFromSlot(4))
         }};

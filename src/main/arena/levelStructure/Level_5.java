@@ -55,8 +55,9 @@ public class Level_5 extends Level {
            new Dialogue(p, "...like new plastic.", getPositionFromSlot(4)),
            new Dialogue(p, "So whatd'ya say?", getPositionFromSlot(4)),
            new Dialogue(p, "Whats in it for us?", getPositionFromSlot(0)),
-           new Dialogue(p, "Well for one you wont have to", getPositionFromSlot(4)),
+           new Dialogue(p, "Well, you wont have to", getPositionFromSlot(4)),
            new Dialogue(p, "fight through robots to raid the dungeon.", getPositionFromSlot(4)),
+           new Dialogue(p, "...", getPositionFromSlot(4)),
            new Dialogue(p, "...also we'll give you lots of loot.", getPositionFromSlot(4)),
            new Dialogue(p, "Deal.", getPositionFromSlot(0))
         }};

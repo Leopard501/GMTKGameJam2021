@@ -28,10 +28,6 @@ public class Level_7 extends Level {
         };
 
         waves = new Combatant[][] {{
-            new Android(p),
-            new Android(p),
-            new Android(p)
-        }, {
             new Drone(p),
             new Router(p),
             new Drone(p)
@@ -55,8 +51,6 @@ public class Level_7 extends Level {
             new Dialogue(p, "*shudder*", getPositionFromSlot(2)),
             new Dialogue(p, "Let's just get this over with.", getPositionFromSlot(2)),
             new Dialogue(p, "HISS", getPositionFromSlot(1))
-        }, {
-            new Dialogue(p, "BEEP", getPositionFromSlot(4))
         }, {
             new Dialogue(p, "Awww, its so cute!", getPositionFromSlot(2)),
             new Dialogue(p, ":)", getPositionFromSlot(4)),

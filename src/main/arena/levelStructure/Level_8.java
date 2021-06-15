@@ -55,19 +55,23 @@ public class Level_8 extends Level {
         dialogues = new Dialogue[][] {{
             new Dialogue(p, "\"Ugh, that guys creepy\"", getPositionFromSlot(0)),
             new Dialogue(p, "Hmm?", getPositionFromSlot(2)),
-            new Dialogue(p, "Oh, nothing", getPositionFromSlot(0)),
-            new Dialogue(p, "...your moms creepy...", getPositionFromSlot(0)),
-            new Dialogue(p, "XD", getPositionFromSlot(4))
+            new Dialogue(p, "Oh, nothing...", getPositionFromSlot(0)),
         }, {
-            new Dialogue(p, "S-sorry about that...", getPositionFromSlot(2)),
+            new Dialogue(p, "S-sorry I called you creepy earlier,", getPositionFromSlot(2)),
             new Dialogue(p, "I shouldn't have said that.", getPositionFromSlot(2)),
             new Dialogue(p, "Hey, I get it,", getPositionFromSlot(0)),
             new Dialogue(p, "being undead n'all.", getPositionFromSlot(0)),
+            new Dialogue(p, "I mean,", getPositionFromSlot(0)),
+            new Dialogue(p, "it's not often you meet someone", getPositionFromSlot(0)),
+            new Dialogue(p, "with holes instead of eyes!", getPositionFromSlot(0)),
+            new Dialogue(p, "Haha!", getPositionFromSlot(2)),
             new Dialogue(p, "Hey, look at you guys making up!", getPositionFromSlot(1)),
             new Dialogue(p, "...", getPositionFromSlot(0))
         }, {
-            new Dialogue(p, ">:(", getPositionFromSlot(3)),
-            new Dialogue(p, "BOOP", getPositionFromSlot(4))
+            new Dialogue(p, "Wait, wasn't that a different", getPositionFromSlot(2)),
+            new Dialogue(p, "skeleton that I insulted?", getPositionFromSlot(2)),
+            new Dialogue(p, "...", getPositionFromSlot(0)),
+            new Dialogue(p, "We'll get back to that.", getPositionFromSlot(0))
         }, {
             new Dialogue(p, "A... glowing cylinder?", getPositionFromSlot(1)),
             new Dialogue(p, "*falls over aggressively*", getPositionFromSlot(4)),

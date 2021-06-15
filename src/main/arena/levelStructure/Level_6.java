@@ -60,6 +60,11 @@ public class Level_6 extends Level {
             new Dialogue(p, "GLERP", getPositionFromSlot(2)),
             new Dialogue(p, "Doesn't look like it.", getPositionFromSlot(0))
         }, {
+            new Dialogue(p, "It feels odd fighting", getPositionFromSlot(1)),
+            new Dialogue(p, "alongside a monster.", getPositionFromSlot(1)),
+            new Dialogue(p, "Yeah, lets just get this over with", getPositionFromSlot(0)),
+            new Dialogue(p, "and get out money.", getPositionFromSlot(0)),
+            new Dialogue(p, "SHLORP", getPositionFromSlot(2)),
             new Dialogue(p, "DO NOT RESIST", getPositionFromSlot(4))
         }, {
             new Dialogue(p, "WHIRRRR", getPositionFromSlot(4)),

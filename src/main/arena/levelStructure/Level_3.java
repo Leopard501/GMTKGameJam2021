@@ -49,7 +49,7 @@ public class Level_3 extends Level {
         dialogues = new Dialogue[][]{{
             new Dialogue(p, "Hi!", getPositionFromSlot(0)),
             new Dialogue(p, "Want to join our party?", getPositionFromSlot(0)),
-            new Dialogue(p, "Uhhh, s-sure.", getPositionFromSlot(2)),
+            new Dialogue(p, "Uh, s-sure.", getPositionFromSlot(2)),
             new Dialogue(p, "GAAAAAHHH", getPositionFromSlot(4))
         }, {
             new Dialogue(p, "Cool shield and armor!", getPositionFromSlot(1)),
@@ -68,7 +68,9 @@ public class Level_3 extends Level {
             new Dialogue(p, "GRAHAHAHAHAAAAA", getPositionFromSlot(4)),
             new Dialogue(p, "ugh", getPositionFromSlot(2)),
             new Dialogue(p, "That guys creepy.", getPositionFromSlot(2)),
-            new Dialogue(p, "AHAHAHAHAHHAAAAAA", getPositionFromSlot(4))
+            new Dialogue(p, "AHAHAHAHAHHAAAAAA", getPositionFromSlot(4)),
+            new Dialogue(p, "...rude...", getPositionFromSlot(4)),
+            new Dialogue(p, "Wait what?", getPositionFromSlot(2))
         }};
     }
 }
