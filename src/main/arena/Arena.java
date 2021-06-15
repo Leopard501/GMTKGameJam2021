@@ -381,7 +381,7 @@ public class Arena {
 
     private void displayOverlays() {
         if (actionTimer >= TIME_BETWEEN_ACTIONS) {
-            if (!enemiesTurn && !teamSlots[selected].empty()) {
+            if (!enemiesTurn && !teamSlots[selected].empty() && !noEnemies()) {
                 Combatant teamMember = teamSlots[selected].combatant;
                 teamMember.selectionOverlay();
                 if (teamMember instanceof OffensiveAbility || teamMember instanceof SplashOffensiveAbility) {
