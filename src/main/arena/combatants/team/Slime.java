@@ -24,15 +24,11 @@ public class Slime extends Combatant implements SplashOffensiveAbility {
     public void ability(Combatant[] others) {
         mp -= mpCost;
         if (mp < 0) mp = 0;
-        int damage = attackDamage;
         float strength = abilityStrength;
         playSoundRandomSpeed(P, abilitySound, 1);
-        if (statBoost != null) {
-            damage = round(damage * statBoost.strength);
-            strength *= statBoost.strength;
-        }
+        if (statBoost != null) strength *= statBoost.strength;
         for (Combatant other : others) {
-            if (other == null) continue;
+            if (other == null || !other.alive) continue;
             other.hurt((int) strength);
         }
     }
