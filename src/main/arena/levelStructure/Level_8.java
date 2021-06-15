@@ -81,7 +81,9 @@ public class Level_8 extends Level {
             new Dialogue(p, "...thanks for helping us.", getPositionFromSlot(0)),
             new Dialogue(p, "It's uh, really no problem.", getPositionFromSlot(2)),
             new Dialogue(p, "No really, you don't know", getPositionFromSlot(0)),
-            new Dialogue(p, "how much this means to us.", getPositionFromSlot(0)),
+            new Dialogue(p, "how much this means to us,", getPositionFromSlot(0)),
+            new Dialogue(p, "that you put aside our differences", getPositionFromSlot(0)),
+            new Dialogue(p, "to protect the dungeon.", getPositionFromSlot(0)),
             new Dialogue(p, ":')", getPositionFromSlot(4)),
             new Dialogue(p, "Shut up.", getPositionFromSlot(0))
         }};
