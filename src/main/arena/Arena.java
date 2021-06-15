@@ -361,6 +361,10 @@ public class Arena {
     }
 
     private void displayProgress() {
+        P.fill(255);
+        P.textSize(6);
+        P.text("Level " + (currentLevel + 1), (BOARD_SIZE.x / 2), BOARD_SIZE.y - 10);
+
         int length = levels[currentLevel].waves.length;
         int size = 5;
         float from = ceil(-(length / 2f));
@@ -375,7 +379,7 @@ public class Arena {
             P.rectMode(CENTER);
             if (i + to < currentWave + 1) P.fill(255);
             else P.noFill();
-            P.rect((2 * size * i) + (BOARD_SIZE.x / 2), BOARD_SIZE.y - (2 * size), size, size);
+            P.rect((2 * size * i) + (BOARD_SIZE.x / 2), BOARD_SIZE.y - size, size, size);
         }
     }
 
