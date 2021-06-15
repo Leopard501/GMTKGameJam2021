@@ -321,6 +321,34 @@ public class Arena {
             if (!levels[currentLevel].isCutscene) slot.displayBars();
 
         }
+        displayOverlays();
+        for (int i = particles.size() - 1; i >= 0; i--) {
+            Particle particle = particles.get(i);
+            particle.main();
+        }
+        for (int i = dialogues.size() -1; i >= 0; i--) {
+            Dialogue dialogue = dialogues.get(i);
+            dialogue.main();
+        }
+        if (!paused) {
+            P.fill(20);
+            P.textSize(8);
+            P.textAlign(CENTER);
+            pauseButton.main();
+            P.text("Pause", 20, 8);
+        }
+        if (gettingDark) {
+            darkAmount += INCREASE_DARK;
+            if (darkAmount >= 254) gettingDark = false;
+        } else if (darkAmount > 0) darkAmount -= INCREASE_DARK;
+        P.rectMode(CORNER);
+        P.fill(0, darkAmount);
+        P.noStroke();
+        P.rect(0, 0, BOARD_SIZE.x + 1, BOARD_SIZE.y + 1);
+        P.rectMode(CENTER);
+    }
+
+    private void displayOverlays() {
         if (actionTimer >= TIME_BETWEEN_ACTIONS && !levels[currentLevel].isCutscene) {
             if (enemiesTurn) {
                 if (!enemySlots[selected].empty()) {
@@ -353,30 +381,6 @@ public class Arena {
                 }
             }
         }
-        for (int i = particles.size() - 1; i >= 0; i--) {
-            Particle particle = particles.get(i);
-            particle.main();
-        }
-        for (int i = dialogues.size() -1; i >= 0; i--) {
-            Dialogue dialogue = dialogues.get(i);
-            dialogue.main();
-        }
-        if (!paused) {
-            P.fill(20);
-            P.textSize(8);
-            P.textAlign(CENTER);
-            pauseButton.main();
-            P.text("Pause", 20, 8);
-        }
-        if (gettingDark) {
-            darkAmount += INCREASE_DARK;
-            if (darkAmount >= 254) gettingDark = false;
-        } else if (darkAmount > 0) darkAmount -= INCREASE_DARK;
-        P.rectMode(CORNER);
-        P.fill(0, darkAmount);
-        P.noStroke();
-        P.rect(0, 0, BOARD_SIZE.x + 1, BOARD_SIZE.y + 1);
-        P.rectMode(CENTER);
     }
 
     private static class Slot {
