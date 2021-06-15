@@ -33,10 +33,6 @@ public class Level_3 extends Level {
             new Spider(p)
         }, {
             new Skeleton(p),
-            new Skeleton(p),
-            new Skeleton(p)
-        }, {
-            new Skeleton(p),
             new Slime(p)
         }, {
             new Skeleton(p),
@@ -66,9 +62,8 @@ public class Level_3 extends Level {
             new Dialogue(p, "if you want...", getPositionFromSlot(2)),
             new Dialogue(p, "My ability can make you", getPositionFromSlot(2)),
             new Dialogue(p, "temporarily invulnerable.", getPositionFromSlot(2)),
-            new Dialogue(p, "...that could be useful.", getPositionFromSlot(1))
-        }, {
-            new Dialogue(p, "GURGLE", getPositionFromSlot(4))
+            new Dialogue(p, "...that could be useful.", getPositionFromSlot(1)),
+            new Dialogue(p, "GLORP", getPositionFromSlot(4))
         }, {
             new Dialogue(p, "GRAHAHAHAHAAAAA", getPositionFromSlot(4)),
             new Dialogue(p, "ugh", getPositionFromSlot(2)),
