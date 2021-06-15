@@ -54,6 +54,10 @@ public abstract class Combatant {
     protected SoundFile hurtSound;
     protected SoundFile abilitySound;
 
+    private static final Color MANA_COLOR = new Color(0, 175, 255);
+
+    private final SoundFile DEFLECT_SOUND;
+
     private int animationState;
     private int frame;
     private int betweenFrameTimer;
@@ -63,7 +67,6 @@ public abstract class Combatant {
     private PImage[] abilityAnimation;
     private Combatant target;
     private Combatant[] targets;
-    private SoundFile deflectSound;
 
     /**
      * These are the little dudes that will fight.
@@ -87,7 +90,7 @@ public abstract class Combatant {
         betweenAbilityFrames = 5;
         betweenIdleFrames = 30;
         betweenFrameTimer = (int) P.random(betweenIdleFrames);
-        deflectSound = sounds.get("deflect");
+        DEFLECT_SOUND = sounds.get("deflect");
     }
 
     protected void loadAnimations(String name) {
@@ -179,7 +182,7 @@ public abstract class Combatant {
     private void mpBar() {
         P.rectMode(CORNER);
         P.strokeWeight(0.2f);
-        Color barColor = new Color(0, 175, 255);
+        Color barColor = MANA_COLOR;
         float barWidth = SIZE.x * (mp / (float) maxMp);
         P.stroke(barColor.getRGB());
         P.noFill();
@@ -193,7 +196,16 @@ public abstract class Combatant {
     public void selectionOverlay() {
         P.noFill();
         P.stroke(255);
-        P.strokeWeight(0.3f);
+        P.strokeWeight(0.4f);
+        P.rect(position.x, position.y, SIZE.x, SIZE.y);
+        P.strokeWeight(1);
+    }
+
+    public void abilityOverlay() {
+        if (mp < mpCost) return;
+        P.noFill();
+        P.stroke(MANA_COLOR.getRGB(), 150);
+        P.strokeWeight(0.2f);
         P.rect(position.x, position.y, SIZE.x, SIZE.y);
         P.strokeWeight(1);
     }
@@ -246,7 +258,7 @@ public abstract class Combatant {
     public void hurt(int amount) {
         if (shielded != null) {
             for (int i = 0; i < 8; i++) arena.particles.add(new FloatParticle(P, position.x, position.y, Color.WHITE));
-            playSoundRandomSpeed(P, deflectSound, 1);
+            playSoundRandomSpeed(P, DEFLECT_SOUND, 1);
             return;
         }
         int damage = amount;

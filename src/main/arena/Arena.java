@@ -322,8 +322,36 @@ public class Arena {
 
         }
         if (actionTimer >= TIME_BETWEEN_ACTIONS && !levels[currentLevel].isCutscene) {
-            if (enemiesTurn) enemySlots[selected].selectionOverlay();
-            else teamSlots[selected].selectionOverlay();
+            if (enemiesTurn) {
+                if (!enemySlots[selected].empty()) {
+                    Combatant enemy = enemySlots[selected].combatant;
+                    enemy.selectionOverlay();
+                    if (enemy instanceof OffensiveAbility || enemy instanceof SplashOffensiveAbility) {
+                        for (Slot slot : teamSlots) {
+                            slot.abilityOverlay();
+                        }
+                    } else if (enemy instanceof DefensiveAbility) {
+                        for (Slot slot : enemySlots) {
+                            slot.abilityOverlay();
+                        }
+                    }
+                }
+            }
+            else {
+                if (!teamSlots[selected].empty()) {
+                    Combatant teamMember = teamSlots[selected].combatant;
+                    teamMember.selectionOverlay();
+                    if (teamMember instanceof OffensiveAbility || teamMember instanceof SplashOffensiveAbility) {
+                        for (Slot slot : enemySlots) {
+                            slot.abilityOverlay();
+                        }
+                    } else if (teamMember instanceof DefensiveAbility) {
+                        for (Slot slot : teamSlots) {
+                            slot.abilityOverlay();
+                        }
+                    }
+                }
+            }
         }
         for (int i = particles.size() - 1; i >= 0; i--) {
             Particle particle = particles.get(i);
@@ -428,6 +456,11 @@ public class Arena {
         private void selectionOverlay() {
             if (empty()) return;
             combatant.selectionOverlay();
+        }
+
+        private void abilityOverlay() {
+            if (empty()) return;
+            combatant.abilityOverlay();
         }
 
         private boolean empty() {
