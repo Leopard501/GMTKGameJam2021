@@ -2,14 +2,14 @@ package main.gui;
 
 import main.Main;
 import main.gui.guiObjects.buttons.MenuButton;
+import main.sound.FadeSoundLoop;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
 
 import java.awt.*;
 
-import static main.Main.BOARD_SIZE;
-import static main.Main.sprites;
+import static main.Main.*;
 import static main.misc.Utilities.shadowedText;
 import static processing.core.PConstants.CENTER;
 import static processing.core.PConstants.CORNER;
@@ -50,6 +50,7 @@ public class MainMenu {
     private void update() {
         quitButton.hover();
         if (quitButton.isPressed()) {
+            for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.setTargetVolume(0);
             gettingDark = true;
             exitState = 1;
         }
