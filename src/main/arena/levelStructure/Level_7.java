@@ -20,6 +20,7 @@ public class Level_7 extends Level {
      */
     public Level_7(PApplet p) {
         super(p);
+        soundtrack = "robotInvasion";
 
         team = new Combatant[] {
           new Fighter(p),

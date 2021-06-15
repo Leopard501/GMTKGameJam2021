@@ -3,13 +3,13 @@ package main.gui;
 import main.Main;
 import main.arena.Arena;
 import main.gui.guiObjects.buttons.MenuButton;
+import main.sound.FadeSoundLoop;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.awt.*;
 
-import static main.Main.BOARD_SIZE;
-import static main.Main.arena;
+import static main.Main.*;
 import static main.misc.Utilities.shadowedText;
 import static processing.core.PConstants.CENTER;
 import static processing.core.PConstants.CORNER;
@@ -48,11 +48,13 @@ public class PauseMenu {
         if (quitButton.isPressed()) {
             gettingDark = true;
             exitState = 1;
+            for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.setTargetVolume(0);
         }
         mainMenuButton.hover();
         if (mainMenuButton.isPressed()) {
             gettingDark = true;
             exitState = 2;
+            for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.setTargetVolume(0);
         }
         playButton.hover();
         if (playButton.isPressed() && !locked) arena.paused = false;

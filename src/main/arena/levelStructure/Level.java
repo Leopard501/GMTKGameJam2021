@@ -7,6 +7,7 @@ import processing.core.PApplet;
 public abstract class Level {
 
     public boolean isCutscene;
+    public String soundtrack;
     public Combatant[] team;
     public Combatant[][] waves;
     public Dialogue[][] dialogues;

@@ -16,6 +16,7 @@ public class Level_10 extends Level {
     public Level_10(PApplet p) {
         super(p);
         isCutscene = true;
+        soundtrack = "cutscene";
 
         team = new Combatant[] {
           new Fighter(p),

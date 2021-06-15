@@ -123,6 +123,8 @@ public class Main extends PApplet {
         drawSound();
         pushFullscreen();
 
+        for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.main();
+
         if (inMainMenu) mainMenu.main();
         else arena.main();
 

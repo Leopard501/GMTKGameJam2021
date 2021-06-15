@@ -12,6 +12,7 @@ import main.arena.particles.Particle;
 import main.gui.PauseMenu;
 import main.gui.guiObjects.Dialogue;
 import main.gui.guiObjects.buttons.MenuButton;
+import main.sound.FadeSoundLoop;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -19,8 +20,7 @@ import processing.sound.SoundFile;
 
 import java.util.ArrayList;
 
-import static main.Main.BOARD_SIZE;
-import static main.Main.arena;
+import static main.Main.*;
 import static main.misc.Utilities.getPositionFromSlot;
 import static main.misc.Utilities.getSlotFromPosition;
 import static main.sound.SoundUtilities.playSoundRandomSpeed;
@@ -112,6 +112,8 @@ public class Arena {
         for (int i = 0; i < levels[currentLevel].team.length; i++) {
             teamSlots[i].setCombatant(levels[currentLevel].team[i]);
         }
+        for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.setTargetVolume(0);
+        fadeSoundLoops.get(levels[currentLevel].soundtrack).setTargetVolume(1);
         advanceWave();
     }
 
@@ -165,9 +167,7 @@ public class Arena {
         }
         updateDialogue();
         if (noTeam()) {
-            if (darkAmount >= 254) {
-                resetLevel();
-            }
+            if (darkAmount >= 254) resetLevel();
             else gettingDark = true;
         }
         if (noEnemies()) {

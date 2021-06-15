@@ -3,6 +3,7 @@ package main.sound;
 import processing.core.PApplet;
 import processing.sound.SoundFile;
 
+import static main.Main.fadeSoundLoops;
 import static main.Main.sounds;
 
 public class SoundLoader {
@@ -35,5 +36,11 @@ public class SoundLoader {
         sounds.put("crossbow", new SoundFile(p, "sounds/combatants/ability/crossbow.wav"));
         sounds.put("ice", new SoundFile(p, "sounds/combatants/ability/ice.wav"));
         sounds.put("energy", new SoundFile(p, "sounds/combatants/ability/energy.wav"));
+
+        //music
+        fadeSoundLoops.put("dungeonCrawling", new FadeSoundLoop(p, "music/dungeonCrawling", -1));
+        fadeSoundLoops.put("robotInvasion", new FadeSoundLoop(p, "music/robotInvasion", -1));
+        fadeSoundLoops.put("cutscene", new FadeSoundLoop(p, "music/cutscene", -1));
+        fadeSoundLoops.put("finalLevel", new FadeSoundLoop(p, "music/finalLevel", -1));
     }
 }

@@ -17,6 +17,7 @@ public class Level_8 extends Level {
      */
     public Level_8(PApplet p) {
         super(p);
+        soundtrack = "robotInvasion";
 
         team = new Combatant[] {
           new Necromancer(p),
