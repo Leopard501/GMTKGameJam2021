@@ -12,6 +12,8 @@ import static processing.core.PConstants.CENTER;
 
 public class Dialogue {
 
+    public final PVector INTITIAL_POSITION;
+
     public PVector position;
 
     private final PApplet P;
@@ -39,6 +41,7 @@ public class Dialogue {
         SIZE = size;
         TEXT_COLOR = textColor;
         HIGHLIGHT_COLOR = highlightColor;
+        INTITIAL_POSITION = position;
         this.position = position;
         TEXT = text;
 
@@ -80,5 +83,13 @@ public class Dialogue {
             alpha = incrementByTo(alpha, 0.5f, 0);
         }
         if (alpha == 0) arena.dialogues.remove(this);
+    }
+
+    public void reset() {
+        alpha = 254;
+        movementSpeed = 1;
+        position = INTITIAL_POSITION;
+        firstPhase = true;
+        displacement = 0;
     }
 }

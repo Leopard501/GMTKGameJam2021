@@ -285,4 +285,16 @@ public abstract class Combatant {
         if (shielded != null) shielded.effect();
         if (pizza != null) pizza.effect();
     }
+
+    public void reset() {
+        mp = maxMp;
+        hp = maxHp;
+        alive = true;
+        bleeding = null;
+        sticky = null;
+        pizza = null;
+        statBoost = null;
+        shielded = null;
+        animationState = 0;
+    }
 }

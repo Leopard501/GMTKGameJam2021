@@ -165,7 +165,9 @@ public class Arena {
         }
         updateDialogue();
         if (noTeam()) {
-            if (darkAmount >= 254) resetLevel();
+            if (darkAmount >= 254) {
+                resetLevel();
+            }
             else gettingDark = true;
         }
         if (noEnemies()) {
@@ -180,7 +182,9 @@ public class Arena {
             dialogueTimer++;
             if (dialogueTimer >= TIME_BETWEEN_DIALOGUE) {
                 Dialogue currentDialogOb = levels[currentLevel].dialogues[currentWave][currentDialogue];
+                currentDialogOb.reset();
                 int slot = getSlotFromPosition(currentDialogOb.position);
+                if (slot < 0) return;
                 if (slot < 3 && teamSlots[slot].empty()) return;
                 if (slot > 3 && enemySlots[slot - 3].empty()) return;
                 if (currentDialogue > 0) {
@@ -341,6 +345,10 @@ public class Arena {
             pauseButton.main();
             P.text("Pause", 20, 8);
         }
+        displayDark();
+    }
+
+    private void displayDark() {
         if (gettingDark) {
             darkAmount += INCREASE_DARK;
             if (darkAmount >= 254) gettingDark = false;
@@ -411,7 +419,8 @@ public class Arena {
 
         private void setCombatant(Combatant combatant) {
             this.combatant = combatant;
-            if (empty()) return;
+            if (combatant == null) return;
+            combatant.reset();
             combatant.setPosition(POSITION.x, POSITION.y);
         }
 
