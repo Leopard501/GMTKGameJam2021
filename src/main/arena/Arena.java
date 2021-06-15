@@ -321,9 +321,11 @@ public class Arena {
         for (Slot slot : enemySlots) {
             slot.display(paused);
             if (!levels[currentLevel].isCutscene) slot.displayBars();
-
         }
-        displayOverlays();
+        if (!levels[currentLevel].isCutscene) {
+            displayOverlays();
+            displayProgress();
+        }
         for (int i = particles.size() - 1; i >= 0; i--) {
             Particle particle = particles.get(i);
             particle.main();
@@ -339,7 +341,6 @@ public class Arena {
             pauseButton.main();
             P.text("Pause", 20, 8);
         }
-        displayProgress();
         if (gettingDark) {
             darkAmount += INCREASE_DARK;
             if (darkAmount >= 254) gettingDark = false;
@@ -371,7 +372,7 @@ public class Arena {
     }
 
     private void displayOverlays() {
-        if (actionTimer >= TIME_BETWEEN_ACTIONS && !levels[currentLevel].isCutscene) {
+        if (actionTimer >= TIME_BETWEEN_ACTIONS) {
             if (enemiesTurn) {
                 if (!enemySlots[selected].empty()) {
                     Combatant enemy = enemySlots[selected].combatant;
