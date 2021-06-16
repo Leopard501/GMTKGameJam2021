@@ -203,7 +203,6 @@ public abstract class Combatant {
     }
 
     public void abilityOverlay() {
-        if (mp < mpCost) return;
         P.noFill();
         P.stroke(MANA_COLOR.getRGB(), 150);
         P.strokeWeight(0.2f);
