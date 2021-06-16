@@ -17,7 +17,6 @@ public class Drone extends Combatant implements SplashOffensiveAbility {
         hurtSound = sounds.get("metalDamage");
         abilitySound = sounds.get("explosion");
         loadAnimations("drone");
-        betweenIdleFrames = 5;
         abilityTriggerFrame = 1;
         attackTriggerFrame = 5;
     }
