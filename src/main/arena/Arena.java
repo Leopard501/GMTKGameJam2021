@@ -43,8 +43,10 @@ public class Arena {
     private static final int INCREASE_DARK = 5;
 
     private final PApplet P;
+    private final Level[] LEVELS;
     private final PImage BACKGROUND;
     private final PauseMenu PAUSE_MENU;
+    private final MenuButton PAUSE_BUTTON;
     private final SoundFile DIALOGUE_SOUND;
 
     private boolean gettingDark;
@@ -55,8 +57,6 @@ public class Arena {
     private int currentDialogue;
     private int currentWave;
     private int currentLevel;
-    private Level[] levels;
-    private MenuButton pauseButton;
 
     /**
      * This will hold the players and gui and stuff
@@ -72,7 +72,7 @@ public class Arena {
         dialogues = new ArrayList<>();
 
         darkAmount = 254;
-        pauseButton = new MenuButton(p, 0, 5);
+        PAUSE_BUTTON = new MenuButton(p, 0, 5);
 
         teamSlots = new Slot[] {
           new Slot(getPositionFromSlot(0)),
@@ -85,7 +85,7 @@ public class Arena {
         };
 
         currentLevel = -1;
-        levels = new Level[] {
+        LEVELS = new Level[] {
           new Level_1(p),
           new Level_2(p),
           new Level_3(p),
@@ -104,16 +104,16 @@ public class Arena {
         currentLevel++;
         currentWave = -1;
         currentDialogue = 0;
-        if (currentLevel >= levels.length) {
+        if (currentLevel >= LEVELS.length) {
             Main.inMainMenu = true;
             arena = new Arena(P);
             return;
         }
-        for (int i = 0; i < levels[currentLevel].team.length; i++) {
-            teamSlots[i].setCombatant(levels[currentLevel].team[i]);
+        for (int i = 0; i < LEVELS[currentLevel].team.length; i++) {
+            teamSlots[i].setCombatant(LEVELS[currentLevel].team[i]);
         }
         for (FadeSoundLoop fadeSoundLoop : fadeSoundLoops.values()) fadeSoundLoop.setTargetVolume(0);
-        fadeSoundLoops.get(levels[currentLevel].soundtrack).setTargetVolume(1);
+        fadeSoundLoops.get(LEVELS[currentLevel].soundtrack).setTargetVolume(1);
         advanceWave();
     }
 
@@ -125,12 +125,12 @@ public class Arena {
         currentDialogue = 0;
         currentWave++;
         dialogues = new ArrayList<>();
-        if (currentWave >= levels[currentLevel].waves.length) {
+        if (currentWave >= LEVELS[currentLevel].waves.length) {
             advanceLevel();
             return;
         }
-        for (int i = 0; i < levels[currentLevel].waves[currentWave].length; i++) {
-            enemySlots[i].setCombatant(levels[currentLevel].waves[currentWave][i]);
+        for (int i = 0; i < LEVELS[currentLevel].waves[currentWave].length; i++) {
+            enemySlots[i].setCombatant(LEVELS[currentLevel].waves[currentWave][i]);
         }
     }
 
@@ -142,8 +142,8 @@ public class Arena {
 
     public void main() {
         display();
-        pauseButton.hover();
-        if (pauseButton.isPressed()) {
+        PAUSE_BUTTON.hover();
+        if (PAUSE_BUTTON.isPressed()) {
             paused = true;
             PAUSE_MENU.locked = true;
         }
@@ -151,14 +151,14 @@ public class Arena {
             PAUSE_MENU.main();
             return;
         }
-        if (levels[currentLevel].isCutscene) {
-            boolean ranOutOfDialogue = currentDialogue >= levels[currentLevel].dialogues[currentWave].length;
+        if (LEVELS[currentLevel].isCutscene) {
+            boolean ranOutOfDialogue = currentDialogue >= LEVELS[currentLevel].dialogues[currentWave].length;
             if (ranOutOfDialogue) dialogueTimer++;
             if (ranOutOfDialogue && dialogueTimer > TIME_BETWEEN_DIALOGUE * 2) {
                 if (darkAmount > 254) advanceWave();
                 else gettingDark = true;
             }
-            if (ranOutOfDialogue && currentLevel == levels.length) {
+            if (ranOutOfDialogue && currentLevel == LEVELS.length) {
                 return;
             }
         } else if (actionTimer >= TIME_BETWEEN_ACTIONS) {
@@ -178,20 +178,20 @@ public class Arena {
     }
 
     private void updateDialogue() {
-        if (currentWave < levels[currentLevel].dialogues.length && currentDialogue < levels[currentLevel].dialogues[currentWave].length) {
+        if (currentWave < LEVELS[currentLevel].dialogues.length && currentDialogue < LEVELS[currentLevel].dialogues[currentWave].length) {
             dialogueTimer++;
             if (dialogueTimer >= TIME_BETWEEN_DIALOGUE) {
-                Dialogue currentDialogOb = levels[currentLevel].dialogues[currentWave][currentDialogue];
+                Dialogue currentDialogOb = LEVELS[currentLevel].dialogues[currentWave][currentDialogue];
                 currentDialogOb.reset();
                 int slot = getSlotFromPosition(currentDialogOb.position);
                 if (slot < 0) return;
                 if (slot < 3 && teamSlots[slot].empty()) return;
                 if (slot > 3 && enemySlots[slot - 3].empty()) return;
                 if (currentDialogue > 0) {
-                    Dialogue lastDialogOb = levels[currentLevel].dialogues[currentWave][currentDialogue - 1];
+                    Dialogue lastDialogOb = LEVELS[currentLevel].dialogues[currentWave][currentDialogue - 1];
                     if (currentDialogOb.position.equals(lastDialogOb.position)) currentDialogOb.moveUp(1);
                 } if (currentDialogue > 1) {
-                    Dialogue lastDialogOb = levels[currentLevel].dialogues[currentWave][currentDialogue - 2];
+                    Dialogue lastDialogOb = LEVELS[currentLevel].dialogues[currentWave][currentDialogue - 2];
                     if (currentDialogOb.position.equals(lastDialogOb.position)) {
                         currentDialogOb.moveUp(2);
                     }
@@ -320,13 +320,13 @@ public class Arena {
         P.imageMode(CENTER);
         for (Slot slot : teamSlots) {
             slot.display(paused);
-            if (!levels[currentLevel].isCutscene) slot.displayBars();
+            if (!LEVELS[currentLevel].isCutscene) slot.displayBars();
         }
         for (Slot slot : enemySlots) {
             slot.display(paused);
-            if (!levels[currentLevel].isCutscene) slot.displayBars();
+            if (!LEVELS[currentLevel].isCutscene) slot.displayBars();
         }
-        if (!levels[currentLevel].isCutscene) {
+        if (!LEVELS[currentLevel].isCutscene) {
             displayOverlays();
             displayProgress();
         }
@@ -342,7 +342,7 @@ public class Arena {
             P.fill(20);
             P.textSize(8);
             P.textAlign(CENTER);
-            pauseButton.main();
+            PAUSE_BUTTON.main();
             P.text("Pause", 20, 8);
         }
         displayDark();
@@ -365,7 +365,7 @@ public class Arena {
         P.textSize(6);
         P.text("Level " + (currentLevel + 1), (BOARD_SIZE.x / 2), BOARD_SIZE.y - 10);
 
-        int length = levels[currentLevel].waves.length;
+        int length = LEVELS[currentLevel].waves.length;
         int size = 5;
         float from = ceil(-(length / 2f));
         float to = floor(length / 2f);
