@@ -388,7 +388,7 @@ public class Arena {
             if (!enemiesTurn && !teamSlots[selected].empty() && !noEnemies()) {
                 Combatant teamMember = teamSlots[selected].combatant;
                 teamMember.selectionOverlay();
-                if (dontDisplayMp()) return;
+                if (dontDisplayMp() || teamMember.mp < teamMember.mpCost) return;
                 if (teamMember instanceof OffensiveAbility || teamMember instanceof SplashOffensiveAbility) {
                     for (Slot slot : enemySlots) {
                         slot.abilityOverlay();
