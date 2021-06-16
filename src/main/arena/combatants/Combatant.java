@@ -130,6 +130,7 @@ public abstract class Combatant {
                 frame++;
                 if (frame >= idleAnimation.length) frame = 0;
             }
+            if (frame > idleAnimation.length) frame = idleAnimation.length - 1;
             frameImage = idleAnimation[frame];
         } else if (animationState == 1) {
             if (betweenFrameTimer >= betweenAttackFrames) {
